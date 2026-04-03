@@ -24,15 +24,22 @@ The first layer is the most MAC-intensive. Below are the details
 Arithmetic intensity 	= (2 * MAC) / (weight bytes + activation bytes)
 
 Weight (in bytes) 		= MAC * 4
+
 						= 118,013,952 * 4
+						
 						= 472,055,808
 						
 Activation (in bytes)	= (Number of inputs + Number of neurons) * 4bytes
+
 						= ((3 * 224 * 224) + (64 * 112 * 112)) * 4
+						
 						= (150,528 + 802,816) * 4
+						
 						= 3,813,376
 						
 Arithmetic intensity 	= (2 * 118,013,952) / (472,055,808 + 3,813,376)
+
 						= 236,027,904 / 475,869,184
+						
 						= 0.496
 						
