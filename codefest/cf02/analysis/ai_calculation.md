@@ -15,10 +15,15 @@ h = head = 8
 Based on data flow there are 5 stages to this kernel 
 
 Stage 1:
+
 Q, K, V projections - 3 projections -  hence multiplied by 3 
+
 Output matrix dimension - (B, T, d)
+
 Q, K, V Projections = 3 * (2*B*T*d*d)
+
                     = 3 * (2*2*1000*64*64)
+                    
                     = 49,152,000
 
 Stage 2:
