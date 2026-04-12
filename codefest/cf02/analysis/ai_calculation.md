@@ -1,9 +1,13 @@
 FOR KERNEL 2: SELFATTENTION
 
 Constants used in the conformer model
+
 B = Batch size = 2
+
 T = sequence length = 1000
+
 d = model dimension = 64
+
 h = head = 8
 
 ![Data Flow for SelfAttention Kernel](image.png)
