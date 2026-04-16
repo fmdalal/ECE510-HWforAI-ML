@@ -22,7 +22,7 @@ Batch size: 2
 
 ---------------------------------------------------------------------
 ### Execution Time
-Measured wall-clock time from project_profile.txt
+Measured wall-clock time from project_profile.txt  
   Run  1:   30.34 ms  
   Run  2:   29.63 ms  
   Run  3:   29.72 ms  
