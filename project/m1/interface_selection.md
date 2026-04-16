@@ -15,4 +15,4 @@ Total bytes for 4 blocks = 1,048,838,144 bytes ~ 1GB
               = 8.19 GB/s </pre>  
 The recommended interface that I would use is  AXI4-Lite for the control plane and AXI4-Stream 512-bit @250MHz for data plane. Below is the block diagram for the same. It uses wishbone2axi bridge as my Intel hardware does not allow a direct interface with AXI buses being a sealed SoC. Our requirement is 8.19 GB/s and the interface provides 16GB/s.
 
-![Interface](image2.png)
+![Interface](image3.png)
