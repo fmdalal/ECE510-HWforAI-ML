@@ -1,6 +1,6 @@
 1. What are you trying to do? Articulate your objectives using absolutely no jargon.	
 
-   A chiplet that can perform speech-to-text transcription fast (without using the internet and needing the cloud) and without draining the battery.
+   A chiplet that can perform speech-to-text transcription fast (without using the internet and needing the cloud) and without draining the battery. This algorithm is called Conformer. 
    
 2. How is it done today, and what are the limits of current practice?
 
