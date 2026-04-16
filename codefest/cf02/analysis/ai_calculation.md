@@ -121,7 +121,7 @@ Output projections:
 Weight matrix - d*d  
 Input and Output matrix dimension - (B, T, d)
 
-output projection (in bytes) = (d\*d + B\*T\*d  B\*T\*d) \* 4  
+output projection (in bytes) = (d\*d + B\*T\*d + B\*T\*d) \* 4  
                              = (64*64 + 2\*1000\*64 + 2\*1000\*64) \* 4                               
                              = 1,040,384
 
@@ -132,9 +132,23 @@ output projection (in bytes) = (d\*d + B\*T\*d  B\*T\*d) \* 4
 
 -----------------------------------------------------------------------------------------------------
 
-### Airthmetic Intensity 
+### Arithmetic Intensity 
                      = TOTAL FLOPs / TOTAL MEMORY  
                      = 512,097,536,000 / 262,209,536                       
                      = 1953.001 FLOPs/byte
 
+### Total runtime taken to run the algorithm (from wall-clock mean, project_profile.txt)
+      = 26.95 ms
+
+### Total runtime for the Self Attention module (from per-module hook timing, project_profile.txt)
+      = SelfAttention [0] + SelfAttention [1] + SelfAttention [2] + SelfAttention [3]  
+      = 2.362 + 2.249 + 2.284 + 2.138
+      = 9.033 ms
+
+### Dominant kernel percentage against the total runtime 
+      = Dominant kernel runtime / total runtime * 100
+      = 9.033 ms / 26.95 ms * 100
+      = 33.51% 
+
+**The dominant kernel is SelfAttention, accounting for 33.51% of total runtime.**
                      
