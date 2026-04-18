@@ -1,0 +1,5 @@
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+[naive] N=1024 iters=20  bytes/matrix=4.0 MiB
+Device: Tesla T4 (SM 7.5, 40 SMs)
+  spot-check on 8x8 block at (0,0): max_abs=5.722e-06 max_rel=4.824e-06 -> OK
+  avg time: 7.994 ms   perf: 268.63 GFLOP/s
