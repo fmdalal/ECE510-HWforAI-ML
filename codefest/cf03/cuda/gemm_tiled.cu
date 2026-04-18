@@ -1,3 +1,5 @@
+%%writefile gemm_tiled.cu
+
 // matmul_tiled.cu
 // Shared-memory tiled FP32 matrix multiply: C = A * B, row-major, N x N.
 // Tile size TILE = 8 per spec. Each 8x8 thread block computes one 8x8
