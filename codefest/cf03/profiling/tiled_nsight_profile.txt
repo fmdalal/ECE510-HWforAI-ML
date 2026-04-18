@@ -1,0 +1,157 @@
+==PROF== Connected to process 47583 (/content/gemm_tiled)
+==PROF== Profiling "matmul_tiled_kernel" - 0: 0%....50%....100% - 8 passes
+==PROF== Profiling "matmul_tiled_kernel" - 1: 0%....50%....100% - 8 passes
+==PROF== Profiling "matmul_tiled_kernel" - 2: 0%....50%....100% - 8 passes
+[tiled TILE=8] N=1024 iters=2  bytes/matrix=4.0 MiB
+Device: Tesla T4 (SM 7.5, 40 SMs)
+  spot-check on 16x16 block at (0,0): max_abs=7.629e-06 max_rel=2.072e-03 -> OK
+  avg time: 1957.322 ms   perf: 1.10 GFLOP/s
+==PROF== Disconnected from process 47583
+[47583] gemm_tiled@127.0.0.1
+  matmul_tiled_kernel(const float *, const float *, float *, int) (128, 128, 1)x(8, 8, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         4.99
+    SM Frequency                    Mhz       585.00
+    Elapsed Cycles                cycle    5,339,885
+    Memory Throughput                 %        55.08
+    DRAM Throughput                   %         6.04
+    Duration                         ms         9.13
+    L1/TEX Cache Throughput           %        98.38
+    L2 Cache Throughput               %        10.64
+    SM Active Cycles              cycle 5,321,954.78
+    Compute (SM) Throughput           %        55.08
+    ----------------------- ----------- ------------
+
+    OPT   This workload exhibits low compute throughput and memory bandwidth utilization relative to the peak           
+          performance of this device. Achieved compute throughput and/or memory bandwidth below 60.0% of peak           
+          typically indicate latency issues. Look at Scheduler Statistics and Warp State Statistics for potential       
+          reasons.                                                                                                      
+
+    Section: Compute Workload Analysis
+    -------------------- ----------- ------------
+    Metric Name          Metric Unit Metric Value
+    -------------------- ----------- ------------
+    Executed Ipc Active   inst/cycle         0.61
+    Executed Ipc Elapsed  inst/cycle         0.60
+    Issue Slots Busy               %        15.15
+    Issued Ipc Active     inst/cycle         0.61
+    SM Busy                        %        21.07
+    -------------------- ----------- ------------
+
+    OPT   Est. Local Speedup: 89.63%                                                                                    
+          All compute pipelines are under-utilized. Either this workload is very small or it doesn't issue enough warps 
+          per scheduler. Check the Launch Statistics and Scheduler Statistics sections for further details.             
+
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        19.29
+    Mem Busy                    %        49.19
+    Max Bandwidth               %        55.08
+    L1/TEX Hit Rate             %        23.13
+    L2 Hit Rate                 %        94.63
+    Mem Pipes Busy              %        55.08
+    ----------------- ----------- ------------
+
+  matmul_tiled_kernel(const float *, const float *, float *, int) (128, 128, 1)x(8, 8, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         4.99
+    SM Frequency                    Mhz       584.99
+    Elapsed Cycles                cycle    5,341,727
+    Memory Throughput                 %        55.07
+    DRAM Throughput                   %         5.97
+    Duration                         ms         9.13
+    L1/TEX Cache Throughput           %        98.37
+    L2 Cache Throughput               %        10.56
+    SM Active Cycles              cycle 5,323,783.55
+    Compute (SM) Throughput           %        55.07
+    ----------------------- ----------- ------------
+
+    OPT   This workload exhibits low compute throughput and memory bandwidth utilization relative to the peak           
+          performance of this device. Achieved compute throughput and/or memory bandwidth below 60.0% of peak           
+          typically indicate latency issues. Look at Scheduler Statistics and Warp State Statistics for potential       
+          reasons.                                                                                                      
+
+    Section: Compute Workload Analysis
+    -------------------- ----------- ------------
+    Metric Name          Metric Unit Metric Value
+    -------------------- ----------- ------------
+    Executed Ipc Active   inst/cycle         0.61
+    Executed Ipc Elapsed  inst/cycle         0.60
+    Issue Slots Busy               %        15.15
+    Issued Ipc Active     inst/cycle         0.61
+    SM Busy                        %        21.06
+    -------------------- ----------- ------------
+
+    OPT   Est. Local Speedup: 89.64%                                                                                    
+          All compute pipelines are under-utilized. Either this workload is very small or it doesn't issue enough warps 
+          per scheduler. Check the Launch Statistics and Scheduler Statistics sections for further details.             
+
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        19.10
+    Mem Busy                    %        49.19
+    Max Bandwidth               %        55.07
+    L1/TEX Hit Rate             %        21.99
+    L2 Hit Rate                 %        94.43
+    Mem Pipes Busy              %        55.07
+    ----------------- ----------- ------------
+
+  matmul_tiled_kernel(const float *, const float *, float *, int) (128, 128, 1)x(8, 8, 1), Context 1, Stream 7, Device 0, CC 7.5
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         4.99
+    SM Frequency                    Mhz       585.00
+    Elapsed Cycles                cycle    5,338,384
+    Memory Throughput                 %        55.16
+    DRAM Throughput                   %         6.23
+    Duration                         ms         9.13
+    L1/TEX Cache Throughput           %        98.53
+    L2 Cache Throughput               %        10.83
+    SM Active Cycles              cycle 5,320,515.60
+    Compute (SM) Throughput           %        55.16
+    ----------------------- ----------- ------------
+
+    OPT   This workload exhibits low compute throughput and memory bandwidth utilization relative to the peak           
+          performance of this device. Achieved compute throughput and/or memory bandwidth below 60.0% of peak           
+          typically indicate latency issues. Look at Scheduler Statistics and Warp State Statistics for potential       
+          reasons.                                                                                                      
+
+    Section: Compute Workload Analysis
+    -------------------- ----------- ------------
+    Metric Name          Metric Unit Metric Value
+    -------------------- ----------- ------------
+    Executed Ipc Active   inst/cycle         0.61
+    Executed Ipc Elapsed  inst/cycle         0.61
+    Issue Slots Busy               %        15.16
+    Issued Ipc Active     inst/cycle         0.61
+    SM Busy                        %        21.07
+    -------------------- ----------- ------------
+
+    OPT   Est. Local Speedup: 89.63%                                                                                    
+          All compute pipelines are under-utilized. Either this workload is very small or it doesn't issue enough warps 
+          per scheduler. Check the Launch Statistics and Scheduler Statistics sections for further details.             
+
+    Section: Memory Workload Analysis
+    ----------------- ----------- ------------
+    Metric Name       Metric Unit Metric Value
+    ----------------- ----------- ------------
+    Memory Throughput     Gbyte/s        19.92
+    Mem Busy                    %        49.27
+    Max Bandwidth               %        55.16
+    L1/TEX Hit Rate             %        20.16
+    L2 Hit Rate                 %        94.42
+    Mem Pipes Busy              %        55.16
+    ----------------- ----------- ------------
+
