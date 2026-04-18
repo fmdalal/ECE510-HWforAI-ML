@@ -1,6 +1,8 @@
+%%writefile gemm_naive.cu
+
 // matmul_naive.cu
 // Naive FP32 matrix multiply: C = A * B, row-major, N x N (default N=1024).
-// One CUDA thread per output element C[row, col]; 16x16 thread blocks.
+// One CUDA thread per output element C[row, col]; 8x8 thread blocks.
 //
 // Build: nvcc -O3 -std=c++14 -arch=sm_70 matmul_naive.cu -o matmul_naive
 // Run:   ./matmul_naive            (N=1024, 20 timed iterations)
@@ -115,8 +117,8 @@ int main(int argc, char** argv) {
     CUDA_CHECK(cudaMemcpy(dB, hB, bytes, cudaMemcpyHostToDevice));
     CUDA_CHECK(cudaMemset(dC, 0, bytes));
 
-    // Launch config: 16x16 block; one thread per output element of C.
-    dim3 block(16, 16);
+    // Launch config: 8x8 block; one thread per output element of C.
+    dim3 block(8, 8);
     dim3 grid((N + block.x - 1) / block.x, (N + block.y - 1) / block.y);
 
     // Warm up (first launch includes JIT/context overhead).
@@ -138,9 +140,9 @@ int main(int argc, char** argv) {
     CUDA_CHECK(cudaEventElapsedTime(&total_ms, start, stop));
     float avg_ms = total_ms / iters;
 
-    // Correctness spot-check on a 16x16 sub-block.
+    // Correctness spot-check on a 8x8 sub-block.
     CUDA_CHECK(cudaMemcpy(hC, dC, bytes, cudaMemcpyDeviceToHost));
-    const int BS = 16;
+    const int BS = 8;
     float* Cref = (float*)std::malloc(BS * BS * sizeof(float));
     cpu_reference_block(hA, hB, Cref, N, 0, 0, BS);
     verify_block(hC, Cref, N, 0, 0, BS);
