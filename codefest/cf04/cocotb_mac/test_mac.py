@@ -77,3 +77,81 @@ async def test_mac_basic(dut):
         await FallingEdge(dut.clk)
         assert s32(dut.out.value) == expected, \
             f"Phase 3 failed: expected {expected}, got {s32(dut.out.value)}"
+        
+    dut._log.info("test_mac_basic passed.")
+
+
+# =============================================================================
+# Test 2: Overflow behavior test
+# Does the accumulator saturate or wrap around?
+#
+# Strategy:
+#   - Use a=127, b=127 (max INT8 product = 16129) to accumulate quickly
+#   - Run 133144 cycles to reach 2,147,479,576 (just below 2^31-1)
+#   - One more cycle pushes past 2^31-1 → observe wrap or saturate
+#
+# Expected (no saturation logic):
+#   - Design WRAPS to a large negative value (two's complement overflow)
+#   - Wrapped value = -2,147,471,591
+# =============================================================================
+@cocotb.test()
+async def test_mac_overflow(dut):
+
+    MAX_S32  = 2**31 - 1       # 2,147,483,647
+    PRODUCT  = 127 * 127       # 16,129 per cycle
+    # Number of cycles to reach 2,147,479,576 (last value before overflow)
+    CYCLES_BEFORE = 133144
+    VAL_BEFORE    = 2147479576
+    VAL_WRAPPED   = ctypes.c_int32(VAL_BEFORE + PRODUCT).value  # -2147471591
+
+    cocotb.start_soon(Clock(dut.clk, 10, unit="ns").start())
+
+    # -- Reset ----------------------------------------------------------------
+    await FallingEdge(dut.clk)
+    dut.rst.value = 1
+    dut.a.value   = 0
+    dut.b.value   = 0
+
+    await RisingEdge(dut.clk)
+    await FallingEdge(dut.clk)
+    assert s32(dut.out.value) == 0, "Reset failed"
+
+    dut.rst.value = 0
+    dut.a.value   = u8(127)
+    dut.b.value   = u8(127)
+
+    dut._log.info(f"Overflow test: accumulating {CYCLES_BEFORE} cycles "
+                  f"with a=127, b=127 (product={PRODUCT})")
+    dut._log.info(f"2^31 - 1 = {MAX_S32}")
+
+    # -- Accumulate up to just before overflow --------------------------------
+    for _ in range(CYCLES_BEFORE):
+        await RisingEdge(dut.clk)
+
+    await FallingEdge(dut.clk)
+    val_before = s32(dut.out.value)
+    dut._log.info(f"After {CYCLES_BEFORE} cycles: out = {val_before} "
+                  f"(expected {VAL_BEFORE})")
+    assert val_before == VAL_BEFORE, \
+        f"Pre-overflow value wrong: expected {VAL_BEFORE}, got {val_before}"
+
+    # -- One more cycle: crosses 2^31-1 → expect wrap -------------------------
+    await RisingEdge(dut.clk)
+    await FallingEdge(dut.clk)
+    val_after = s32(dut.out.value)
+    dut._log.info(f"After {CYCLES_BEFORE+1} cycles: out = {val_after}")
+
+    if val_after == VAL_WRAPPED:
+        dut._log.info(f"OVERFLOW BEHAVIOR: WRAP (two's complement)")
+        dut._log.info(f"out wrapped from {VAL_BEFORE} to {val_after}")
+    elif val_after == MAX_S32:
+        dut._log.info(f"OVERFLOW BEHAVIOR: SATURATE (clamped to {MAX_S32})")
+    else:
+        dut._log.info(f"OVERFLOW BEHAVIOR: UNKNOWN — got {val_after}")
+
+    # Document the behavior — this design wraps, not saturates
+    assert val_after == VAL_WRAPPED, \
+        f"Expected wrap to {VAL_WRAPPED}, got {val_after}. " \
+        f"Design may saturate instead of wrap."
+
+    dut._log.info("test_mac_overflow passed — design WRAPS on overflow.")
