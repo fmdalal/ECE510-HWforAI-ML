@@ -31,3 +31,9 @@ Below are the outputs and the wave simulation using gtkwave
 ![Alt Text](tb_B.png)  
 ![Alt Text](tb_wave_B.png)
 
+
+## Compiling and running the mac_correct.sv using yosys
+
+**mac_correct.sv file = mac_llm_A.sv**  
+Below is the output for yosys. The outfile for yosys is also provided under the review folder of cf04 as yosys_output.txt
+![Alt Text](yosys_output.png)  
