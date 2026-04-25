@@ -33,6 +33,12 @@ Below are the outputs and the wave simulation using gtkwave
 ![Alt Text](tb_B.png)  
 ![Alt Text](tb_wave_B.png)
 
+## Compiling and running the mac_correct.sv using iverilog
+Below are the outputs and the wave simulation using gtkwave  
+
+![Alt Text](tb_correct.png)  
+![Alt Text](tb_wave_correct.png)
+
 
 ## Compiling and running the mac_correct.sv using yosys
 
