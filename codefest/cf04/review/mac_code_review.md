@@ -26,7 +26,7 @@ Below are the outputs and the wave simulation using gtkwave
 ![Alt Text](tb_A.png)  
 ![Alt Text](tb_wave_A.png)
 
-### LLM_A - Claude
+### LLM_B - Gemini
 Below are the outputs and the wave simulation using gtkwave  
 ![Alt Text](tb_B.png)  
 ![Alt Text](tb_wave_B.png)
