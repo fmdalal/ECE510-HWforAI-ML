@@ -77,10 +77,3 @@ async def test_mac_basic(dut):
         await FallingEdge(dut.clk)
         assert s32(dut.out.value) == expected, \
             f"Phase 3 failed: expected {expected}, got {s32(dut.out.value)}"
-        
-    dut._log.info("Waveform saved to dump.vcd")
- 
- 
-async def _dump_vcd(dut):
-    """Trigger VCD dump via Icarus $dumpfile and $dumpvars."""
-    await Timer(1, unit="ns")
