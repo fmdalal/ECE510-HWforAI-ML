@@ -1,12 +1,11 @@
 # =============================================================================
 # File        : test_mac.py
 # Description : cocotb testbench for INT8 MAC unit (mac_correct.sv)
-# Test Plan   :
-#   Phase 1 — a=3,  b=4  for 3 cycles  → expect 12, 24, 36
-#   Phase 2 — assert rst for 1 cycle   → expect 0
-#   Phase 3 — a=-5, b=2  for 2 cycles  → expect -10, -20
+#
+# Tests:
+#   test_mac_basic    — functional test (reset, accumulate, signed inputs)
+#   test_mac_overflow — overflow behavior test (wrap vs saturate)
 # =============================================================================
-
 import ctypes
 import cocotb
 from cocotb.clock import Clock
@@ -22,7 +21,9 @@ def u8(val):
     """Convert signed Python integer to unsigned 8-bit for port driving."""
     return ctypes.c_uint8(val).value
 
-
+# =============================================================================
+# Test 1: Basic functional test
+# =============================================================================
 @cocotb.test()
 async def test_mac_basic(dut):
 
