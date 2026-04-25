@@ -23,11 +23,13 @@ Both the files compiled fine with no error. But there were slight differences in
 Changed to iverilog as verilator needs a C++ testbench. 
 ### LLM_A - Claude
 Below are the outputs and the wave simulation using gtkwave  
+
 ![Alt Text](tb_A.png)  
 ![Alt Text](tb_wave_A.png)
 
 ### LLM_B - Gemini
 Below are the outputs and the wave simulation using gtkwave  
+
 ![Alt Text](tb_B.png)  
 ![Alt Text](tb_wave_B.png)
 
@@ -35,5 +37,8 @@ Below are the outputs and the wave simulation using gtkwave
 ## Compiling and running the mac_correct.sv using yosys
 
 **mac_correct.sv file = mac_llm_A.sv**  
-Below is the output for yosys. The outfile for yosys is also provided under the review folder of cf04 as yosys_output.txt
+Below is the output for yosys. The output file for yosys is also provided under the review folder of cf04 as yosys_output.txt  
+Number of public wires = 5 (clk, rst, a, b, out)  
+Number of public wire bits = 50 (clk-1, rst-1, a-8, b-8, out-32)  
+
 ![Alt Text](yosys_output.png)  
