@@ -1,0 +1,38 @@
+make[2]: Entering directory '/mnt/c/ECE510/cf04'
+rm -f results.xml
+"make" -f Makefile results.xml
+make[3]: Entering directory '/mnt/c/ECE510/cf04'
+mkdir -p sim_build
+/usr/bin/iverilog -o sim_build/sim.vvp -s mac -g2012 -g2012 -f sim_build/cmds.f -s cocotb_iverilog_dump  /mnt/c/ECE510/cf04/mac_correct.sv sim_build/cocotb_iverilog_dump.v
+rm -f results.xml
+COCOTB_TEST_MODULES=test_mac_basic COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=mac TOPLEVEL_LANG=verilog \
+         /usr/bin/vvp -M /home/fatem/.local/lib/python3.12/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp -fst  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb                             Seeding Python random module with 1777200689
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/fatem/.local/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_mac_basic.test_mac_basic (1/1)
+    15.00ns INFO     cocotb.mac                         [RESET     ] rst=1 | a= 0, b= 0 | out=0
+    15.00ns INFO     cocotb.mac                         --- Phase 1: a=3, b=4 for 3 cycles (expect 12, 24, 36) ---
+    25.00ns INFO     cocotb.mac                         [CYCLE     ] rst=0 | a= 3, b= 4 | out=12
+    35.00ns INFO     cocotb.mac                         [CYCLE     ] rst=0 | a= 3, b= 4 | out=24
+    45.00ns INFO     cocotb.mac                         [CYCLE     ] rst=0 | a= 3, b= 4 | out=36
+    55.00ns INFO     cocotb.mac                         [RST ASSERT] rst=1 | a= 0, b= 0 | out=0
+    55.00ns INFO     cocotb.mac                         --- Phase 3: a=-5, b=2 for 2 cycles (expect -10, -20) ---
+    65.00ns INFO     cocotb.mac                         [CYCLE     ] rst=0 | a=-5, b= 2 | out=-10
+    75.00ns INFO     cocotb.mac                         [CYCLE     ] rst=0 | a=-5, b= 2 | out=-20
+    75.00ns INFO     cocotb.mac                         test_mac_basic passed.
+    75.00ns INFO     cocotb.regression                  test_mac_basic.test_mac_basic passed
+    75.00ns INFO     cocotb.regression                  ***************************************************************************************
+                                                        ** TEST                           STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ***************************************************************************************
+                                                        ** test_mac_basic.test_mac_basic   PASS          75.00           0.01       5571.21  **
+                                                        ***************************************************************************************
+                                                        ** TESTS=1 PASS=1 FAIL=0 SKIP=0                  75.00           0.02       3963.12  **
+                                                        ***************************************************************************************
+FST info: dumpfile sim_build/mac.fst opened for output.
+make[3]: Leaving directory '/mnt/c/ECE510/cf04'
+make[2]: Leaving directory '/mnt/c/ECE510/cf04'
