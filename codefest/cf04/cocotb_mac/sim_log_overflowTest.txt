@@ -1,0 +1,35 @@
+make[2]: Entering directory '/mnt/c/ECE510/cf04'
+rm -f results.xml
+"make" -f Makefile results.xml
+make[3]: Entering directory '/mnt/c/ECE510/cf04'
+rm -f results.xml
+COCOTB_TEST_MODULES=test_mac_overflow COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=mac TOPLEVEL_LANG=verilog \
+         /usr/bin/vvp -M /home/fatem/.local/lib/python3.12/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp -fst  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb                             Seeding Python random module with 1777200690
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/fatem/.local/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running test_mac_overflow.test_mac_overflow (1/1)
+    15.00ns INFO     cocotb.mac                         [RESET     ] rst=1 | a=  0, b=  0 | out=0
+    15.00ns INFO     cocotb.mac                         2^31 - 1   = 2147483647
+    15.00ns INFO     cocotb.mac                         product    = 16129 (127 x 127)
+    15.00ns INFO     cocotb.mac                         Accumulating 133144 cycles to reach 2147479576
+1331455.00ns INFO     cocotb.mac                         After 133144 cycles : out = 2147479576 (expected 2147479576)
+1331465.00ns INFO     cocotb.mac                         After 133145 cycles: out = -2147471591
+1331465.00ns INFO     cocotb.mac                         OVERFLOW BEHAVIOR: WRAP (two's complement)
+1331465.00ns INFO     cocotb.mac                         out wrapped from 2147479576 → -2147471591
+1331465.00ns INFO     cocotb.mac                         test_mac_overflow passed — design WRAPS on overflow.
+1331465.00ns INFO     cocotb.regression                  test_mac_overflow.test_mac_overflow passed
+1331465.00ns INFO     cocotb.regression                  *********************************************************************************************
+                                                         ** TEST                                 STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                         *********************************************************************************************
+                                                         ** test_mac_overflow.test_mac_overflow   PASS     1331465.00           2.82     471923.46  **
+                                                         *********************************************************************************************
+                                                         ** TESTS=1 PASS=1 FAIL=0 SKIP=0                   1331465.00           2.82     471345.11  **
+                                                         *********************************************************************************************
+FST info: dumpfile sim_build/mac.fst opened for output.
+make[3]: Leaving directory '/mnt/c/ECE510/cf04'
+make[2]: Leaving directory '/mnt/c/ECE510/cf04'
