@@ -1,10 +1,13 @@
 // =============================================================================
-// compute_core.sv  —  SoC top-level wrapper  (PURE WIRING — no AXI logic inside)
+// compute_core.sv  —  Compute core top-level wrapper  (PURE WIRING — no AXI logic inside)
 // =============================================================================
 //
-// This file contains NO AXI logic, NO CSR registers, NO FIFOs.
-// Its only responsibility is connecting axi_if.sv to the 10 chiplets
-// through UCIe bump buses.
+// Description
+// -----------
+// Top-level structural wrapper that connects the AXI/CSR interface (axi_if)
+// to the 10 chiplets through UCIe bump buses.  Contains NO AXI logic,
+// NO CSR registers, and NO FIFOs — all control and data-path logic lives
+// in the sub-modules it instantiates.
 //
 // Block view
 // ----------
@@ -23,7 +26,7 @@
 //       │  cfg_* / in_tile_* / out_tile_* / sts_*
 //       │
 //   ┌───┴──────────────────────────────────────────┐
-//   │  soc_top  (THIS FILE)                        │
+//   │  compute_core  (THIS FILE)                   │
 //   │                                              │
 //   │  ucie_tx ──► chiplet_0_qkv_outproj ──►       │
 //   │              (UCIe Q/K/V broadcast)          │
@@ -40,13 +43,145 @@
 //   0  QKV + OutProj (Stage 1 / Stage 5 time-mux)
 //   1  Head 0   2  Head 1   3  Head 2   4  Head 3
 //   5  Head 4   6  Head 5   7  Head 6   8  Head 7
-//   9  Taylor chiplet
+//   9  Taylor softmax chiplet
+//
 // =============================================================================
+// Clock domains
+// =============================================================================
+//
+//   Name       Freq      Source         Drives
+//   --------   -------   -----------    ----------------------------------------
+//   clk_axi    250 MHz   SoC PLL        axi_if (Wishbone bridge, CSR, FIFOs,
+//                                       watchdog, perf_counter)
+//                                       done_sync 2-FF (sts_done_s1/r)
+//
+//   clk_core   1 GHz     Chiplet PLL    All 10 chiplets (chiplet_0, chiplet_head
+//                                       ×8, chiplet_9_taylor), ucie_tx, ucie_rx
+//                                       start_sync 2-FF (cfg_start_s1/core)
+//                                       busy_r FSM, done_latch_core
+//
+//   clk_link   2 GHz     UCIe PHY PLL   UCIe bump-pad physical layer
+//                                       (not yet modelled in RTL;
+//                                        tie to clk_core in simulation)
+//
+// =============================================================================
+// Clock domain crossings (CDC)
+// =============================================================================
+//
+//  #   Signal(s)            Direction              Strategy
+//  --  -------------------  ---------------------  ----------------------------
+//  1   cfg_start            clk_axi → clk_core     2-FF synchroniser
+//      (1-cycle pulse)                             Registers: cfg_start_s1,
+//                                                  cfg_start_core  (start_sync)
+//                                                  Located: section 9 of this file
+//
+//  2   in_tile_valid,       clk_axi → clk_core     Qualified with cfg_start_core
+//      in_tile_data                                (synchronised pulse) before
+//      (tile payload)                              being driven into ucie_tx.
+//                                                  NOTE: in_tile_data is a wide
+//                                                  bus — valid gating ensures data
+//                                                  is stable when consumed.
+//                                                  Located: section 4, u_host_tx
+//
+//  3   sts_done / c0_done   clk_core → clk_axi     2-FF synchroniser
+//      (1-cycle pulse)                             Pulse stretched to 1 clk_core
+//                                                  cycle in done_latch_core, then
+//                                                  synchronised via sts_done_s1,
+//                                                  sts_done_r  (done_sync)
+//                                                  Located: section 9 of this file
+//
+//  4   out_tile_valid,      clk_core → clk_axi     Passed directly from ucie_rx
+//      out_tile_data                               (clk_core) to axi_if
+//      (tile payload)                              (clk_axi) without a synchroniser.
+//                                                  ** TAPEOUT ACTION REQUIRED **
+//                                                  Add a 2-FF synchroniser on
+//                                                  host_rx_valid before tapeout;
+//                                                  gate out_tile_data on the
+//                                                  synchronised valid.
+//                                                  Located: section 8, u_host_rx
+//
+// =============================================================================
+// Reset
+// =============================================================================
+//
+//   Signal   : rst_n
+//   Sense    : Active-LOW  (assert low to reset, release high to run)
+//   Type     : ASYNCHRONOUS — all always_ff blocks in this module use
+//              the form:
+//                  always_ff @(posedge clk_x or negedge rst_n)
+//              This means the reset de-assertion (0→1 transition) is
+//              the only potential metastability point; the assertion
+//              (1→0) takes effect immediately regardless of the clock edge.
+//   Domains  : rst_n is shared across clk_axi and clk_core domains.
+//              Both are released simultaneously by a single de-assertion.
+//              If the two clocks are asynchronous to each other (which they
+//              are — 250 MHz vs 1 GHz from separate PLLs), a reset
+//              synchroniser should be inserted per domain before tapeout
+//              to avoid metastability on the de-assertion edge.
+//   Scope    : rst_n is passed to all sub-module instantiations
+//              (u_axi_if, u_host_tx, u_c0, u_head[0..7], u_taylor,
+//               u_host_rx).  All registered state in those modules is
+//              also reset active-low asynchronously unless the sub-module
+//              header states otherwise.
+//
+//   Registers reset in this file
+//   ----------------------------
+//   Block           Clock      Reset value   Purpose
+//   -----------     ---------  -----------   ---------------------------------
+//   start_sync      clk_core   2'b00         CDC stage regs for cfg_start
+//   busy_ff         clk_core   1'b0          Compute-busy flag
+//   done_latch_core clk_core   1'b0          c0_done pulse stretch latch
+//   done_sync       clk_axi    2'b00         CDC stage regs for sts_done
+//
+// =============================================================================
+// Parameters
+// =============================================================================
+//
+//   NUM_HEADS   int   8     Number of parallel attention head chiplets
+//   TILE_DIM    int   64    Tile dimension (rows = cols = TILE_DIM)
+//   D_HEAD      int   64    Per-head embedding dimension
+//   D_MODEL     int   512   Full model embedding dimension (NUM_HEADS * D_HEAD)
+//   TDATA_W     int   512   AXI-Stream data bus width in bits
+//   FIFO_D      int   256   Input/output FIFO depth (entries)
+//
+// =============================================================================
+// Port list
+// =============================================================================
+//
+//   Name           Dir    Width   Purpose
+//   ------------   -----  ------  -----------------------------------------------
+//   clk_axi        in     1       250 MHz clock — AXI/Wishbone/CSR/FIFO domain
+//   clk_core       in     1       1 GHz clock   — chiplet compute domain
+//   clk_link       in     1       2 GHz clock   — UCIe PHY domain (sim: = clk_core)
+//   rst_n          in     1       Active-low async reset (all domains)
+//
+//   wb_cyc         in     1       Wishbone cycle valid (bus in use)
+//   wb_stb         in     1       Wishbone strobe (transfer requested)
+//   wb_we          in     1       Wishbone write enable (1=write, 0=read)
+//   wb_addr        in     32      Wishbone byte address
+//   wb_wdata       in     32      Wishbone write data
+//   wb_sel         in     4       Wishbone byte lane select (one bit per byte)
+//   wb_stall       out    1       Wishbone stall — slave not ready for transfer
+//   wb_ack         out    1       Wishbone acknowledge — transfer complete
+//   wb_rdata       out    32      Wishbone read data returned by CSR
+//   wb_err         out    1       Wishbone bus error response
+//
+//   mem_addr       out    64      Weight SRAM byte address (= cfg_weight_addr)
+//   mem_wdata      out    512     Memory write data (tied to 0 — read-only path)
+//   mem_wen        out    1       Memory write enable (tied to 0 — read-only path)
+//   mem_rdata      in     512     Memory read data returned by LPDDR5X controller
+//   mem_rvalid     in     1       Memory read data valid strobe
+//   mem_req        out    1       Memory request — asserted while compute busy
+//   mem_gnt        in     1       Memory grant from arbiter
+//
+//   irq            out    1       Interrupt to CPU — asserted on cfg_done event
+// =============================================================================
+ 
 
 `timescale 1ns/1ps
 `default_nettype none
 
-module soc_top #(
+module compute_core #(
     parameter int NUM_HEADS = 8,
     parameter int TILE_DIM  = 64,
     parameter int D_HEAD    = 64,
@@ -480,5 +615,5 @@ endmodule
 
 `default_nettype wire
 // =============================================================================
-// End of soc_top.sv
+// End of compute_core.sv
 // =============================================================================
