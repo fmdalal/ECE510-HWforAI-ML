@@ -1,0 +1,32 @@
+# =============================================================================
+# Makefile for tb_interface  (cocotb)
+# =============================================================================
+# Usage:
+#   make SIM=icarus          — Icarus Verilog (default)
+#   make SIM=questa          — Questa / ModelSim
+#   make SIM=verilator       — Verilator
+#   make clean
+#
+# Requirements:
+#   pip install cocotb
+#   Icarus:   iverilog + vvp in PATH
+#   Questa:   vsim in PATH
+# =============================================================================
+
+SIM          ?= icarus
+TOPLEVEL_LANG = verilog
+
+# Source files — list interface.sv; the wb2axip stub is embedded in the TB
+VERILOG_SOURCES  = $(PWD)/interface.sv \
+
+# Compile flags for Icarus
+ifeq ($(SIM),icarus)
+  COMPILE_ARGS += -g2012
+endif
+
+TOPLEVEL = axi_if
+COCOTB_TEST_MODULES   = tb_interface
+COCOTB_RESOLVE_X  = ZEROS
+WAVES             = 1
+
+include $(shell cocotb-config --makefiles)/Makefile.sim

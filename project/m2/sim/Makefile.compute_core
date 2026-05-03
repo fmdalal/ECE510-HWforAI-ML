@@ -1,0 +1,29 @@
+# =============================================================================
+# Makefile for tb_compute_core  (cocotb)
+# =============================================================================
+# Usage:
+#   make SIM=icarus          — Icarus Verilog (default)
+#   make SIM=questa          — Questa / ModelSim
+#   make SIM=verilator       — Verilator
+#   make clean
+# =============================================================================
+
+SIM          ?= icarus
+TOPLEVEL_LANG = verilog
+
+# Compile order: stubs first, then interface (sub-blocks), then compute_core
+VERILOG_SOURCES  = $(PWD)/soc_top_stubs.sv \
+                   $(PWD)/interface.sv         \
+                   $(PWD)/compute_core.sv
+
+ifeq ($(SIM),icarus)
+  COMPILE_ARGS += -g2012
+COCOTB_RESOLVE_X  = ZEROS
+WAVES             = 1
+endif
+
+TOPLEVEL = soc_top
+COCOTB_TEST_MODULES   = tb_compute_core
+
+
+include $(shell cocotb-config --makefiles)/Makefile.sim

@@ -1,0 +1,94 @@
+rm -f results.xml
+"make" -f Makefile.interface results.xml
+make[1]: Entering directory '/mnt/c/ECE510/m2'
+mkdir -p sim_build
+/usr/bin/iverilog -o sim_build/sim.vvp -s axi_if -g2012 -g2012 -f sim_build/cmds.f -s cocotb_iverilog_dump  /mnt/c/ECE510/m2/interface.sv  sim_build/cocotb_iverilog_dump.v
+rm -f results.xml
+COCOTB_TEST_MODULES=tb_interface COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOPLEVEL=axi_if TOPLEVEL_LANG=verilog \
+         /usr/bin/vvp -M /home/fatem/.local/lib/python3.12/site-packages/cocotb/libs -m libcocotbvpi_icarus   sim_build/sim.vvp -fst  
+     -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /usr/bin/python3
+     -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
+     0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
+     0.00ns INFO     cocotb                             Seeding Python random module with 1777769522
+     0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/fatem/.local/lib/python3.12/site-packages/cocotb
+     0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
+     0.00ns INFO     cocotb                             Running tests
+     0.00ns INFO     cocotb.regression                  running tb_interface.test_01_reset_defaults (1/10)
+                                                            CSR registers hold their reset / default values after de-assertion.
+    72.00ns INFO     test                               PASS [SEQ_LEN default=256]: 0x100
+    92.00ns INFO     test                               PASS [D_MODEL default=512]: 0x200
+   112.00ns INFO     test                               PASS [NUM_HEADS default=8]: 0x8
+   132.00ns INFO     test                               PASS [NUM_TILES default=8]: 0x8
+   152.00ns INFO     test                               PASS [VERSION=0x00020000]: 0x20000
+   172.00ns INFO     test                               PASS [SCALE upper=0x3E00]: 0x3E00
+   192.00ns INFO     test                               PASS [WDT_TIMEOUT=0x00FFFFFF]: 0xFFFFFF
+   212.00ns INFO     test                               PASS [STATUS=0 at reset]: 0x0
+   212.00ns INFO     cocotb.regression                  tb_interface.test_01_reset_defaults passed
+   212.00ns INFO     cocotb.regression                  running tb_interface.test_02_csr_write_readback (2/10)
+                                                            Writable CSR fields store values and appear on cfg_* outputs.
+  1900.00ns INFO     test                               PASS [SEQ_LEN=1024]: 0x400
+  5144.00ns INFO     test                               PASS [WEIGHT_L readback]: 0xDEADCAFE
+  5164.00ns INFO     test                               PASS [WEIGHT_H readback]: 0x1234
+  5172.00ns INFO     test                               PASS [cfg_weight_addr]: 0x1234DEADCAFE
+  8416.00ns INFO     test                               PASS [IN_ADDR]: 0xCAFE0000
+  8436.00ns INFO     test                               PASS [OUT_ADDR]: 0xBEEF0000
+ 10068.00ns INFO     test                               PASS [SCALE_BF16 reg]: 0x3F000000
+ 10068.00ns INFO     test                               PASS [cfg_scale_bf16 output]: 0x3F00
+ 10068.00ns INFO     cocotb.regression                  tb_interface.test_02_csr_write_readback passed
+ 10068.00ns INFO     cocotb.regression                  running tb_interface.test_03_version_readonly (3/10)
+                                                            Writes to VERSION register are silently ignored.
+ 11756.00ns INFO     test                               PASS [VERSION unchanged]: 0x20000
+ 13388.00ns INFO     test                               PASS [TILE_DIM unchanged]: 0x40
+ 13388.00ns INFO     cocotb.regression                  tb_interface.test_03_version_readonly passed
+ 13388.00ns INFO     cocotb.regression                  running tb_interface.test_04_cfg_start_autopulse (4/10)
+                                                            Writing CTRL[0]=1 causes cfg_start to pulse for exactly one cycle.
+ 13444.00ns INFO     test                               PASS [cfg_start quiescent]: 0x0
+ 15088.00ns INFO     test                               PASS [cfg_start auto-cleared]: 0x0
+ 15088.00ns INFO     test                               cfg_start high was observed: False
+ 15088.00ns INFO     cocotb.regression                  tb_interface.test_04_cfg_start_autopulse passed
+ 15088.00ns INFO     cocotb.regression                  running tb_interface.test_05_status_register (5/10)
+                                                            STATUS[2:0] = {error, done, busy}; STATUS[11:8] = active_head.
+ 15172.00ns INFO     test                               PASS [STATUS busy=1,done=0,error=0]: 0x1
+ 15200.00ns INFO     test                               PASS [STATUS busy=0,done=1,error=0]: 0x2
+ 15228.00ns INFO     test                               PASS [STATUS error=1]: 0x4
+ 15228.00ns INFO     test                               PASS [STATUS active_head=5]: 0x5
+ 15228.00ns INFO     cocotb.regression                  tb_interface.test_05_status_register passed
+ 15228.00ns INFO     cocotb.regression                  running tb_interface.test_06_interrupt_generation (6/10)
+                                                            sts_done with INTR_EN[1]=1 sets INTR_STAT[1] and asserts irq.
+ 16916.01ns INFO     test                               PASS [IRQ asserted]: 0x1
+ 16936.01ns INFO     test                               PASS [INTR_STAT[1] set]: 0x1
+ 16936.01ns INFO     cocotb.regression                  tb_interface.test_06_interrupt_generation passed
+ 16936.01ns INFO     cocotb.regression                  running tb_interface.test_07_w1c_clear (7/10)
+                                                            Writing 1 to INTR_STAT[1] clears it and de-asserts IRQ.
+ 20240.01ns INFO     test                               PASS [IRQ cleared after W1C]: 0x0
+ 20260.01ns INFO     test                               PASS [INTR_STAT[1] cleared]: 0x0
+ 20260.01ns INFO     cocotb.regression                  tb_interface.test_07_w1c_clear passed
+ 20260.01ns INFO     cocotb.regression                  running tb_interface.test_08_perf_counter_passthru (8/10)
+                                                            PERF_CYCLE_L/H CSRs expose the perf_cycles input wire.
+ 22168.01ns INFO     test                               PASS [perf_cycles]: counted 449 cycles
+ 22168.01ns INFO     cocotb.regression                  tb_interface.test_08_perf_counter_passthru passed
+ 22168.01ns INFO     cocotb.regression                  skipping tb_interface.test_09_axis_tile_assembly (9/10)
+                                                            Sending BEATS_PER_TILE=128 stream beats produces tile_valid=1.
+ 22168.01ns INFO     cocotb.regression                  running tb_interface.test_10_wdt_timeout_register (10/10)
+                                                            WDT_TIMEOUT CSR stores and exposes cfg_wdt_timeout.
+ 23856.01ns INFO     test                               PASS [WDT_TIMEOUT readback]: 0x1000
+ 23856.01ns INFO     test                               PASS [cfg_wdt_timeout output]: 0x1000
+ 23856.01ns INFO     cocotb.regression                  tb_interface.test_10_wdt_timeout_register passed
+ 23856.01ns INFO     cocotb.regression                  ****************************************************************************************************
+                                                        ** TEST                                        STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
+                                                        ****************************************************************************************************
+                                                        ** tb_interface.test_01_reset_defaults          PASS         212.00           0.29        728.30  **
+                                                        ** tb_interface.test_02_csr_write_readback      PASS        9856.00           0.36      27673.59  **
+                                                        ** tb_interface.test_03_version_readonly        PASS        3320.00           0.31      10593.98  **
+                                                        ** tb_interface.test_04_cfg_start_autopulse     PASS        1700.00           0.30       5636.51  **
+                                                        ** tb_interface.test_05_status_register         PASS         140.00           0.29        482.61  **
+                                                        ** tb_interface.test_06_interrupt_generation    PASS        1708.00           0.30       5620.79  **
+                                                        ** tb_interface.test_07_w1c_clear               PASS        3324.00           0.31      10714.48  **
+                                                        ** tb_interface.test_08_perf_counter_passthru   PASS        1908.00           0.30       6354.44  **
+                                                        ** tb_interface.test_09_axis_tile_assembly      SKIP           0.00           0.00          -.--  **
+                                                        ** tb_interface.test_10_wdt_timeout_register    PASS        1688.00           0.30       5703.33  **
+                                                        ****************************************************************************************************
+                                                        ** TESTS=10 PASS=9 FAIL=0 SKIP=1                           23856.01           2.79       8555.13  **
+                                                        ****************************************************************************************************
+FST info: dumpfile sim_build/axi_if.fst opened for output.
+make[1]: Leaving directory '/mnt/c/ECE510/m2'
