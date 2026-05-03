@@ -9,7 +9,7 @@ COCOTB_TEST_MODULES=tb_interface COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOP
      -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
      0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
-     0.00ns INFO     cocotb                             Seeding Python random module with 1777769522
+     0.00ns INFO     cocotb                             Seeding Python random module with 1777806411
      0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/fatem/.local/lib/python3.12/site-packages/cocotb
      0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
      0.00ns INFO     cocotb                             Running tests
@@ -77,18 +77,18 @@ COCOTB_TEST_MODULES=tb_interface COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_TOP
  23856.01ns INFO     cocotb.regression                  ****************************************************************************************************
                                                         ** TEST                                        STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ****************************************************************************************************
-                                                        ** tb_interface.test_01_reset_defaults          PASS         212.00           0.29        728.30  **
-                                                        ** tb_interface.test_02_csr_write_readback      PASS        9856.00           0.36      27673.59  **
-                                                        ** tb_interface.test_03_version_readonly        PASS        3320.00           0.31      10593.98  **
-                                                        ** tb_interface.test_04_cfg_start_autopulse     PASS        1700.00           0.30       5636.51  **
-                                                        ** tb_interface.test_05_status_register         PASS         140.00           0.29        482.61  **
-                                                        ** tb_interface.test_06_interrupt_generation    PASS        1708.00           0.30       5620.79  **
-                                                        ** tb_interface.test_07_w1c_clear               PASS        3324.00           0.31      10714.48  **
-                                                        ** tb_interface.test_08_perf_counter_passthru   PASS        1908.00           0.30       6354.44  **
+                                                        ** tb_interface.test_01_reset_defaults          PASS         212.00           0.30        698.12  **
+                                                        ** tb_interface.test_02_csr_write_readback      PASS        9856.00           0.37      26528.63  **
+                                                        ** tb_interface.test_03_version_readonly        PASS        3320.00           0.33      10191.40  **
+                                                        ** tb_interface.test_04_cfg_start_autopulse     PASS        1700.00           0.32       5363.71  **
+                                                        ** tb_interface.test_05_status_register         PASS         140.00           0.30        460.29  **
+                                                        ** tb_interface.test_06_interrupt_generation    PASS        1708.00           0.31       5462.55  **
+                                                        ** tb_interface.test_07_w1c_clear               PASS        3324.00           0.32      10239.14  **
+                                                        ** tb_interface.test_08_perf_counter_passthru   PASS        1908.00           0.32       6045.30  **
                                                         ** tb_interface.test_09_axis_tile_assembly      SKIP           0.00           0.00          -.--  **
-                                                        ** tb_interface.test_10_wdt_timeout_register    PASS        1688.00           0.30       5703.33  **
+                                                        ** tb_interface.test_10_wdt_timeout_register    PASS        1688.00           0.31       5396.35  **
                                                         ****************************************************************************************************
-                                                        ** TESTS=10 PASS=9 FAIL=0 SKIP=1                           23856.01           2.79       8555.13  **
+                                                        ** TESTS=10 PASS=9 FAIL=0 SKIP=1                           23856.01           2.95       8080.33  **
                                                         ****************************************************************************************************
 FST info: dumpfile sim_build/axi_if.fst opened for output.
 make[1]: Leaving directory '/mnt/c/ECE510/m2'

@@ -6,7 +6,7 @@
 // -------
 // This file contains ONLY the host-facing interface logic.
 // It has no knowledge of chiplets, UCIe, or systolic arrays.
-// It presents clean, tiled BF16 data outward to soc_top.sv.
+// It presents clean, tiled BF16 data outward to compute_core.sv.
 //
 // Block diagram
 // -------------
@@ -31,7 +31,7 @@
 //          │                    │
 //          └────────┬───────────┘
 //                   ▼
-//             to soc_top.sv
+//             to compute_core.sv
 //
 // AXI4-Lite CSR Register Map  (byte addresses, 32-bit words)
 // ----------------------------------------------------------
@@ -67,6 +67,34 @@
 // -------------
 //  TILE_DIM x TILE_DIM x 16-bit = TILE_DIM² x 16 bits
 //  For TILE_DIM=64: 64x64x16 = 65536 bits = 128 AXI-Stream beats (512-bit)
+//
+// Protocol Conformance
+// --------------------
+//
+// AXI4-Lite (axi_lite_csr):
+//   All 5 channels present: AW, W, B, AR, R
+//   Handshake: VALID never de-asserted before handshake completes (spec A3.2.1)
+//   Write path: WR_IDLE → WR_DATA → WR_RESP
+//     s_awready asserted in WR_IDLE; s_wready in WR_DATA; s_bvalid in WR_RESP
+//     s_bresp always OKAY (2'b00)
+//   Read path: RD_IDLE → RD_LATCH → RD_WAIT
+//     s_arready in RD_IDLE; s_rvalid + s_rdata in RD_LATCH; hold until s_rready
+//     s_rresp always OKAY (2'b00)
+//   Known limitation: AW and W accepted in separate FSM states.
+//     Master must hold s_wvalid until WR_DATA asserts s_wready.
+//     Simultaneous AW+W is legal per spec and correctly handled — master
+//     holds s_wvalid until s_wready, which is standard AXI4-Lite behaviour.
+//
+// AXI4-Stream (axis_input_fifo slave / axis_output_fifo master):
+//   TVALID/TREADY contract honoured on both sides (spec A3.3)
+//   Slave:  s_tready = ~fifo_full; beat accepted only when s_tvalid & s_tready
+//           TDATA, TKEEP, TLAST, TUSER, TID all stored per beat
+//   Master: m_tvalid not de-asserted unless m_tready was high and FIFO empty
+//           m_tkeep = all-ones (all 64 bytes valid per beat)
+//           m_tlast correctly marks last beat of each 128-beat tile
+//           m_tuser = 4'd3 (RESULT type) on all output beats
+//   Known limitation: m_tready on axis_output_fifo tied to 1'b1.
+//     Host DMA backpressure not yet wired; add before tapeout.
 //
 // Coding rules
 // ------------
@@ -140,8 +168,8 @@ endmodule
 // =============================================================================
 // axi_lite_csr
 // AXI4-Lite slave.  Owns all CSR registers.
-// Drives cfg_* outputs consumed by soc_top.
-// Accepts status inputs from soc_top.
+// Drives cfg_* outputs consumed by compute_core.
+// Accepts status inputs from compute_core.
 // =============================================================================
 module axi_lite_csr #(
     parameter int TILE_DIM = 64
@@ -170,7 +198,7 @@ module axi_lite_csr #(
     output logic        s_rvalid,
     input  wire         s_rready,
 
-    // Config outputs  →  soc_top / chiplets
+    // Config outputs  →  compute_core / chiplets
     output logic        cfg_start,        // 1-cycle pulse on write
     output logic        cfg_reset,        // 1-cycle pulse on write
     output logic        cfg_mode,         // 0=stage1 QKV, 1=stage5 OutProj
@@ -184,7 +212,7 @@ module axi_lite_csr #(
     output logic [15:0] cfg_scale_bf16,   // BF16 in [15:0]
     output logic [31:0] cfg_wdt_timeout,
 
-    // Status inputs  ←  soc_top
+    // Status inputs  ←  compute_core
     input  wire         sts_busy,
     input  wire         sts_done,
     input  wire         sts_error,
@@ -559,7 +587,7 @@ module axis_output_fifo #(
     input  wire        clk_axi,   // 250 MHz AXI host interface clock
     input  wire        rst_n,
 
-    // Tile input from soc_top
+    // Tile input from compute_core
     input  wire  [15:0] tile_in    [TILE_DIM][TILE_DIM],
     input  wire         tile_valid,
     output logic        tile_ready,
@@ -712,13 +740,13 @@ endmodule
 // =============================================================================
 // axi_if  —  top-level AXI interface block
 //
-// This is the ONLY module instantiated by soc_top.sv on the host side.
+// This is the ONLY module instantiated by compute_core.sv on the host side.
 // It exposes:
 //   - Wishbone B4 slave inward (from CPU)
 //   - cfg_* outputs (config to chiplets)
 //   - tile_* outputs (input data to chiplet 0)
 //   - tile_* inputs  (output data from chiplet 0)
-//   - sts_* inputs   (status from soc_top)
+//   - sts_* inputs   (status from compute_core)
 //   - irq output     (interrupt to CPU)
 // =============================================================================
 module axi_if #(
@@ -744,7 +772,7 @@ module axi_if #(
     output wire        wb_err,
 
     // ------------------------------------------------------------------
-    // Config outputs  →  soc_top
+    // Config outputs  →  compute_core
     // ------------------------------------------------------------------
     output wire        cfg_start,
     output wire        cfg_reset,
@@ -760,7 +788,7 @@ module axi_if #(
     output wire [31:0] cfg_wdt_timeout,
 
     // ------------------------------------------------------------------
-    // Input tile  →  soc_top  (token / weight data from DMA)
+    // Input tile  →  compute_core  (token / weight data from DMA)
     // ------------------------------------------------------------------
     output wire [15:0] in_tile_data  [TILE_DIM][TILE_DIM],
     output wire        in_tile_valid,
@@ -769,14 +797,14 @@ module axi_if #(
     input  wire        in_tile_ready,
 
     // ------------------------------------------------------------------
-    // Output tile  ←  soc_top  (results back to DMA)
+    // Output tile  ←  compute_core  (results back to DMA)
     // ------------------------------------------------------------------
     input  wire [15:0] out_tile_data  [TILE_DIM][TILE_DIM],
     input  wire        out_tile_valid,
     output wire        out_tile_ready,
 
     // ------------------------------------------------------------------
-    // Status inputs  ←  soc_top
+    // Status inputs  ←  compute_core
     // ------------------------------------------------------------------
     input  wire        sts_busy,
     input  wire        sts_done,
@@ -1000,7 +1028,7 @@ module axi_if #(
         .en      (sts_busy),
         .kick    (out_tile_valid),   // any output = progress
         .limit   (csr_wdt_timeout),
-        .timeout (/* connected in soc_top */)
+        .timeout (/* connected in compute_core */)
     );
 
     // -----------------------------------------------------------------------
