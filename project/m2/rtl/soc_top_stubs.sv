@@ -42,24 +42,49 @@ module ucie_rx #(parameter int TILE_DIM = 64)(
     input  wire [511:0] bump_data,
     input  wire         bump_valid,
     output wire         bump_credit,
-    output wire         rx_valid,
+    output logic        rx_valid,
     output wire [3:0]   rx_src_id,
-    output wire [15:0]  rx_tile [TILE_DIM][TILE_DIM],
+    output logic [15:0] rx_tile [TILE_DIM][TILE_DIM],
     input  wire         rx_ready,
     output wire         rx_crc_err,
     output wire         rx_seq_err
 );
+    localparam int BEATS = (TILE_DIM * TILE_DIM * 16) / 512;
+    logic [8:0]  beat_cnt;
+    logic [15:0] tile_buf [TILE_DIM][TILE_DIM];
+
     assign bump_credit = 1'b1;
-    assign rx_valid    = 1'b0;
-    assign rx_src_id   = '0;
+    assign rx_src_id   = 4'h0;
     assign rx_crc_err  = 1'b0;
     assign rx_seq_err  = 1'b0;
-    genvar i, j;
-    generate
-        for (i = 0; i < TILE_DIM; i++)
-            for (j = 0; j < TILE_DIM; j++)
-                assign rx_tile[i][j] = '0;
-    endgenerate
+
+    always_ff @(posedge clk_core or negedge rst_n) begin : rx_ff
+        integer k, elem, row, col, r, c;
+        if (!rst_n) begin
+            beat_cnt <= '0;
+            rx_valid <= 1'b0;
+        end else begin
+            rx_valid <= 1'b0;
+            if (bump_valid) begin
+                for (k = 0; k < 32; k = k + 1) begin
+                    elem = beat_cnt * 32 + k;
+                    row  = elem / TILE_DIM;
+                    col  = elem % TILE_DIM;
+                    if (row < TILE_DIM)
+                        tile_buf[row][col] <= bump_data[511 - k*16 -: 16];
+                end
+                if (beat_cnt == BEATS - 1) begin
+                    beat_cnt <= '0;
+                    rx_valid <= 1'b1;
+                    for (r = 0; r < TILE_DIM; r = r + 1)
+                        for (c = 0; c < TILE_DIM; c = c + 1)
+                            rx_tile[r][c] <= tile_buf[r][c];
+                end else begin
+                    beat_cnt <= beat_cnt + 1;
+                end
+            end
+        end
+    end
 endmodule
 
 

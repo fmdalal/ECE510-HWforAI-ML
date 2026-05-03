@@ -176,7 +176,6 @@
 //
 //   irq            out    1       Interrupt to CPU — asserted on cfg_done event
 // =============================================================================
- 
 
 `timescale 1ns/1ps
 `default_nettype none
@@ -224,6 +223,10 @@ module compute_core #(
     output logic         mem_req,
     input  wire          mem_gnt,
 
+    // Output tile (probability results from chiplet pipeline → host DMA)
+    output wire [15:0] out_tile_data  [TILE_DIM][TILE_DIM],
+    output wire        out_tile_valid,
+
     // Interrupt to CPU
     output wire        irq
 );
@@ -254,8 +257,7 @@ module compute_core #(
     wire        in_tile_ready;
 
     // Output tile (chiplet 0 UCIe RX → axi_if)
-    wire [15:0] out_tile_data [TILE_DIM][TILE_DIM];
-    wire        out_tile_valid;
+    // out_tile_data and out_tile_valid are now top-level output ports
     wire        out_tile_ready;
 
     // Status (chiplets → axi_if)

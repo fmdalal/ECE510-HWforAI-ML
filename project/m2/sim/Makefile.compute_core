@@ -22,7 +22,7 @@ COCOTB_RESOLVE_X  = ZEROS
 WAVES             = 1
 endif
 
-TOPLEVEL = soc_top
+TOPLEVEL = compute_core
 COCOTB_TEST_MODULES   = tb_compute_core
 
 
