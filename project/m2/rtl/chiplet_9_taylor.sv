@@ -234,7 +234,7 @@ module chiplet_9_taylor #(
     logic [15:0] h_acc [3][SEQ_LEN];
     logic        h_vld [3];
 
-    // Stage 3 (init): acc = clipped * (1/6) + 0 = 1/6 * x
+    // Stage 3 (init): acc = clipped * (1/2) + 1 = x/2 + 1
     genvar ghi;
     generate
         for (ghi = 0; ghi < SEQ_LEN; ghi++) begin : h0_gen
@@ -242,8 +242,8 @@ module chiplet_9_taylor #(
             bf16_mac h0_mac (
                 .clk_core(clk_core), .rst_n(rst_n),
                 .en(clipped_vld), .flush(clipped_vld),
-                .a(clipped_r[ghi]), .b(ONE_6TH),
-                .acc_fp32_in(32'h0),
+                .a(clipped_r[ghi]), .b(HALF),
+                .acc_fp32_in({ONE, 16'h0}),
                 .acc_fp32_out(h0_fp32_nc),
                 .acc_bf16_out(h_acc[0][ghi])
             );
@@ -255,7 +255,7 @@ module chiplet_9_taylor #(
         else        h_vld[0] <= clipped_vld;
     end
 
-    // Stage 4: acc = clipped * acc + 0.5
+    // Stage 4: acc = clipped * h_acc[0] + 1.0
     genvar gh1;
     generate
         for (gh1 = 0; gh1 < SEQ_LEN; gh1++) begin : h1_gen
@@ -265,9 +265,9 @@ module chiplet_9_taylor #(
             fp32_mul h1_mul (.a(clipped_r[gh1]), .b(h_acc[0][gh1]),
                              .result(h1_prod));
             // FP32 add: prod + 0.5
-            wire [31:0] half_fp32 = {HALF, 16'h0000};
+            wire [31:0] one_fp32 = {ONE, 16'h0000};
             wire [31:0] h1_sum;
-            fp32_add h1_add (.a(h1_prod), .b(half_fp32), .result(h1_sum));
+            fp32_add h1_add (.a(h1_prod), .b(one_fp32), .result(h1_sum));
             // Register + round to BF16
             wire rup = h1_sum[15] & (|h1_sum[14:0] | h1_sum[16]);
             always_ff @(posedge clk_core or negedge rst_n) begin : h1_reg
@@ -368,6 +368,14 @@ module chiplet_9_taylor #(
                     .b({~sy_prod[31], sy_prod[30:0]}),
                     .result(two_minus_sy));
     fp32_mul nr_m2 (.a(y_bf16), .b(two_minus_sy[31:16]), .result(nr_next));
+	
+	// Exponent-derived seed: y0 = 2^(-(floor(log2(S))))
+    // Places S*y0 in [0.5, 1.0] for any positive normal S -> guaranteed convergence
+    wire [7:0]  sum_exp_field = total_sum[30:23];
+    wire [7:0]  seed_exp      = 8'd253 - sum_exp_field;
+    wire [31:0] nr_seed       = (sum_exp_field == 8'h00)
+                                ? 32'h3F80_0000                // fallback: S=0 edge case
+                                : {1'b0, seed_exp, 23'h0};
 
     always_ff @(posedge clk_core or negedge rst_n) begin : nr_ff
         if (!rst_n) begin

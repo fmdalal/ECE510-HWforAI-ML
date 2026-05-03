@@ -9,7 +9,7 @@ COCOTB_TEST_MODULES=tb_compute_core COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_
      -.--ns INFO     gpi                                ..mbed/gpi_embed.cpp:93   in _embed_init_python              Using Python 3.12.4 interpreter at /usr/bin/python3
      -.--ns INFO     gpi                                ../gpi/GpiCommon.cpp:79   in gpi_print_registered_impl       VPI registered
      0.00ns INFO     cocotb                             Running on Icarus Verilog version 12.0 (stable)
-     0.00ns INFO     cocotb                             Seeding Python random module with 1777805214
+     0.00ns INFO     cocotb                             Seeding Python random module with 1777830820
      0.00ns INFO     cocotb                             Initialized cocotb v2.0.1 from /home/fatem/.local/lib/python3.12/site-packages/cocotb
      0.00ns INFO     cocotb.regression                  pytest not found, install it to enable better AssertionError messages
      0.00ns INFO     cocotb                             Running tests
@@ -103,20 +103,20 @@ COCOTB_TEST_MODULES=tb_compute_core COCOTB_TESTCASE= COCOTB_TEST_FILTER= COCOTB_
 112435.01ns INFO     cocotb.regression                  ********************************************************************************************************************
                                                         ** TEST                                                        STATUS  SIM TIME (ns)  REAL TIME (s)  RATIO (ns/s) **
                                                         ********************************************************************************************************************
-                                                        ** tb_compute_core.test_01_reset_quiescent                      PASS         192.00           0.69        276.32  **
-                                                        ** tb_compute_core.test_02_csr_program_via_wb                   PASS       11524.00           0.97      11903.50  **
-                                                        ** tb_compute_core.test_03_mem_req_on_start                     PASS        3364.00           0.78       4286.09  **
-                                                        ** tb_compute_core.test_04_busy_clears_on_c0_done               PASS        1952.00           0.73       2671.38  **
-                                                        ** tb_compute_core.test_05_irq_end_to_end                       PASS        5020.00           0.78       6456.73  **
-                                                        ** tb_compute_core.test_06_mem_req_gates_on_busy                PASS        3367.00           0.77       4357.14  **
-                                                        ** tb_compute_core.test_07_mode_bit                             PASS        3368.00           0.73       4623.66  **
-                                                        ** tb_compute_core.test_08_software_reset                       PASS        1784.00           0.76       2335.09  **
-                                                        ** tb_compute_core.test_09_tile_dim_readonly                    PASS        1776.00           0.71       2498.70  **
-                                                        ** tb_compute_core.test_10_clock_domain_stability               PASS          80.00           0.26        302.07  **
-                                                        ** tb_compute_core.test_11_representative_input_vs_reference    PASS       40024.00           1.74      23015.44  **
-                                                        ** tb_compute_core.test_12_uniform_input_analytical_reference   PASS       39984.00          -0.48     -83018.93  **
+                                                        ** tb_compute_core.test_01_reset_quiescent                      PASS         192.00           0.62        310.32  **
+                                                        ** tb_compute_core.test_02_csr_program_via_wb                   PASS       11524.00           0.86      13414.93  **
+                                                        ** tb_compute_core.test_03_mem_req_on_start                     PASS        3364.00           0.67       5003.78  **
+                                                        ** tb_compute_core.test_04_busy_clears_on_c0_done               PASS        1952.00           0.64       3070.05  **
+                                                        ** tb_compute_core.test_05_irq_end_to_end                       PASS        5020.00           0.71       7098.45  **
+                                                        ** tb_compute_core.test_06_mem_req_gates_on_busy                PASS        3367.00           0.67       5013.78  **
+                                                        ** tb_compute_core.test_07_mode_bit                             PASS        3368.00           0.65       5218.99  **
+                                                        ** tb_compute_core.test_08_software_reset                       PASS        1784.00           0.63       2826.42  **
+                                                        ** tb_compute_core.test_09_tile_dim_readonly                    PASS        1776.00           0.63       2822.06  **
+                                                        ** tb_compute_core.test_10_clock_domain_stability               PASS          80.00           0.22        356.29  **
+                                                        ** tb_compute_core.test_11_representative_input_vs_reference    PASS       40024.00           1.54      26073.59  **
+                                                        ** tb_compute_core.test_12_uniform_input_analytical_reference   PASS       39984.00           1.57      25475.76  **
                                                         ********************************************************************************************************************
-                                                        ** TESTS=12 PASS=12 FAIL=0 SKIP=0                                         112435.01           8.48      13259.04  **
+                                                        ** TESTS=12 PASS=12 FAIL=0 SKIP=0                                         112435.01           9.44      11916.13  **
                                                         ********************************************************************************************************************
 FST info: dumpfile sim_build/compute_core.fst opened for output.
 make[1]: Leaving directory '/mnt/c/ECE510/m2'
