@@ -5,7 +5,7 @@ wb2axip bridge for bridging my SoC
 AXI4 Lite-32 bit @100MHz for Control transfer  
 AXI4 Stream-512 bit @250MHz for Data transfer
 
-UCIe 1.0 Advanced Package — 512-bit bump bus @16 GT/s, 64 lanes, 45 µm pitch, 2 GHz forwarded clock (clk_link), 128 GB/s per direction per module
+UCIe 1.0 Advanced Package — 512-bit bump bus @16 GT/s, 64 lanes, 45 µm pitch, 2 GHz forwarded clock (clk_link), 128 GB/s per direction per module for communication within the 10 Chiplets of my hardware accelerator.
 
 ---
 ### Calculating Required BandWidth 
