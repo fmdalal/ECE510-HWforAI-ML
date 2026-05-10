@@ -1,41 +1,36 @@
 =================================================
-  crossbar_tb: 4x4 Binary-Weight MAC Testbench
+  crossbar_tb: Serial MAC Accumulator Testbench
 =================================================
 VCD info: dumpfile crossbar_tb.vcd opened for output.
 
-[Test 1] Spec weights, in=[10,20,30,40]
-  Weight matrix:
-         col0 col1 col2 col3
-  row0: [ +1,  -1,  +1,  -1 ]
-  row1: [ +1,  +1,  -1,  -1 ]
-  row2: [ -1,  +1,  +1,  -1 ]
-  row3: [ -1,  -1,  -1,  +1 ]
+--- Cycle-by-cycle accumulation ---
+
+[Cycle 1] row0 processed: in[0]=10
+       acc += weight[0][j] * in[0]
+  out    = [  10,  -10,   10,  -10]
+  expect = [  10,  -10,   10,  -10]
+  --> PASS
+
+[Cycle 2] row1 processed: in[1]=20
+       acc += weight[1][j] * in[1]
+  out    = [  30,   10,  -10,  -30]
+  expect = [  30,   10,  -10,  -30]
+  --> PASS
+
+[Cycle 3] row2 processed: in[2]=30
+       acc += weight[2][j] * in[2]
+  out    = [   0,   40,   20,  -60]
+  expect = [   0,   40,   20,  -60]
+  --> PASS
+
+[Cycle 4] row3 processed: in[3]=40 --> FINAL RESULT
+       acc += weight[3][j] * in[3]
   out    = [ -40,    0,  -20,  -20]
   expect = [ -40,    0,  -20,  -20]
   --> PASS
 
-[Test 2] All +1 weights, in=[1,1,1,1]
-  out    = [   4,    4,    4,    4]
-  expect = [   4,    4,    4,    4]
-  --> PASS
-
-[Test 3] All -1 weights, in=[1,1,1,1]
-  out    = [  -4,   -4,   -4,   -4]
-  expect = [  -4,   -4,   -4,   -4]
-  --> PASS
-
-[Test 4] Diagonal +1, rest -1, in=[10,20,30,40]
-  out    = [ -80,  -60,  -40,  -20]
-  expect = [ -80,  -60,  -40,  -20]
-  --> PASS
-
-[Test 5] All +1 weights, in=[-5,-10,-15,-20]
-  out    = [ -50,  -50,  -50,  -50]
-  expect = [ -50,  -50,  -50,  -50]
-  --> PASS
-
 =================================================
-  Results: 5 passed, 0 failed
-  ALL TESTS PASSED
+  Results: 4 passed, 0 failed
+  ALL TESTS PASSED - matches hand calculation
 =================================================
-crossbar_tb.sv:164: $finish called at 76000 (1ps)
+crossbar_tb.sv:106: $finish called at 56000 (1ps)
