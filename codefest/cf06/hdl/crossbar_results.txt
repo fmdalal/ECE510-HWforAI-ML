@@ -1,0 +1,41 @@
+=================================================
+  crossbar_tb: 4x4 Binary-Weight MAC Testbench
+=================================================
+VCD info: dumpfile crossbar_tb.vcd opened for output.
+
+[Test 1] Spec weights, in=[10,20,30,40]
+  Weight matrix:
+         col0 col1 col2 col3
+  row0: [ +1,  -1,  +1,  -1 ]
+  row1: [ +1,  +1,  -1,  -1 ]
+  row2: [ -1,  +1,  +1,  -1 ]
+  row3: [ -1,  -1,  -1,  +1 ]
+  out    = [ -40,    0,  -20,  -20]
+  expect = [ -40,    0,  -20,  -20]
+  --> PASS
+
+[Test 2] All +1 weights, in=[1,1,1,1]
+  out    = [   4,    4,    4,    4]
+  expect = [   4,    4,    4,    4]
+  --> PASS
+
+[Test 3] All -1 weights, in=[1,1,1,1]
+  out    = [  -4,   -4,   -4,   -4]
+  expect = [  -4,   -4,   -4,   -4]
+  --> PASS
+
+[Test 4] Diagonal +1, rest -1, in=[10,20,30,40]
+  out    = [ -80,  -60,  -40,  -20]
+  expect = [ -80,  -60,  -40,  -20]
+  --> PASS
+
+[Test 5] All +1 weights, in=[-5,-10,-15,-20]
+  out    = [ -50,  -50,  -50,  -50]
+  expect = [ -50,  -50,  -50,  -50]
+  --> PASS
+
+=================================================
+  Results: 5 passed, 0 failed
+  ALL TESTS PASSED
+=================================================
+crossbar_tb.sv:164: $finish called at 76000 (1ps)
