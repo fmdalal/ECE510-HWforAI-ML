@@ -1,0 +1,17 @@
+{
+  "DESIGN_NAME": "chiplet_0_qkv_outproj",
+  "VERILOG_FILES": "dir::*.v",
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 10.0,
+  "PDK": "sky130A",
+  "RUN_VERILATOR": false,
+  "FP_SIZING": "absolute",
+  "DIE_AREA": "0 0 3000 3000",
+  "FP_CORE_UTIL": 30,
+  "PL_TARGET_DENSITY": 0.3,
+  "RUN_CVC": false,
+  "QUIT_ON_SYNTH_CHECKS": false,
+  "SYNTH_PARAMETERS": "TILE=8 NUM_HEADS=1 D_MODEL=64 D_HEAD=8 K_DIM=8",
+  "STA_CORNERS": ["nom_tt_025C_1v80", "nom_ss_100C_1v60", "nom_ff_n40C_1v95"],
+  "RUN_KLAYOUT": false
+}
