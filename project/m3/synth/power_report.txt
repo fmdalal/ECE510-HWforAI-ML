@@ -1,0 +1,568 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.65+37 (git sha1 e87a9bd9a, g++ 13.3.0-6ubuntu2~24.04.1 -fPIC -O3)
+
+-- Running command `
+  read_liberty -lib typical.lib;
+  read_verilog gate_level_netlist.v;
+  hierarchy -top compute_core;
+  stat -liberty typical.lib;
+' --
+
+1. Executing Liberty frontend: typical.lib
+Imported 477 cell types from liberty file.
+
+2. Executing Verilog-2005 frontend: gate_level_netlist.v
+Parsing Verilog input from `gate_level_netlist.v' to AST representation.
+Generating RTLIL representation for module `\axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Generating RTLIL representation for module `\compute_core'.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \compute_core
+Used module:     \axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256
+
+3.2. Analyzing design hierarchy..
+Top module:  \compute_core
+Used module:     \axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256
+Removed 0 unused modules.
+
+4. Printing statistics.
+
+=== compute_core ===
+
+        +----------Local Count, excluding submodules.
+        | 
+    11653 wires
+    15459 wire bits
+    11653 public wires
+    15459 public wire bits
+       44 ports
+     2379 port bits
+    10515 cells
+        3   ADDHX1
+       10   AND2X6
+        1   AND2X8
+        1   AND3X6
+        4   AO21X2
+        3   AO21X4
+        1   AO22X1
+       42   AO22X4
+        1   AO22XL
+        1   AOI211X1
+        1   AOI211X4
+        6   AOI21X1
+      136   AOI21X2
+      109   AOI21X4
+        1   AOI21XL
+       12   AOI221X2
+       75   AOI221X4
+        7   AOI222X4
+       10   AOI22X1
+        2   AOI22X2
+       14   AOI22X4
+       25   AOI2BB1X1
+       15   AOI2BB1X2
+       77   AOI2BB1X4
+        6   AOI2BB1XL
+        1   AOI2BB2X1
+       27   AOI2BB2X2
+       21   AOI2BB2X4
+        1   AOI31X1
+       15   AOI31X2
+        5   AOI31X4
+        1   AOI32X2
+        1   AOI32X4
+        2   BUFX2
+        1   BUFX20
+       61   BUFX3
+       32   BUFX6
+        5   BUFX8
+       16   CLKAND2X12
+        7   CLKAND2X2
+       21   CLKAND2X3
+        5   CLKAND2X6
+        1   CLKAND2X8
+        1   CLKBUFX4
+      206   CLKINVX1
+        1   CLKINVX12
+       20   CLKINVX16
+     1418   CLKINVX2
+        7   CLKINVX20
+      115   CLKINVX3
+      277   CLKINVX4
+        5   CLKINVX6
+       72   CLKINVX8
+      259   CLKMX2X3
+        4   CLKXOR2X1
+        2   DFFRHQX1
+      292   DFFRHQX4
+        1   DFFRHQX8
+      237   DFFRX1
+     1055   DFFRX4
+       39   DFFRXL
+        1   DFFSX4
+        1   DLY4X4
+        8   EDFFHQX8
+        2   EDFFX4
+        9   INVX1
+        2   INVX2
+        2   INVX3
+        1   INVX4
+       17   INVX6
+       25   INVXL
+        3   MDFFHQX4
+        1   MX2X1
+       14   MX2X8
+        5   MX2XL
+        1   MX3XL
+      243   MXI2X1
+        1   MXI2X6
+        4   MXI2XL
+      286   NAND2BX1
+       64   NAND2BX2
+      115   NAND2BX4
+       27   NAND2BXL
+      187   NAND2X1
+      558   NAND2X2
+      264   NAND2X4
+       42   NAND2X6
+       27   NAND2X8
+        5   NAND2XL
+        1   NAND3BX1
+       17   NAND3BX2
+       13   NAND3BX4
+        1   NAND3X1
+        8   NAND3X2
+        2   NAND3X4
+        1   NAND3X6
+        5   NAND3X8
+        8   NAND4BBX2
+        1   NAND4X1
+        8   NAND4X8
+       33   NOR2BX1
+       12   NOR2BX2
+       23   NOR2BX4
+        7   NOR2BXL
+      329   NOR2X1
+      369   NOR2X2
+      375   NOR2X4
+      125   NOR2X6
+        8   NOR2X8
+       13   NOR2XL
+        1   NOR3BX1
+        6   NOR3BX4
+        1   NOR3X1
+        4   NOR3X2
+        2   NOR3X6
+        4   NOR3X8
+        1   NOR4BBX2
+        1   NOR4BBX4
+        1   NOR4BX4
+        6   NOR4X8
+        1   OA21X1
+        1   OA21X2
+        1   OA21X4
+        3   OA22X1
+       66   OA22X4
+        1   OA22XL
+        7   OAI211X2
+        4   OAI211X4
+        8   OAI21X1
+       55   OAI21X2
+       65   OAI21X4
+        1   OAI221X1
+        8   OAI221X2
+       53   OAI221X4
+        1   OAI222X1
+        4   OAI222X2
+       19   OAI222X4
+        8   OAI22X1
+       21   OAI22X2
+       20   OAI22X4
+       26   OAI2BB1X1
+       11   OAI2BB1X2
+       94   OAI2BB1X4
+     1271   OAI2BB2X1
+        1   OAI2BB2X2
+        1   OAI2BB2X4
+        6   OAI2BB2XL
+        1   OAI31X1
+        8   OAI31X2
+        2   OAI31X4
+        4   OAI32X1
+        1   OAI32X2
+        1   OR2X1
+        3   OR2X2
+        4   OR2X4
+       15   OR2X6
+       32   OR2X8
+        1   OR2XL
+        3   OR3X1
+        5   OR3X8
+        1   OR4X1
+        2   OR4X6
+        1   OR4XL
+        4   SDFFQX2
+        1   SDFFRHQX2
+      188   SDFFRHQX4
+        4   SDFFRHQX8
+        2   SDFFRX2
+      168   SDFFRX4
+        1   SDFFRXL
+       10   SDFFSHQX1
+        1   SDFFSHQX4
+       23   SDFFSX2
+        1   SDFFTRXL
+        3   SDFFX4
+        9   XNOR2X1
+        1   XNOR2X2
+       42   XNOR2X4
+       11   XNOR2XL
+       20   XNOR3X1
+        7   XNOR3XL
+       58   XOR2X4
+       22   XOR3X1
+        1 submodules
+        1   axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256
+
+=== axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256 ===
+
+        +----------Local Count, excluding submodules.
+        | 
+   240538 wires
+   373884 wire bits
+   240538 public wires
+   373884 public wire bits
+       77 ports
+     1623 port bits
+   311844 cells
+        1   ADDHXL
+        1   AND3X6
+        1   AND3X8
+        1   AO22X4
+      473   AOI211X2
+     4573   AOI211X4
+        2   AOI21X1
+      124   AOI21X2
+     3738   AOI21X4
+      367   AOI221X2
+    13340   AOI221X4
+       63   AOI222X1
+     2446   AOI222X2
+     6691   AOI222X4
+      113   AOI22X1
+      436   AOI22X2
+     4401   AOI22X4
+       12   AOI22XL
+        1   AOI2BB1X4
+        3   AOI2BB2X1
+      129   AOI2BB2X2
+      470   AOI2BB2X4
+       34   AOI31X4
+       52   BUFX12
+       32   BUFX16
+       33   BUFX20
+    11645   BUFX3
+    14498   BUFX6
+      383   BUFX8
+      290   CLKAND2X12
+        1   CLKAND2X3
+        2   CLKAND2X6
+     3824   CLKINVX1
+       41   CLKINVX12
+      853   CLKINVX16
+    54253   CLKINVX2
+      235   CLKINVX20
+     3864   CLKINVX3
+     6440   CLKINVX4
+        1   CLKINVX6
+     6456   CLKINVX8
+      137   CLKMX2X3
+      188   DFFQX2
+        6   DFFRHQX4
+        1   DFFRX4
+        1   DFFSX4
+      486   DFFX4
+        9   EDFFHQX8
+       17   INVX12
+        6   INVX2
+      219   INVX6
+        1   MX2XL
+        3   MX3XL
+      490   MXI2X1
+        8   NAND2BX4
+        1   NAND2X1
+        4   NAND2X2
+       35   NAND2X4
+        1   NAND2X6
+        9   NAND2X8
+        3   NAND3BX2
+        5   NAND3BX4
+        3   NAND3X6
+        4   NAND3X8
+        2   NOR2BX4
+        1   NOR2X1
+        3   NOR2X2
+        6   NOR2X4
+        2   NOR2X6
+       15   NOR2X8
+        2   NOR3BX4
+        2   NOR3X6
+        4   NOR3X8
+        1   NOR4BBX4
+        3   NOR4X8
+      132   OAI211X1
+      353   OAI211X2
+     4539   OAI211X4
+        2   OAI21X1
+        2   OAI21X2
+       14   OAI21X4
+        3   OAI221X1
+      539   OAI221X2
+    12970   OAI221X4
+     1965   OAI222X2
+     7272   OAI222X4
+       12   OAI22X1
+     3442   OAI22X2
+     1220   OAI22X4
+       58   OAI2BB1X1
+       79   OAI2BB1X2
+     4227   OAI2BB1X4
+      275   OAI2BB2X2
+      236   OAI2BB2X4
+       23   OAI31X4
+        9   OR2X8
+    70474   SDFFQX2
+     1031   SDFFRHQX4
+        1   SDFFRHQX8
+       14   SDFFRX4
+    60948   SDFFX4
+        3   XNOR2X4
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+   322359 compute_core
+   311844 axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256
+
+        +----------Count including submodules.
+        | 
+   252191 wires
+   389343 wire bits
+   252191 public wires
+   389343 public wire bits
+      121 ports
+     4002 port bits
+        - memories
+        - memory bits
+        - processes
+   322359 cells
+        3   ADDHX1
+        1   ADDHXL
+       10   AND2X6
+        1   AND2X8
+        2   AND3X6
+        1   AND3X8
+        4   AO21X2
+        3   AO21X4
+        1   AO22X1
+       43   AO22X4
+        1   AO22XL
+        1   AOI211X1
+      473   AOI211X2
+     4574   AOI211X4
+        8   AOI21X1
+      260   AOI21X2
+     3847   AOI21X4
+        1   AOI21XL
+      379   AOI221X2
+    13415   AOI221X4
+       63   AOI222X1
+     2446   AOI222X2
+     6698   AOI222X4
+      123   AOI22X1
+      438   AOI22X2
+     4415   AOI22X4
+       12   AOI22XL
+       25   AOI2BB1X1
+       15   AOI2BB1X2
+       78   AOI2BB1X4
+        6   AOI2BB1XL
+        4   AOI2BB2X1
+      156   AOI2BB2X2
+      491   AOI2BB2X4
+        1   AOI31X1
+       15   AOI31X2
+       39   AOI31X4
+        1   AOI32X2
+        1   AOI32X4
+       52   BUFX12
+       32   BUFX16
+        2   BUFX2
+       34   BUFX20
+    11706   BUFX3
+    14530   BUFX6
+      388   BUFX8
+      306   CLKAND2X12
+        7   CLKAND2X2
+       22   CLKAND2X3
+        7   CLKAND2X6
+        1   CLKAND2X8
+        1   CLKBUFX4
+     4030   CLKINVX1
+       42   CLKINVX12
+      873   CLKINVX16
+    55671   CLKINVX2
+      242   CLKINVX20
+     3979   CLKINVX3
+     6717   CLKINVX4
+        6   CLKINVX6
+     6528   CLKINVX8
+      396   CLKMX2X3
+        4   CLKXOR2X1
+      188   DFFQX2
+        2   DFFRHQX1
+      298   DFFRHQX4
+        1   DFFRHQX8
+      237   DFFRX1
+     1056   DFFRX4
+       39   DFFRXL
+        2   DFFSX4
+      486   DFFX4
+        1   DLY4X4
+       17   EDFFHQX8
+        2   EDFFX4
+        9   INVX1
+       17   INVX12
+        8   INVX2
+        2   INVX3
+        1   INVX4
+      236   INVX6
+       25   INVXL
+        3   MDFFHQX4
+        1   MX2X1
+       14   MX2X8
+        6   MX2XL
+        4   MX3XL
+      733   MXI2X1
+        1   MXI2X6
+        4   MXI2XL
+      286   NAND2BX1
+       64   NAND2BX2
+      123   NAND2BX4
+       27   NAND2BXL
+      188   NAND2X1
+      562   NAND2X2
+      299   NAND2X4
+       43   NAND2X6
+       36   NAND2X8
+        5   NAND2XL
+        1   NAND3BX1
+       20   NAND3BX2
+       18   NAND3BX4
+        1   NAND3X1
+        8   NAND3X2
+        2   NAND3X4
+        4   NAND3X6
+        9   NAND3X8
+        8   NAND4BBX2
+        1   NAND4X1
+        8   NAND4X8
+       33   NOR2BX1
+       12   NOR2BX2
+       25   NOR2BX4
+        7   NOR2BXL
+      330   NOR2X1
+      372   NOR2X2
+      381   NOR2X4
+      127   NOR2X6
+       23   NOR2X8
+       13   NOR2XL
+        1   NOR3BX1
+        8   NOR3BX4
+        1   NOR3X1
+        4   NOR3X2
+        4   NOR3X6
+        8   NOR3X8
+        1   NOR4BBX2
+        2   NOR4BBX4
+        1   NOR4BX4
+        9   NOR4X8
+        1   OA21X1
+        1   OA21X2
+        1   OA21X4
+        3   OA22X1
+       66   OA22X4
+        1   OA22XL
+      132   OAI211X1
+      360   OAI211X2
+     4543   OAI211X4
+       10   OAI21X1
+       57   OAI21X2
+       79   OAI21X4
+        4   OAI221X1
+      547   OAI221X2
+    13023   OAI221X4
+        1   OAI222X1
+     1969   OAI222X2
+     7291   OAI222X4
+       20   OAI22X1
+     3463   OAI22X2
+     1240   OAI22X4
+       84   OAI2BB1X1
+       90   OAI2BB1X2
+     4321   OAI2BB1X4
+     1271   OAI2BB2X1
+      276   OAI2BB2X2
+      237   OAI2BB2X4
+        6   OAI2BB2XL
+        1   OAI31X1
+        8   OAI31X2
+       25   OAI31X4
+        4   OAI32X1
+        1   OAI32X2
+        1   OR2X1
+        3   OR2X2
+        4   OR2X4
+       15   OR2X6
+       41   OR2X8
+        1   OR2XL
+        3   OR3X1
+        5   OR3X8
+        1   OR4X1
+        2   OR4X6
+        1   OR4XL
+    70478   SDFFQX2
+        1   SDFFRHQX2
+     1219   SDFFRHQX4
+        5   SDFFRHQX8
+        2   SDFFRX2
+      182   SDFFRX4
+        1   SDFFRXL
+       10   SDFFSHQX1
+        1   SDFFSHQX4
+       23   SDFFSX2
+        1   SDFFTRXL
+    60951   SDFFX4
+        9   XNOR2X1
+        1   XNOR2X2
+       45   XNOR2X4
+       11   XNOR2XL
+       20   XNOR3X1
+        7   XNOR3XL
+       58   XOR2X4
+       22   XOR3X1
+        1 submodules
+        1   axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256
+
+End of script. Logfile hash: 699e4d0838, time: 25.82s, user: 20.64s, system: 2.15s, MEM: 3532.18 MB peak
+Yosys 0.65+37 (git sha1 e87a9bd9a, g++ 13.3.0-6ubuntu2~24.04.1 -fPIC -O3)
+Time spent: 97% 2x read_verilog (22 sec), 1% 1x hierarchy (0 sec), ...

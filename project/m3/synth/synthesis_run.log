@@ -1,0 +1,2202 @@
+TMPDIR is being set to /tmp/genus_temp_11035_mo.ece.pdx.edu_fchikani_RFTlcb
+Cadence Genus(TM) Synthesis Solution.
+Copyright 2022 Cadence Design Systems, Inc. All rights reserved worldwide.
+Cadence and the Cadence logo are registered trademarks and Genus is a trademark
+of Cadence Design Systems, Inc. in the United States and other countries.
+
+[21:41:35.346497] Configured Lic search path (20.02-s004): 5280@cadence-lic.cecs.pdx.edu
+
+Version: 21.12-s068_1, built Fri Mar 04 14:12:46 PST 2022
+Options: -batch -files synthesize.tcl 
+Date:    Fri May 22 21:41:35 2026
+Host:    mo.ece.pdx.edu (x86_64 w/Linux 3.10.0-1160.119.1.el7.x86_64) (1core*32cpus*32physical cpus*Intel Xeon Processor (Cascadelake) 16384KB) (125666820KB)
+PID:     11035
+OS:      CentOS Linux release 7.9.2009 (Core)
+
+
+[21:41:35.506881] Periodic Lic check successful
+[21:41:35.506897] Feature usage summary:
+[21:41:35.506898] Genus_Synthesis
+Checking out license: Genus_Synthesis
+
+
+***********************************************************************************************************
+***********************************************************************************************************
+
+
+
+Loading tool scripts...
+Finished loading tool scripts (10 seconds elapsed).
+
+#@ Processing -files option
+@genus 1> source synthesize.tcl
+#@ Begin verbose source ./synthesize.tcl
+@file(synthesize.tcl) 2: suppress_message LBR-43
+  Setting attribute of message 'LBR-43': 'max_print' = 0
+@file(synthesize.tcl) 3: suppress_message VLOGPT-431
+  Setting attribute of message 'VLOGPT-431': 'max_print' = 0
+@file(synthesize.tcl) 4: suppress_message CDFG-508
+  Setting attribute of message 'CDFG-508': 'max_print' = 0
+@file(synthesize.tcl) 6: set_db init_lib_search_path /pkgs/cadence-09-2015/SSV151/share/FoundationFlows/EXAMPLES/TEMPUS/GPDK/LIBS/GPDK045/timing/
+  Setting attribute of root '/': 'init_lib_search_path' = /pkgs/cadence-09-2015/SSV151/share/FoundationFlows/EXAMPLES/TEMPUS/GPDK/LIBS/GPDK045/timing/
+@file(synthesize.tcl) 7: set_db library typical.lib
+
+Threads Configured:3
+
+  Message Summary for Library typical.lib:
+  ****************************************
+  Missing a function attribute in the output pin definition. [LBR-518]: 1
+  Missing library level attribute. [LBR-516]: 1
+  ****************************************
+ 
+Info    : Created nominal operating condition. [LBR-412]
+        : Operating condition '_nominal_' was created for the PVT values (1.000000, 1.200000, 25.000000) in library 'typical.lib'.
+        : The nominal operating condition is represented, either by the nominal PVT values specified in the library source (via nom_process,nom_voltage and nom_temperature respectively), or by the default PVT values (1.0,1.0,1.0).
+  Setting attribute of root '/': 'library' = typical.lib
+@file(synthesize.tcl) 12: read_hdl -sv {compute_core.sv chiplet_0_qkv_outproj.sv chiplet_9_softmax.sv chiplet_head.sv fp32_arith.sv interface.sv ucie_link.sv}
+	initial begin
+	      |
+Warning : Ignoring unsynthesizable construct. [VLOGPT-37]
+        : Initial in file 'compute_core.sv' on line 438, column 8.
+        : For example, the following constructs will be ignored:
+    - initial block
+    - final block
+    - program block
+    - property block
+    - sequence block
+    - covergroup
+    - checker block
+    - gate drive strength
+    - system task enable
+    - reg declaration with initial value
+    - specify block.
+@file(synthesize.tcl) 18: elaborate compute_core
+  Library has 324 usable logic and 126 usable sequential lib-cells.
+Info    : Elaborating Design. [ELAB-1]
+        : Elaborating top-level block 'compute_core' from file 'compute_core.sv'.
+Warning : Using default parameter value for module elaboration. [CDFG-818]
+        : Elaborating block 'compute_core' with default parameters value.
+Warning : Loop condition is always false. [CDFG-485]
+        : 'for' loop condition is always false in file 'chiplet_9_softmax.sv' on line 144.
+        : Loop body will not be synthesized.
+Warning : Loop condition is always false. [CDFG-485]
+        : 'for' loop condition is always false in file 'chiplet_9_softmax.sv' on line 144.
+Warning : Loop condition is always false. [CDFG-485]
+        : 'for' loop condition is always false in file 'chiplet_9_softmax.sv' on line 144.
+Warning : In legacy_ui mode, Genus creates a blackbox as description for a module is not found. Black boxes represent unresolved references in the design and are usually not expected. Another possible reason is, some libraries are not read and the tool could not get the content for some macros or lib_cells. [CDFG-428]
+        : A blackbox was created for instance 'u_exp' in file 'chiplet_9_softmax.sv' on line 240.
+        : Check the kind of module a black box is. If it is a lib_cell or a macro, check why the corresponding .lib was not read in. This could be either due to a missing or faulty file or due to an incomplete init_lib_search_path attribute value making restricting access to the missing file. If it is a module of your design, verify whether the path to this module is a part of the files you read or else check that the init_hdl_search_path attribute is not missing some paths.
+Warning : Generated logic differs from the expected logic. [CDFG2G-615]
+        : Signal 'max_tree[6][0]' in module 'chiplet_9_softmax_NUM_HEADS8_TILE8_SEQ_LEN8' modeled as latch instead of flip-flop in file 'chiplet_9_softmax.sv' on line 117, column 46.
+        : The logic generated for an always_comb, always_latch or always_ff process may not match the behavior specified in the input HDL.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[7][7]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+        : Run check_design to check 'Undriven Port(s)/Pin(s)' section for all undriven module input ports. It is better to double confirm with designer if these undriven ports are expected. During syn_gen the undriven ports are controlled by attribute 'hdl_unconnected_value', the default value is 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[7][6]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[7][5]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[7][4]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[7][3]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[7][2]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[7][1]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[7][0]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[6][7]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[6][6]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[6][5]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[6][4]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[6][3]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[6][2]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[6][1]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[6][0]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[5][7]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[5][6]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[5][5]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Undriven module input port. [ELABUTL-127]
+        : Undriven bits of port 'b_col[5][4]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8' in file 'chiplet_0_qkv_outproj.sv' on line 175, column 56, hid = 0.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'ELABUTL-127'.
+Warning : Undriven signal detected. [ELABUTL-125]
+        : Undriven bits of signal 'h_ctx_bcr' in module 'compute_core' in file 'compute_core.sv' on line 530, column 37, hid = 0.
+        : The undriven signal handling can be controlled by setting the attribute 'hdl_unconnected_value' before syn_generic command.
+Warning : Undriven signal detected. [ELABUTL-125]
+        : Undriven bits of signal 'h_ctx_bcr' in module 'compute_core' in file 'compute_core.sv' on line 530, column 37, hid = 0.
+Warning : Undriven signal detected. [ELABUTL-125]
+        : Undriven bits of signal 'h_ctx_bcr' in module 'compute_core' in file 'compute_core.sv' on line 530, column 37, hid = 0.
+Warning : Undriven signal detected. [ELABUTL-125]
+        : Undriven bits of signal 'h_ctx_bcr' in module 'compute_core' in file 'compute_core.sv' on line 530, column 37, hid = 0.
+Warning : Undriven signal detected. [ELABUTL-125]
+        : Undriven bits of signal 'h_ctx_bcr' in module 'compute_core' in file 'compute_core.sv' on line 530, column 37, hid = 0.
+Warning : Undriven signal detected. [ELABUTL-125]
+        : Undriven bits of signal 'h_ctx_bcr' in module 'compute_core' in file 'compute_core.sv' on line 530, column 37, hid = 0.
+Warning : Undriven signal detected. [ELABUTL-125]
+        : Undriven bits of signal 'h_ctx_bcr' in module 'compute_core' in file 'compute_core.sv' on line 530, column 37, hid = 0.
+Warning : Undriven signal detected. [ELABUTL-125]
+        : Undriven bits of signal 'h_ctx_bcr' in module 'compute_core' in file 'compute_core.sv' on line 530, column 37, hid = 0.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[0]' in module 'axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+        : This may cause simulation mismatches between the original and synthesized designs.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[1]' in module 'axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[2]' in module 'axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[3]' in module 'axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[4]' in module 'axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[5]' in module 'axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[6]' in module 'axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[7]' in module 'axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[8]' in module 'axis_input_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[0]' in module 'axis_output_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[1]' in module 'axis_output_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[2]' in module 'axis_output_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[3]' in module 'axis_output_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[4]' in module 'axis_output_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[5]' in module 'axis_output_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[6]' in module 'axis_output_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[7]' in module 'axis_output_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'count[8]' in module 'axis_output_fifo_TDATA_W512_TILE_DIM8_FIFO_D256'.
+Warning : Signal or variable has multiple drivers. [CDFG2G-622]
+        : 'c0_txq_bcr' in module 'compute_core'.
+Info    : Done Elaborating Design. [ELAB-3]
+        : Done elaborating 'compute_core'.
+Warning : Black-boxes are represented as unresolved references in the design. [TUI-273]
+        : Cannot resolve reference to 'bf16_exp'.
+        : Run check_design to get all unresolved instance. To resolve the reference, either load a technology library containing the cell by appending to the 'library' attribute, or read in the hdl file containing the module before performing elaboration. As the design is incomplete, synthesis results may not correspond to the entire design.
+Checking for analog nets...
+Check completed for analog nets.
+Checking for source RTL...
+Check completed for source RTL.
+Running Unified Mux Engine Tricks...
+Completed Unified Mux Engine Tricks
+--------------------------------------------------------
+| Trick             | Accepts | Rejects | Runtime (ms) | 
+--------------------------------------------------------
+| ume_constant_bmux |       0 |       0 |       361.00 | 
+--------------------------------------------------------
+Starting clip mux common data inputs [v1.0] (stage: post_elab, startdef: compute_core, recur: true)
+Completed clip mux common data inputs (accepts: 0, rejects: 0, runtime: 0.349s)
+Starting clip the non-user hierarchies [v2.0] (stage: post_elab, startdef: compute_core, recur: true)
+Completed clip the non-user hierarchies (accepts: 1, rejects: 0, runtime: 1.489s)
+UM:   flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   elaborate
+@file(synthesize.tcl) 24: define_clock -period 1000  -name clk_core [get_ports clk_core]
+@file(synthesize.tcl) 25: define_clock -period 4000 -name clk_axi  [get_ports clk_axi]
+@file(synthesize.tcl) 26: define_clock -period 500   -name clk_link [get_ports clk_link]
+@file(synthesize.tcl) 32: syn_generic
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[7][7]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+        : The 'hdl_unconnected_value' attribute controls treatment of undriven input port.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[7][6]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[7][5]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[7][4]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[7][3]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[7][2]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[7][1]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[7][0]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[6][7]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[6][6]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[6][5]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[6][4]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[6][3]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[6][2]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[6][1]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[6][0]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[5][7]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[5][6]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[5][5]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Info    : Undriven module input port. [ELABUTL-131]
+        : Assuming a logic '0' value for undriven bits of port 'b_col[5][4]' of instance 'sa_k' of module 'systolic_array_M8_N8_K8'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'ELABUTL-131'.
+Info    : Undriven signal detected. [ELABUTL-130]
+        : Assuming a logic '0' value for undriven bits of signal 'h_ctx_bcr' in module 'compute_core'.
+        : The 'hdl_unconnected_value' attribute controls treatment of undriven signal.
+Info    : Undriven signal detected. [ELABUTL-130]
+        : Assuming a logic '0' value for undriven bits of signal 'h_ctx_bcr' in module 'compute_core'.
+Info    : Undriven signal detected. [ELABUTL-130]
+        : Assuming a logic '0' value for undriven bits of signal 'h_ctx_bcr' in module 'compute_core'.
+Info    : Undriven signal detected. [ELABUTL-130]
+        : Assuming a logic '0' value for undriven bits of signal 'h_ctx_bcr' in module 'compute_core'.
+Info    : Undriven signal detected. [ELABUTL-130]
+        : Assuming a logic '0' value for undriven bits of signal 'h_ctx_bcr' in module 'compute_core'.
+Info    : Undriven signal detected. [ELABUTL-130]
+        : Assuming a logic '0' value for undriven bits of signal 'h_ctx_bcr' in module 'compute_core'.
+Info    : Undriven signal detected. [ELABUTL-130]
+        : Assuming a logic '0' value for undriven bits of signal 'h_ctx_bcr' in module 'compute_core'.
+Info    : Undriven signal detected. [ELABUTL-130]
+        : Assuming a logic '0' value for undriven bits of signal 'h_ctx_bcr' in module 'compute_core'.
+##Generic Timing Info for library domain: _default_ typical gate delay: 46.6 ps std_slew: 11.4 ps std_load: 2.2 fF
+Starting mux data reorder optimization [v1.0] (stage: pre_to_gen_setup, startdef: compute_core, recur: true)
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+        : Optimizations such as constant propagation or redundancy removal could change the connections so a hierarchical instance does not drive any primary outputs anymore. To see the list of deleted hierarchical instances, set the 'information_level' attribute to 2 or above. If the message is truncated set the message attribute 'truncate' to false to see the complete list. To prevent this optimization, set the 'delete_unloaded_insts' root/subdesign attribute to 'false' or 'preserve' instance attribute to 'true'.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Info    : Deleting instances not driving any primary outputs. [GLO-34]
+        : Deleting 4 hierarchical instances.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'GLO-34'.
+Completed mux data reorder optimization (accepts: 60, rejects: 0, runtime: 50.512s)
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_axi_if/u_csr/s_bresp_reg[0]'.
+        : To prevent this optimization, set the 'optimize_constant_0_flops' root attribute to 'false' or 'optimize_constant_0_seq' instance attribute to 'false'. You can also see the complete list of deleted sequential with command "report sequential -deleted" (on Reason "constant0").
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_axi_if/u_csr/s_bresp_reg[1]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_axi_if/u_csr/s_rresp_reg[0]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_axi_if/u_csr/s_rresp_reg[1]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_axi_if/u_out_fifo/m_tuser_reg[2]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_axi_if/u_out_fifo/m_tuser_reg[3]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][0]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][1]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][2]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][3]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][4]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][5]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][6]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][7]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][8]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][9]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][10]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][11]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][12]'.
+Info    : Replacing a flip-flop with a logic constant 0. [GLO-12]
+        : The instance is 'u_c0/wq_reg[7][7][13]'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'GLO-12'.
+Info    : Synthesizing. [SYNTH-1]
+        : Synthesizing 'compute_core' to generic gates using 'medium' effort.
+PBS_Generic-Start - Elapsed_Time 0, CPU_Time 0.0
+stamp 'PBS_Generic-Start' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+TNS Restructuring config: no_value at stage: generic applied.
+Info    : Enabling Partition Based Synthesis. [PBS-1]
+        : Starting distributed generic optimization.
+Info    : Attempting to launch a super-threading server. [ST-120]
+        : Attempting to Launch server 1 of 8.
+        : The tool is entering super-threading mode and is launching a CPU server process.  This is enabled by the root attribute 'super_thread_servers' or 'auto_super_thread'.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_0' is process '14467' on this host.
+        : The tool is entering super-threading mode and has established a connection with a CPU server process.  This is enabled by the root attributes 'super_thread_servers' or 'auto_super_thread'.
+     Generating lib_script file: /u/fchikani/ece510/.pbs_mo.ece.pdx.edu_11035/lib_script
+Start partitioning.  Summary: MEM {curr: 10.3G, peak: 15.2G, phys curr: 7.2G, phys peak: 14.5G}
+Start partitioning design compute_core for generic optimization.
+Total generic instances for partitioning: 877390
+	Generic partition 0: size 32560
+	Generic partition 1: size 1417
+	Generic partition 2: size 24707
+	Generic partition 3: size 140500
+	Generic partition 4: size 284234
+	Generic partition 5: size 103802
+	Generic partition 6: size 103802
+	Generic partition 7: size 97696
+	Generic partition 8: size 88672
+Done partitioning.  Summary: RT {elapsed: 0s, ST: 0s}, MEM {curr: 10.3G, peak: 15.2G, phys curr: 7.2G, phys peak: 14.5G}
+Start creating partition netlists.  Summary: MEM {curr: 10.3G, peak: 15.2G, phys curr: 7.2G, phys peak: 14.5G}
+Done creating partition netlists.  Summary: RT {elapsed: 11s, ST: 11s}, MEM {curr: 10.3G, peak: 15.2G, phys curr: 7.4G, phys peak: 14.5G}
+Start budgeting timing for partitions.  Summary: MEM {curr: 10.3G, peak: 15.2G, phys curr: 7.4G, phys peak: 14.5G}
+Done budgeting timing for partitions.  Summary: RT {elapsed: 80s, ST: 103s}, MEM {curr: 10.5G, peak: 15.2G, phys curr: 7.5G, phys peak: 14.5G}
+Start deriving partition netlists.  Summary: MEM {curr: 10.5G, peak: 15.2G, phys curr: 7.5G, phys peak: 14.5G}
+The inst 'pbs_genopt_0' is selected as pbs candidate. The instance cnt is: '32560'.
+The inst 'pbs_genopt_1' is selected as pbs candidate. The instance cnt is: '1417'.
+The inst 'pbs_genopt_2' is selected as pbs candidate. The instance cnt is: '24707'.
+The inst 'pbs_genopt_3' is selected as pbs candidate. The instance cnt is: '140500'.
+The inst 'pbs_genopt_4' is selected as pbs candidate. The instance cnt is: '284234'.
+The inst 'pbs_genopt_5' is selected as pbs candidate. The instance cnt is: '103802'.
+The inst 'pbs_genopt_6' is selected as pbs candidate. The instance cnt is: '103802'.
+The inst 'pbs_genopt_7' is selected as pbs candidate. The instance cnt is: '97696'.
+The inst 'pbs_genopt_8' is selected as pbs candidate. The instance cnt is: '88672'.
+Done deriving partition netlists.  Summary: RT {elapsed: 26s, ST: 26s}, MEM {curr: 10.5G, peak: 15.2G, phys curr: 7.5G, phys peak: 14.5G}
+Wait for super-thread servers to finish loading libraries.
+Start super thread servers forking.  Summary: MEM {curr: 10.4G, peak: 15.2G, phys curr: 7.5G, phys peak: 14.5G}
+                  Library loading done successfully on server 'localhost_1_0'.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_1' is forked process '15266' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_2' is forked process '15269' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_3' is forked process '15271' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_4' is forked process '15273' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_5' is forked process '15275' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_6' is forked process '15277' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_7' is forked process '15279' on this host.
+Done super thread servers forking.  Summary: RT {elapsed: 1s, ST: 0s}, MEM {curr: 10.4G, peak: 15.2G, phys curr: 7.5G, phys peak: 14.5G}
+        Distributing super-thread jobs: {pbs_genopt_4 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_4.etf} {pbs_genopt_3 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_3.etf} {pbs_genopt_5 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_5.etf} {pbs_genopt_6 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_6.etf} {pbs_genopt_7 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_7.etf} {pbs_genopt_8 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_8.etf} {pbs_genopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_0.etf} {pbs_genopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_2.etf} {pbs_genopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_1.etf}
+          Sending 'pbs_genopt_4 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_4.etf' to server 'localhost_1_3'...
+            Sent 'pbs_genopt_4 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_4.etf' to server 'localhost_1_3'.
+          Sending 'pbs_genopt_3 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_3.etf' to server 'localhost_1_1'...
+            Sent 'pbs_genopt_3 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_3.etf' to server 'localhost_1_1'.
+          Sending 'pbs_genopt_5 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_5.etf' to server 'localhost_1_5'...
+            Sent 'pbs_genopt_5 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_5.etf' to server 'localhost_1_5'.
+          Sending 'pbs_genopt_6 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_6.etf' to server 'localhost_1_6'...
+            Sent 'pbs_genopt_6 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_6.etf' to server 'localhost_1_6'.
+          Sending 'pbs_genopt_7 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_7.etf' to server 'localhost_1_7'...
+            Sent 'pbs_genopt_7 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_7.etf' to server 'localhost_1_7'.
+          Sending 'pbs_genopt_8 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_8.etf' to server 'localhost_1_4'...
+            Sent 'pbs_genopt_8 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_8.etf' to server 'localhost_1_4'.
+          Sending 'pbs_genopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_0.etf' to server 'localhost_1_0'...
+            Sent 'pbs_genopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_0.etf' to server 'localhost_1_0'.
+          Sending 'pbs_genopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_2.etf' to server 'localhost_1_2'...
+            Sent 'pbs_genopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_2.etf' to server 'localhost_1_2'.
+          Received 'pbs_genopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_2.etf' from server 'localhost_1_2'. (106294 ms elapsed)
+       Partition:  pbs_genopt_2 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 1.00, CPU_Time 0.00
+       Partition:  pbs_genopt_2 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 103.00, CPU_Time 102.00
+       Partition:  pbs_genopt_2 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_genopt_2 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_genopt_2 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_genopt_2 Slack: -54365.9 TNS: 4347118.6 Cell-Count: 24707 Cell-Area: 0 
+Init-Memory: 890.75
+       Done  - Partition: pbs_genopt_2 Slack: -17092.4 TNS: 1345669.4 Cell-Count: 10942 Cell-Area: 0 
+Peak-Memory: 3366.42 Elapsed: 105
+       Partition:  pbs_genopt_2 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 1.00, CPU_Time 1.00
+       pbs_genopt_2 - PBS_Generic_Opt-Assembly - Elapsed_Time 0, CPU_Time 1.0
+       Partition:  pbs_genopt_2 - Runtime taken by the partition - Elapsed_Time 106.00, CPU_Time 104.00
+          Sending 'pbs_genopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_1.etf' to server 'localhost_1_2'...
+            Sent 'pbs_genopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_1.etf' to server 'localhost_1_2'.
+          Received 'pbs_genopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_1.etf' from server 'localhost_1_2'. (4993 ms elapsed)
+          Received 'pbs_genopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_0.etf' from server 'localhost_1_0'. (119033 ms elapsed)
+       Partition:  pbs_genopt_0 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_genopt_0 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 115.00, CPU_Time 113.00
+       Partition:  pbs_genopt_0 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 2.00, CPU_Time 1.00
+       Partition:  pbs_genopt_0 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_genopt_0 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_genopt_0 Slack: -54197.1 TNS: 26011492.0 Cell-Count: 32560 Cell-Area: 0 
+Init-Memory: 906.75
+       Done  - Partition: pbs_genopt_0 Slack: -16965.1 TNS: 8113215.7 Cell-Count: 10744 Cell-Area: 0 
+Peak-Memory: 3391.41 Elapsed: 118
+       Partition:  pbs_genopt_0 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 1.00, CPU_Time 1.99
+       pbs_genopt_0 - PBS_Generic_Opt-Assembly - Elapsed_Time 1, CPU_Time 0.0
+       Partition:  pbs_genopt_0 - Runtime taken by the partition - Elapsed_Time 119.00, CPU_Time 116.99
+          Received 'pbs_genopt_3 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_3.etf' from server 'localhost_1_1'. (207536 ms elapsed)
+          Received 'pbs_genopt_8 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_8.etf' from server 'localhost_1_4'. (221291 ms elapsed)
+       Partition:  pbs_genopt_8 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_genopt_8 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 216.00, CPU_Time 215.00
+       Partition:  pbs_genopt_8 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 2.00, CPU_Time 2.00
+       Partition:  pbs_genopt_8 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_genopt_8 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_genopt_8 Slack: -3588.8 TNS: 2512405.2 Cell-Count: 88672 Cell-Area: 0 
+Init-Memory: 1008.75
+       Done  - Partition: pbs_genopt_8 Slack: -2414.1 TNS: 1664659.4 Cell-Count: 27428 Cell-Area: 0 
+Peak-Memory: 1442.11 Elapsed: 219
+       Partition:  pbs_genopt_8 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 2.00, CPU_Time 2.99
+       pbs_genopt_8 - PBS_Generic_Opt-Assembly - Elapsed_Time 1, CPU_Time 1.0
+       Partition:  pbs_genopt_8 - Runtime taken by the partition - Elapsed_Time 221.00, CPU_Time 220.99
+          Received 'pbs_genopt_7 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_7.etf' from server 'localhost_1_7'. (232884 ms elapsed)
+       Partition:  pbs_genopt_7 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_genopt_7 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 228.00, CPU_Time 227.00
+       Partition:  pbs_genopt_7 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 2.00, CPU_Time 2.00
+       Partition:  pbs_genopt_7 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_genopt_7 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_genopt_7 Slack: -3437.4 TNS: 2414624.0 Cell-Count: 97696 Cell-Area: 0 
+Init-Memory: 1010.75
+       Done  - Partition: pbs_genopt_7 Slack: -2161.8 TNS: 1447372.8 Cell-Count: 27584 Cell-Area: 0 
+Peak-Memory: 1412.88 Elapsed: 231
+       Partition:  pbs_genopt_7 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 2.00, CPU_Time 1.99
+       pbs_genopt_7 - PBS_Generic_Opt-Assembly - Elapsed_Time 2, CPU_Time 2.0
+       Partition:  pbs_genopt_7 - Runtime taken by the partition - Elapsed_Time 233.00, CPU_Time 231.99
+          Received 'pbs_genopt_5 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_5.etf' from server 'localhost_1_5'. (254133 ms elapsed)
+          Received 'pbs_genopt_6 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_6.etf' from server 'localhost_1_6'. (255979 ms elapsed)
+       Partition:  pbs_genopt_6 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_genopt_6 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 252.00, CPU_Time 251.00
+       Partition:  pbs_genopt_6 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_genopt_6 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_genopt_6 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_genopt_6 Slack: -3437.4 TNS: 2565538.0 Cell-Count: 103802 Cell-Area: 0 
+Init-Memory: 1024.75
+       Done  - Partition: pbs_genopt_6 Slack: -2164.1 TNS: 1537944.0 Cell-Count: 29308 Cell-Area: 0 
+Peak-Memory: 1425.20 Elapsed: 254
+       Partition:  pbs_genopt_6 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 2.00, CPU_Time 1.99
+       pbs_genopt_6 - PBS_Generic_Opt-Assembly - Elapsed_Time 2, CPU_Time 1.0
+       Partition:  pbs_genopt_6 - Runtime taken by the partition - Elapsed_Time 256.00, CPU_Time 254.99
+       Partition:  pbs_genopt_5 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_genopt_5 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 250.00, CPU_Time 249.00
+       Partition:  pbs_genopt_5 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_genopt_5 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_genopt_5 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_genopt_5 Slack: -3437.4 TNS: 2565538.0 Cell-Count: 103802 Cell-Area: 0 
+Init-Memory: 1024.75
+       Done  - Partition: pbs_genopt_5 Slack: -2164.1 TNS: 1538385.6 Cell-Count: 29308 Cell-Area: 0 
+Peak-Memory: 1424.88 Elapsed: 252
+       Partition:  pbs_genopt_5 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 2.00, CPU_Time 1.99
+       pbs_genopt_5 - PBS_Generic_Opt-Assembly - Elapsed_Time 2, CPU_Time 2.0
+       Partition:  pbs_genopt_5 - Runtime taken by the partition - Elapsed_Time 254.00, CPU_Time 252.99
+       Partition:  pbs_genopt_3 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 5.00, CPU_Time 4.00
+       Partition:  pbs_genopt_3 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 161.00, CPU_Time 161.00
+       Partition:  pbs_genopt_3 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 19.00, CPU_Time 19.00
+       Partition:  pbs_genopt_3 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_genopt_3 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_genopt_3 Slack: 177.1 TNS: 0.0 Cell-Count: 140500 Cell-Area: 0 
+Init-Memory: 1672.53
+       Done  - Partition: pbs_genopt_3 Slack: 169.3 TNS: 0.0 Cell-Count: 136175 Cell-Area: 0 
+Peak-Memory: 2274.35 Elapsed: 185
+       Partition:  pbs_genopt_3 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 20.00, CPU_Time 20.99
+       pbs_genopt_3 - PBS_Generic_Opt-Assembly - Elapsed_Time 7, CPU_Time 8.0
+       Partition:  pbs_genopt_3 - Runtime taken by the partition - Elapsed_Time 205.00, CPU_Time 204.99
+          Received 'pbs_genopt_4 ./.pbs_mo.ece.pdx.edu_11035/pbs_genopt_4.etf' from server 'localhost_1_3'. (865579 ms elapsed)
+       Partition:  pbs_genopt_4 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 6.00, CPU_Time 5.00
+       Partition:  pbs_genopt_4 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 737.00, CPU_Time 732.00
+       Partition:  pbs_genopt_4 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 82.00, CPU_Time 82.00
+       Partition:  pbs_genopt_4 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 1.00, CPU_Time 0.00
+       Partition:  pbs_genopt_4 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_genopt_4 Slack: 239.0 TNS: 0.0 Cell-Count: 284234 Cell-Area: 0 
+Init-Memory: 2227.79
+       Done  - Partition: pbs_genopt_4 Slack: 239.0 TNS: 0.0 Cell-Count: 266512 Cell-Area: 0 
+Peak-Memory: 9033.37 Elapsed: 826
+       Partition:  pbs_genopt_4 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 36.00, CPU_Time 38.98
+       pbs_genopt_4 - PBS_Generic_Opt-Assembly - Elapsed_Time 16, CPU_Time 16.0
+       Partition:  pbs_genopt_4 - Runtime taken by the partition - Elapsed_Time 862.00, CPU_Time 857.98
+       Partition:  pbs_genopt_1 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_genopt_1 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 5.00, CPU_Time 4.00
+       Partition:  pbs_genopt_1 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 0.00, CPU_Time 1.00
+       Partition:  pbs_genopt_1 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_genopt_1 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_genopt_1 Slack: 112.3 TNS: 0.0 Cell-Count: 1417 Cell-Area: 0 
+Init-Memory: 1937.44
+       Done  - Partition: pbs_genopt_1 Slack: 77.1 TNS: 0.0 Cell-Count: 1751 Cell-Area: 0 
+Peak-Memory: 3366.42 Elapsed: 5
+       Partition:  pbs_genopt_1 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 0.00, CPU_Time 0.00
+       pbs_genopt_1 - PBS_Generic_Opt-Assembly - Elapsed_Time 0, CPU_Time 0.0
+       Partition:  pbs_genopt_1 - Runtime taken by the partition - Elapsed_Time 5.00, CPU_Time 5.00
+Assembled design in-time
+
++-----------+----------------+-----+----------------------+---------------------------+
+|   Host    |    Machine     | CPU | Physical Memory (MB) | Peak Physical Memory (MB) |
++-----------+----------------+-----+----------------------+---------------------------+
+| localhost | mo.ece.pdx.edu |  8  |       11563.9        |          18848.7          |
++-----------+----------------+-----+----------------------+---------------------------+
+
++---------------+----------------------+---------------------------+
+|    Server     | Physical Memory (MB) | Peak Physical Memory (MB) |
++---------------+----------------------+---------------------------+
+| localhost_1_0 |      4887.5 [1]      |        12201.4 [1]        |
+| localhost_1_4 |      561.9 [2]       |          [2] [3]          |
+| localhost_1_5 |      570.8 [2]       |          [2] [3]          |
+| localhost_1_3 |      872.2 [2]       |          [2] [3]          |
+| localhost_1_2 |      562.3 [2]       |          [2] [3]          |
+| localhost_1_1 |      599.8 [2]       |          [2] [3]          |
+| localhost_1_6 |      572.9 [2]       |          [2] [3]          |
+| localhost_1_7 |      561.9 [2]       |          [2] [3]          |
++---------------+----------------------+---------------------------+
+[1] Memory of child processes is included.
+[2] Memory is included in parent localhost_1_0.
+[3] Peak physical memory is not available for forked background servers.
+
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][0]'.
+        : The value used to replace the flop can be set by the root attribute 'optimize_seq_x_to'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][1]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][2]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][3]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][4]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][5]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][6]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][7]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][8]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][9]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][10]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][11]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][12]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][13]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][14]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][15]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][16]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][17]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][18]'.
+Info    : Replacing a blocking flip-flop with a logic constant 0. [GLO-21]
+        : The instance is 'u_axi_if/u_out_fifo/f_data_reg[0][19]'.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'GLO-21'.
+PBS_Generic-Post_Genopt - Elapsed_Time 1066, CPU_Time 1083.4747849999999
+stamp 'PBS_Generic-Post_Genopt' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) | 100.0(100.0) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+Updating ST server settings
+     Generating lib_script file: /u/fchikani/ece510/.pbs_mo.ece.pdx.edu_11035/lib_script
+Start partitioning.  Summary: MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+Start partitioning design compute_core for generic optimization.
+Total generic instances for partitioning: 148777
+	Generic partition 0: size 9770
+	Generic partition 1: size 2832
+	Generic partition 2: size 136175
+Done partitioning.  Summary: RT {elapsed: 0s, ST: 0s}, MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+Start creating partition netlists.  Summary: MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+Done creating partition netlists.  Summary: RT {elapsed: 3s, ST: 3s}, MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+Start budgeting timing for partitions.  Summary: MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+Done budgeting timing for partitions.  Summary: RT {elapsed: 23s, ST: 30s}, MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+Start deriving partition netlists.  Summary: MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+The inst 'pbs_fcopt_0' is selected as pbs candidate. The instance cnt is: '9770'.
+The inst 'pbs_fcopt_1' is selected as pbs candidate. The instance cnt is: '2832'.
+The inst 'pbs_fcopt_2' is selected as pbs candidate. The instance cnt is: '136175'.
+Done deriving partition netlists.  Summary: RT {elapsed: 12s, ST: 11s}, MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+Wait for super-thread servers to finish loading libraries.
+Start super thread servers forking.  Summary: MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_8' is forked process '20390' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_9' is forked process '20392' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_10' is forked process '20394' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_11' is forked process '20396' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_12' is forked process '20399' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_13' is forked process '20402' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_14' is forked process '20404' on this host.
+Done super thread servers forking.  Summary: RT {elapsed: 1s, ST: 0s}, MEM {curr: 9.8G, peak: 15.2G, phys curr: 7.3G, phys peak: 18.4G}
+        Distributing super-thread jobs: {pbs_fcopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_2.etf} {pbs_fcopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_0.etf} {pbs_fcopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_1.etf}
+          Sending 'pbs_fcopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_2.etf' to server 'localhost_1_10'...
+            Sent 'pbs_fcopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_2.etf' to server 'localhost_1_10'.
+          Sending 'pbs_fcopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_0.etf' to server 'localhost_1_13'...
+            Sent 'pbs_fcopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_0.etf' to server 'localhost_1_13'.
+          Sending 'pbs_fcopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_1.etf' to server 'localhost_1_9'...
+            Sent 'pbs_fcopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_1.etf' to server 'localhost_1_9'.
+          Received 'pbs_fcopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_1.etf' from server 'localhost_1_9'. (6673 ms elapsed)
+       Partition:  pbs_fcopt_1 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_fcopt_1 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_fcopt_1 - PBS_Generic_Opt-First_Cond - Elapsed_Time 6.00, CPU_Time 6.03
+       Partition:  pbs_fcopt_1 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 0.00, CPU_Time 1.00
+       Partition:  pbs_fcopt_1 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_fcopt_1 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_fcopt_1 Slack: 241.4 TNS: 0.0 Cell-Count: 2832 Cell-Area: 0 
+Init-Memory: 1648.23
+       Done  - Partition: pbs_fcopt_1 Slack: 543.0 TNS: 0.0 Cell-Count: 1124 Cell-Area: 0 
+Peak-Memory: 1714.12 Elapsed: 6
+       Partition:  pbs_fcopt_1 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 0.00, CPU_Time 0.00
+       pbs_fcopt_1 - PBS_Generic_Opt-Assembly - Elapsed_Time 0, CPU_Time 0.0
+       Partition:  pbs_fcopt_1 - Runtime taken by the partition - Elapsed_Time 6.00, CPU_Time 7.03
+          Received 'pbs_fcopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_0.etf' from server 'localhost_1_13'. (33852 ms elapsed)
+       Partition:  pbs_fcopt_0 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_fcopt_0 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_fcopt_0 - PBS_Generic_Opt-First_Cond - Elapsed_Time 32.00, CPU_Time 33.12
+       Partition:  pbs_fcopt_0 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_fcopt_0 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_fcopt_0 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_fcopt_0 Slack: -17004.3 TNS: 170938.2 Cell-Count: 9770 Cell-Area: 0 
+Init-Memory: 1648.23
+       Done  - Partition: pbs_fcopt_0 Slack: -47.8 TNS: 242.9 Cell-Count: 4019 Cell-Area: 0 
+Peak-Memory: 1768.54 Elapsed: 33
+       Partition:  pbs_fcopt_0 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 1.00, CPU_Time 1.00
+       pbs_fcopt_0 - PBS_Generic_Opt-Assembly - Elapsed_Time 0, CPU_Time 0.0
+       Partition:  pbs_fcopt_0 - Runtime taken by the partition - Elapsed_Time 34.00, CPU_Time 35.12
+          Received 'pbs_fcopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_fcopt_2.etf' from server 'localhost_1_10'. (1383556 ms elapsed)
+       Partition:  pbs_fcopt_2 - PBS_Generic_Opt-Distributed_Read_DB - Elapsed_Time 3.00, CPU_Time 3.00
+       Partition:  pbs_fcopt_2 - PBS_Generic_Opt-Distributed_Generic - Elapsed_Time 18.00, CPU_Time 18.40
+       Partition:  pbs_fcopt_2 - PBS_Generic_Opt-First_Cond - Elapsed_Time 1304.00, CPU_Time 1373.12
+       Partition:  pbs_fcopt_2 - PBS_Generic_Opt-Distributed_Prop_Const - Elapsed_Time 23.00, CPU_Time 22.00
+       Partition:  pbs_fcopt_2 - PBS_Generic_Opt-Distributed_Gobble - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_fcopt_2 - PBS_Generic_Opt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Start - Partition: pbs_fcopt_2 Slack: 234.9 TNS: 0.0 Cell-Count: 136175 Cell-Area: 0 
+Init-Memory: 1845.55
+       Done  - Partition: pbs_fcopt_2 Slack: 238.5 TNS: 0.0 Cell-Count: 228286 Cell-Area: 0 
+Peak-Memory: 5200.31 Elapsed: 1349
+       Partition:  pbs_fcopt_2 - PBS_Generic_Opt-Distributed_Write_DB - Elapsed_Time 31.00, CPU_Time 33.00
+       pbs_fcopt_2 - PBS_Generic_Opt-Assembly - Elapsed_Time 10, CPU_Time 10.0
+       Partition:  pbs_fcopt_2 - Runtime taken by the partition - Elapsed_Time 1380.00, CPU_Time 1450.52
+Assembled design in-time
+
++-----------+----------------+-----+----------------------+---------------------------+
+|   Host    |    Machine     | CPU | Physical Memory (MB) | Peak Physical Memory (MB) |
++-----------+----------------+-----+----------------------+---------------------------+
+| localhost | mo.ece.pdx.edu |  8  |        7555.4        |          18848.7          |
++-----------+----------------+-----+----------------------+---------------------------+
+
++----------------+----------------------+---------------------------+
+|     Server     | Physical Memory (MB) | Peak Physical Memory (MB) |
++----------------+----------------------+---------------------------+
+| localhost_1_0  |      2117.4 [1]      |        12201.4 [1]        |
+| localhost_1_14 |      104.3 [2]       |          [2] [3]          |
+| localhost_1_13 |      187.3 [2]       |          [2] [3]          |
+| localhost_1_10 |      1228.1 [2]      |          [2] [3]          |
+| localhost_1_11 |      104.3 [2]       |          [2] [3]          |
+| localhost_1_12 |      104.3 [2]       |          [2] [3]          |
+| localhost_1_9  |      157.3 [2]       |          [2] [3]          |
+| localhost_1_8  |      104.3 [2]       |          [2] [3]          |
++----------------+----------------------+---------------------------+
+[1] Memory of child processes is included.
+[2] Memory is included in parent localhost_1_0.
+[3] Peak physical memory is not available for forked background servers.
+
+Info    : Replacing the synchronous part of an always feeding back flip-flop with a logic constant. [GLO-45]
+        : The instance is 'u_axi_if/u_csr_r_intr_stat_reg[1]'. The constant is '0'.
+        : To prevent this optimization, set 'optimize_constant_feedback_seqs' root attribute to 'false'. The instance attribute 'optimize_constant_feedback_seq' controls this optimization. 
+PBS_Generic_Opt-Post - Elapsed_Time 2529, CPU_Time 2617.005513
+stamp 'PBS_Generic_Opt-Post' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  41.4( 42.2) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  58.6( 57.8) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+PBS_Generic-Postgen HBO Optimizations - Elapsed_Time 5, CPU_Time 6.0
+stamp 'PBS_Generic-Postgen HBO Optimizations' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  41.3( 42.1) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  58.5( 57.7) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.2(  0.2) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+##>================================= Cadence Confidential (Generic-Logical) =================================
+##>ST Summary (9 partitions in total):
+##>----------------------------------------------------------------------------------------------------------
+##>PARTITION                4         6         5         7         8         3         0         2         1
+##>----------------------------------------------------------------------------------------------------------
+##>PRE_WNS                239     -3437     -3437     -3437     -3588       177    -54197    -54365       112
+##>PRE_TNS                  0   2565538   2565538   2414624   2512405         0  26011492   4347118         0
+##>PRE_CNT             284234    103802    103802     97696     88672    140500     32560     24707      1417
+##>PRE_PORT_CNT          1608      1636      1636      1540      4359      1542      3041      2151       177
+##>PRE_AREA                 0         0         0         0         0         0         0         0         0
+##>PRE_LEAK_PWR         85677      6674      6674      6281      6782     72136      3766      3521       297
+##>PRE_EX_DEL_CNT        1025      1635      1635      1539      4356      1026      3038      2148        12
+##>----------------------------------------------------------------------------------------------------------
+##>POST_WNS               239     -2164     -2164     -2161     -2414       169    -16965    -17092        77
+##>POST_TNS                 0   1537944   1538385   1447372   1664659         0   8113215   1345669         0
+##>POST_CNT            266512     29308     29308     27584     27428    136175     10744     10942      1751
+##>POST_PORT_CNT         1608      1636      1636      1540      4359      1542      3041      2151       177
+##>POST_AREA                0         0         0         0         0         0         0         0         0
+##>POST_LEAK_PWR        85015      1958      1958      1843      2901     72129      1693      1912       296
+##>POST_EX_DEL_CNT       1025      1635      1635      1539      4356      1026      3038      2148        12
+##>----------------------------------------------------------------------------------------------------------
+##>R:Read DB                6         1         1         1         1         5         1         1         0
+##>R:Mux Opto             136         3         3         2         3        26         3         2         0
+##>R:Generic              600       248       246       225       212       134       111       100         4
+##>R:Retime                 0         0         0         0         0         0         0         0         0
+##>R:Clk Gate               0         0         0         0         0         0         0         0         0
+##>R:Const Prop            82         1         1         2         2        19         2         1         0
+##>R:Gobble                 1         0         0         0         0         0         0         0         0
+##>R:Set Targets            0         0         0         0         0         0         0         0         0
+##>R:Write DB              36         2         2         2         2        20         1         1         0
+##>R:Misc                   0         0         0         0         0         0         0         0         0
+##>Total Elapsed          862       256       254       233       221       205       119       106         5
+##>==========================================================================================================
+##>===== Cadence Confidential (Generic-Logical) =====
+##>ST Summary (3 partitions in total):
+##>----------------------------------------------
+##>PARTITION                2         0         1
+##>----------------------------------------------
+##>PRE_WNS                234    -17004       241
+##>PRE_TNS                  0    170938         0
+##>PRE_CNT             136175      9770      2832
+##>PRE_PORT_CNT          1542      1032       683
+##>PRE_AREA                 0         0         0
+##>PRE_LEAK_PWR         72129      1452       547
+##>PRE_EX_DEL_CNT        1026      1029         3
+##>----------------------------------------------
+##>POST_WNS               238       -47       543
+##>POST_TNS                 0       242         0
+##>POST_CNT            228286      4019      1124
+##>POST_PORT_CNT         1542      1032       683
+##>POST_AREA                0         0         0
+##>POST_LEAK_PWR        57223       796       232
+##>POST_EX_DEL_CNT       1026      1029         3
+##>----------------------------------------------
+##>F:Read DB                3         0         0
+##>F:Mux Opto               0         0         0
+##>F:Generic               18         1         0
+##>F:Retime                 0         0         0
+##>F:Clk Gate               0         0         0
+##>F:Const Prop            23         0         0
+##>F:Gobble                 1         0         0
+##>F:Set Targets         1304        32         6
+##>F:Write DB              31         1         0
+##>F:Misc                   0         0         0
+##>Total Elapsed         1380        34         6
+##>==============================================
+##>Main Thread Summary:
+##>----------------------------------------------------------------------------------------
+##>STEP                           Elapsed       WNS       TNS     Insts      Area    Memory
+##>----------------------------------------------------------------------------------------
+##>G:Initial                          216         -         -    877390         0     11283
+##>G:Setup                              4         -         -         -         -     15541
+##>G:Launch ST                         16         -         -         -         -     15541
+##>G:Design Partition                   0         -         -         -         -     15541
+##>G:Create Partition Netlists         14         -         -         -         -     15541
+##>G:Init Power                         0         -         -         -         -     15541
+##>G:Budgeting                         55         -         -         -         -     15541
+##>G:Derenv-DB                         38         -         -         -         -     15541
+##>G:Debug Outputs                      0         -         -         -         -         -
+##>G:ST loading                         2         -         -         -         -     15541
+##>G:Distributed                     2249         -         -         -         -     15541
+##>G:Timer                             48         -         -         -         -     15541
+##>G:Assembly                          26         -         -         -         -     15541
+##>G:DFT                                7         -         -         -         -     15541
+##>G:Const Prop                         5         -         -    233423         0      6065
+##>G:Misc                              63
+##>----------------------------------------------------------------------------------------
+##>Total Elapsed                     2743
+##>========================================================================================
+Info    : Done synthesizing. [SYNTH-2]
+        : Done synthesizing 'compute_core' to generic gates.
+      flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   syn_gen
+@file(synthesize.tcl) 34: syn_map
+##Generic Timing Info for library domain: _default_ typical gate delay: 46.6 ps std_slew: 11.4 ps std_load: 2.2 fF
+Info    : Mapping. [SYNTH-4]
+        : Mapping 'compute_core' using 'high' effort.
+Mapper: Libraries have:
+	domain _default_: 324 combo usable cells and 126 sequential usable cells
+Configuring mapper costing (none)
+TNS Restructuring config: no_value at stage: map applied.
+PBS_TechMap-Start - Elapsed_Time 0, CPU_Time 0.0
+stamp 'PBS_TechMap-Start' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  41.1( 41.9) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  58.2( 57.4) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.2(  0.2) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.5(  0.5) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+PBS_TechMap-Premap HBO Optimizations - Elapsed_Time 6, CPU_Time 6.0
+stamp 'PBS_TechMap-Premap HBO Optimizations' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  41.0( 41.8) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  58.0( 57.3) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.2(  0.2) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.5(  0.5) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.2(  0.3) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+Info    : Partition Based Synthesis execution skipped. [PHYS-752]
+        : Design size is less than the partition threshold '300000' for distributed mapping optimization to kick in.
+Mapper: Libraries have:
+	domain _default_: 324 combo usable cells and 126 sequential usable cells
+Updating ST server settings
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_15' is forked process '27588' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_16' is forked process '27590' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_17' is forked process '27592' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_18' is forked process '27594' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_19' is forked process '27596' on this host.
+Warning : Maximum message print count reached. [MESG-11]
+        : Maximum print count of '20' reached for message 'ST-110'.
+Multi-threaded constant propagation [1|0] ...
+Updating ST server settings
+        Distributing super-thread jobs: cb_seq cb_part_8799
+          Sending 'cb_seq' to server 'localhost_1_22'...
+            Sent 'cb_seq' to server 'localhost_1_22'.
+          Sending 'cb_part_8799' to server 'localhost_1_27'...
+            Sent 'cb_part_8799' to server 'localhost_1_27'.
+          Received 'cb_seq' from server 'localhost_1_22'. (8857 ms elapsed)
+          Received 'cb_part_8799' from server 'localhost_1_27'. (5740 ms elapsed)
+Multi-threaded Virtual Mapping    (8 threads per ST process, 8 of 32 CPUs usable)
+        Distributing super-thread jobs: mux_ctl_0x_8790 cb_part increment_unsigned_134_136
+          Sending 'mux_ctl_0x_8790' to server 'localhost_1_22'...
+            Sent 'mux_ctl_0x_8790' to server 'localhost_1_22'.
+          Sending 'cb_part' to server 'localhost_1_27'...
+            Sent 'cb_part' to server 'localhost_1_27'.
+          Sending 'increment_unsigned_134_136' to server 'localhost_1_26'...
+            Sent 'increment_unsigned_134_136' to server 'localhost_1_26'.
+          Received 'increment_unsigned_134_136' from server 'localhost_1_26'. (366 ms elapsed)
+          Received 'cb_part' from server 'localhost_1_27'. (421 ms elapsed)
+          Received 'mux_ctl_0x_8790' from server 'localhost_1_22'. (9448 ms elapsed)
+        Distributing super-thread jobs: mrg_mux_ctl cb_seq_8795
+          Sending 'mrg_mux_ctl' to server 'localhost_1_22'...
+            Sent 'mrg_mux_ctl' to server 'localhost_1_22'.
+          Sending 'cb_seq_8795' to server 'localhost_1_27'...
+            Sent 'cb_seq_8795' to server 'localhost_1_27'.
+          Received 'cb_seq_8795' from server 'localhost_1_27'. (2179 ms elapsed)
+          Received 'mrg_mux_ctl' from server 'localhost_1_22'. (113754 ms elapsed)
+        Distributing super-thread jobs: cb_part_8799
+          Sending 'cb_part_8799' to server 'localhost_1_22'...
+            Sent 'cb_part_8799' to server 'localhost_1_22'.
+          Received 'cb_part_8799' from server 'localhost_1_22'. (184017 ms elapsed)
+        Distributing super-thread jobs: cb_part_8801
+          Sending 'cb_part_8801' to server 'localhost_1_22'...
+            Sent 'cb_part_8801' to server 'localhost_1_22'.
+          Received 'cb_part_8801' from server 'localhost_1_22'. (199684 ms elapsed)
+        Distributing super-thread jobs: cb_seq cb_seq_8791 cb_seq_8793
+          Sending 'cb_seq' to server 'localhost_1_22'...
+            Sent 'cb_seq' to server 'localhost_1_22'.
+          Sending 'cb_seq_8791' to server 'localhost_1_27'...
+            Sent 'cb_seq_8791' to server 'localhost_1_27'.
+          Sending 'cb_seq_8793' to server 'localhost_1_26'...
+            Sent 'cb_seq_8793' to server 'localhost_1_26'.
+          Received 'cb_seq_8793' from server 'localhost_1_26'. (101816 ms elapsed)
+          Received 'cb_seq_8791' from server 'localhost_1_27'. (115871 ms elapsed)
+          Received 'cb_seq' from server 'localhost_1_22'. (123709 ms elapsed)
+ 
+Global mapping target info
+==========================
+Cost Group 'default' target slack:    26 ps
+Target path end-point (Pin: u_host_tx_bump_data_reg[15]/d)
+
+Multi-threaded Technology Mapping (8 threads per ST process, 8 of 32 CPUs usable)
+        Distributing super-thread jobs: cb_seq cb_seq_8791 cb_seq_8793
+          Sending 'cb_seq' to server 'localhost_1_22'...
+            Sent 'cb_seq' to server 'localhost_1_22'.
+          Sending 'cb_seq_8791' to server 'localhost_1_27'...
+            Sent 'cb_seq_8791' to server 'localhost_1_27'.
+          Sending 'cb_seq_8793' to server 'localhost_1_26'...
+            Sent 'cb_seq_8793' to server 'localhost_1_26'.
+          Received 'cb_seq' from server 'localhost_1_22'. (170008 ms elapsed)
+          Received 'cb_seq_8793' from server 'localhost_1_26'. (211208 ms elapsed)
+          Received 'cb_seq_8791' from server 'localhost_1_27'. (242091 ms elapsed)
+        Distributing super-thread jobs: cb_part_8801
+          Sending 'cb_part_8801' to server 'localhost_1_22'...
+            Sent 'cb_part_8801' to server 'localhost_1_22'.
+          Received 'cb_part_8801' from server 'localhost_1_22'. (516161 ms elapsed)
+        Distributing super-thread jobs: cb_part_8799
+          Sending 'cb_part_8799' to server 'localhost_1_22'...
+            Sent 'cb_part_8799' to server 'localhost_1_22'.
+          Received 'cb_part_8799' from server 'localhost_1_22'. (473546 ms elapsed)
+        Distributing super-thread jobs: cb_seq_8795
+          Sending 'cb_seq_8795' to server 'localhost_1_22'...
+            Sent 'cb_seq_8795' to server 'localhost_1_22'.
+          Received 'cb_seq_8795' from server 'localhost_1_22'. (2099 ms elapsed)
+        Distributing super-thread jobs: mrg_mux_ctl
+          Sending 'mrg_mux_ctl' to server 'localhost_1_22'...
+            Sent 'mrg_mux_ctl' to server 'localhost_1_22'.
+          Received 'mrg_mux_ctl' from server 'localhost_1_22'. (234473 ms elapsed)
+        Distributing super-thread jobs: mux_ctl_0x_8790
+          Sending 'mux_ctl_0x_8790' to server 'localhost_1_22'...
+            Sent 'mux_ctl_0x_8790' to server 'localhost_1_22'.
+          Received 'mux_ctl_0x_8790' from server 'localhost_1_22'. (16730 ms elapsed)
+        Distributing super-thread jobs: cb_part increment_unsigned_134_136
+          Sending 'cb_part' to server 'localhost_1_22'...
+            Sent 'cb_part' to server 'localhost_1_22'.
+          Sending 'increment_unsigned_134_136' to server 'localhost_1_27'...
+            Sent 'increment_unsigned_134_136' to server 'localhost_1_27'.
+          Received 'cb_part' from server 'localhost_1_22'. (837 ms elapsed)
+          Received 'increment_unsigned_134_136' from server 'localhost_1_27'. (852 ms elapsed)
+ 
+Global mapping status
+=====================
+                                    Worst 
+                           Total  Weighted
+Operation                   Area  Neg Slk Worst Path
+ global_map                    0      -37  u_host_tx_seq_cnt_reg[7]/CK -->
+                                             u_host_tx_bump_data_reg[13]/SI
+
+    Cost Group            Target    Slack    Diff.  Constr.
+-----------------------------------------------------------
+       default                26      -37      -6%     1000 
+
+ 
+Global incremental target info
+==============================
+Cost Group 'default' target slack:   -37 ps
+Target path end-point (Pin: u_host_tx_bump_data_reg[13]/SI (SDFFRHQX8/SI))
+
+              Distributing super-thread jobs: cb_seq cb_seq_8791 cb_seq_8793
+                Sending 'cb_seq' to server 'localhost_1_22'...
+                  Sent 'cb_seq' to server 'localhost_1_22'.
+                Sending 'cb_seq_8791' to server 'localhost_1_27'...
+                  Sent 'cb_seq_8791' to server 'localhost_1_27'.
+                Sending 'cb_seq_8793' to server 'localhost_1_26'...
+                  Sent 'cb_seq_8793' to server 'localhost_1_26'.
+                Received 'cb_seq_8791' from server 'localhost_1_27'. (15105 ms elapsed)
+                Received 'cb_seq_8793' from server 'localhost_1_26'. (14505 ms elapsed)
+                Received 'cb_seq' from server 'localhost_1_22'. (29922 ms elapsed)
+              Distributing super-thread jobs: cb_part_8801
+                Sending 'cb_part_8801' to server 'localhost_1_22'...
+                  Sent 'cb_part_8801' to server 'localhost_1_22'.
+                Received 'cb_part_8801' from server 'localhost_1_22'. (296873 ms elapsed)
+              Distributing super-thread jobs: cb_part_8799
+                Sending 'cb_part_8799' to server 'localhost_1_22'...
+                  Sent 'cb_part_8799' to server 'localhost_1_22'.
+                Received 'cb_part_8799' from server 'localhost_1_22'. (142130 ms elapsed)
+              Distributing super-thread jobs: mrg_mux_ctl
+                Sending 'mrg_mux_ctl' to server 'localhost_1_22'...
+                  Sent 'mrg_mux_ctl' to server 'localhost_1_22'.
+                Received 'mrg_mux_ctl' from server 'localhost_1_22'. (1127847 ms elapsed)
+              Distributing super-thread jobs: mux_ctl_0x_8790 cb_seq_8795
+                Sending 'mux_ctl_0x_8790' to server 'localhost_1_22'...
+                  Sent 'mux_ctl_0x_8790' to server 'localhost_1_22'.
+                Sending 'cb_seq_8795' to server 'localhost_1_27'...
+                  Sent 'cb_seq_8795' to server 'localhost_1_27'.
+                Received 'cb_seq_8795' from server 'localhost_1_27'. (1170 ms elapsed)
+                Received 'mux_ctl_0x_8790' from server 'localhost_1_22'. (8486 ms elapsed)
+              Distributing super-thread jobs: cb_part
+                Sending 'cb_part' to server 'localhost_1_22'...
+                  Sent 'cb_part' to server 'localhost_1_22'.
+                Received 'cb_part' from server 'localhost_1_22'. (861 ms elapsed)
+==================================
+Stage : global_incr_map 
+==================================
+  =================
+   Message Summary
+  =================
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|     Id      |  Sev   |Count  |                                                                                                Message Text                                                                                                 |
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| CDFG-250    |Info    |   148 |Processing multi-dimensional arrays.                                                                                                                                                                         |
+| CDFG-372    |Info    |    11 |Bitwidth mismatch in assignment.                                                                                                                                                                             |
+|             |        |       |Review and make sure the mismatch is unintentional. Genus can possibly issue bitwidth mismatch warning for explicit assignments present in RTL as-well-as for implicit assignments inferred by the tool. For |
+|             |        |       | example, in case of enum declaration without value, the tool will implicitly assign value to the enum variables. It also issues the warning for any bitwidth mismatch that appears in this implicit         |
+|             |        |       | assignment.                                                                                                                                                                                                 |
+| CDFG-428    |Warning |     1 |In legacy_ui mode, Genus creates a blackbox as description for a module is not found. Black boxes represent unresolved references in the design and are usually not expected. Another possible reason is,    |
+|             |        |       | some libraries are not read and the tool could not get the content for some macros or lib_cells.                                                                                                            |
+|             |        |       |Check the kind of module a black box is. If it is a lib_cell or a macro, check why the corresponding .lib was not read in. This could be either due to a missing or faulty file or due to an incomplete      |
+|             |        |       | init_lib_search_path attribute value making restricting access to the missing file. If it is a module of your design, verify whether the path to this module is a part of the files you read or else check  |
+|             |        |       | that the init_hdl_search_path attribute is not missing some paths.                                                                                                                                          |
+| CDFG-485    |Warning |     3 |Loop condition is always false.                                                                                                                                                                              |
+|             |        |       |Loop body will not be synthesized.                                                                                                                                                                           |
+| CDFG-500    |Info    |     9 |Unused module input port.                                                                                                                                                                                    |
+|             |        |       |(In port definition within the module, the input port is not used in any assignment statements or conditional expressions for decision statements.                                                           |
+| CDFG-738    |Info    |  1119 |Common subexpression eliminated.                                                                                                                                                                             |
+| CDFG-739    |Info    |  1119 |Common subexpression kept.                                                                                                                                                                                   |
+| CDFG-769    |Info    |     3 |Identified sum-of-products logic to be optimized during syn_generic.                                                                                                                                         |
+| CDFG-771    |Info    |     1 |Replaced logic with a constant value.                                                                                                                                                                        |
+| CDFG-818    |Warning |     1 |Using default parameter value for module elaboration.                                                                                                                                                        |
+| CDFG-893    |Info    |    61 |Optimized the MUX created for array read / write or variable shifter.                                                                                                                                        |
+| CDFG2G-615  |Warning |     1 |Generated logic differs from the expected logic.                                                                                                                                                             |
+|             |        |       |The logic generated for an always_comb, always_latch or always_ff process may not match the behavior specified in the input HDL.                                                                             |
+| CDFG2G-616  |Info    |     1 |Latch inferred. Check and revisit your RTL if this is not the intended behavior.                                                                                                                             |
+|             |        |       |Use the attributes 'set_attribute hdl_error_on_latch true'(LUI) or 'set_db hdl_error_on_latch true' (CUI)                                                                                                    |
+|             |        |       | to issue an error when a latch is inferred. Use the attributes 'set_attributes hdl_latch_keep_feedback true'(LUI) or 'set_db hdl_latch_keep_feedback true'(CUI)                                             |
+|             |        |       | to infer combinational logic rather than a latch in case a variable is explicitly assigned to itself.                                                                                                       |
+| CDFG2G-622  |Warning |    19 |Signal or variable has multiple drivers.                                                                                                                                                                     |
+|             |        |       |This may cause simulation mismatches between the original and synthesized designs.                                                                                                                           |
+| CWD-19      |Info    |   308 |An implementation was inferred.                                                                                                                                                                              |
+| ELAB-1      |Info    |     1 |Elaborating Design.                                                                                                                                                                                          |
+| ELAB-2      |Info    |    24 |Elaborating Subdesign.                                                                                                                                                                                       |
+| ELAB-3      |Info    |     1 |Done Elaborating Design.                                                                                                                                                                                     |
+| ELABUTL-125 |Warning |     8 |Undriven signal detected.                                                                                                                                                                                    |
+|             |        |       |The undriven signal handling can be controlled by setting the attribute 'hdl_unconnected_value' before syn_generic command.                                                                                  |
+| ELABUTL-127 |Warning |   131 |Undriven module input port.                                                                                                                                                                                  |
+|             |        |       |Run check_design to check 'Undriven Port(s)/Pin(s)                                                                                                                                                           |
+|             |        |       | ' section for all undriven module input ports. It is better to double confirm with designer if these undriven ports are expected. During syn_gen the undriven ports are controlled by attribute             |
+|             |        |       | 'hdl_unconnected_value', the default value is 0.                                                                                                                                                            |
+| ELABUTL-130 |Info    |     8 |Undriven signal detected.                                                                                                                                                                                    |
+|             |        |       |The 'hdl_unconnected_value' attribute controls treatment of undriven signal.                                                                                                                                 |
+| ELABUTL-131 |Info    |   131 |Undriven module input port.                                                                                                                                                                                  |
+|             |        |       |The 'hdl_unconnected_value' attribute controls treatment of undriven input port.                                                                                                                             |
+| ELABUTL-132 |Info    |   101 |Unused instance port.                                                                                                                                                                                        |
+|             |        |       |Please check the reported scenario of unconnected instance port to ensure that it matches the design intent.                                                                                                 |
+| GB-6        |Info    |    11 |A datapath component has been ungrouped.                                                                                                                                                                     |
+| GLO-12      |Info    |  5131 |Replacing a flip-flop with a logic constant 0.                                                                                                                                                               |
+|             |        |       |To prevent this optimization, set the 'optimize_constant_0_flops' root attribute to 'false' or 'optimize_constant_0_seq' instance attribute to 'false'. You can also see the complete list of deleted        |
+|             |        |       | sequential with command 'report sequential -deleted' (on Reason 'constant0').                                                                                                                               |
+| GLO-21      |Info    |132352 |Replacing a blocking flip-flop with a logic constant 0.                                                                                                                                                      |
+|             |        |       |The value used to replace the flop can be set by the root attribute 'optimize_seq_x_to'.                                                                                                                     |
+| GLO-34      |Info    |    67 |Deleting instances not driving any primary outputs.                                                                                                                                                          |
+|             |        |       |Optimizations such as constant propagation or redundancy removal could change the connections so a hierarchical instance does not drive any primary outputs anymore. To see the list of deleted hierarchical |
+|             |        |       | instances, set the 'information_level' attribute to 2 or above. If the message is truncated set the message attribute 'truncate' to false to see the complete list. To prevent this optimization, set the   |
+|             |        |       | 'delete_unloaded_insts' root/subdesign attribute to 'false' or 'preserve' instance attribute to 'true'.                                                                                                     |
+| GLO-45      |Info    |     1 |Replacing the synchronous part of an always feeding back flip-flop with a logic constant.                                                                                                                    |
+|             |        |       |To prevent this optimization, set 'optimize_constant_feedback_seqs' root attribute to 'false'. The instance attribute 'optimize_constant_feedback_seq' controls this optimization.                           |
+| LBR-41      |Info    |     1 |An output library pin lacks a function attribute.                                                                                                                                                            |
+|             |        |       |If the remainder of this library cell's semantic checks are successful, it will be considered as a timing-model (because one of its outputs does not have a valid function.                                  |
+| LBR-155     |Info    |   248 |Mismatch in unateness between 'timing_sense' attribute and the function.                                                                                                                                     |
+|             |        |       |The 'timing_sense' attribute will be respected.                                                                                                                                                              |
+| LBR-161     |Info    |     1 |Setting the maximum print count of this message to 10 if information_level is less than 9.                                                                                                                   |
+| LBR-162     |Info    |   124 |Both 'pos_unate' and 'neg_unate' timing_sense arcs have been processed.                                                                                                                                      |
+|             |        |       |Setting the 'timing_sense' to non_unate.                                                                                                                                                                     |
+| LBR-170     |Info    |    64 |Ignoring specified timing sense.                                                                                                                                                                             |
+|             |        |       |Timing sense should never be set with 'rising_edge' or 'falling_edge' timing type.                                                                                                                           |
+| LBR-412     |Info    |     1 |Created nominal operating condition.                                                                                                                                                                         |
+|             |        |       |The nominal operating condition is represented, either by the nominal PVT values specified in the library source (via nom_process,nom_voltage and nom_temperature respectively)                              |
+|             |        |       | , or by the default PVT values (1.0,1.0,1.0).                                                                                                                                                               |
+| LBR-516     |Info    |     1 |Missing library level attribute.                                                                                                                                                                             |
+| LBR-518     |Info    |     1 |Missing a function attribute in the output pin definition.                                                                                                                                                   |
+| PA-7        |Info    |     6 |Resetting power analysis results.                                                                                                                                                                            |
+|             |        |       |All computed switching activities are removed.                                                                                                                                                               |
+| PBS-1       |Info    |     1 |Enabling Partition Based Synthesis.                                                                                                                                                                          |
+| PHYS-752    |Info    |     1 |Partition Based Synthesis execution skipped.                                                                                                                                                                 |
+| ST-110      |Info    |    29 |Connection established with super-threading server.                                                                                                                                                          |
+|             |        |       |The tool is entering super-threading mode and has established a connection with a CPU server process.  This is enabled by the root attributes 'super_thread_servers' or 'auto_super_thread'.                 |
+| ST-112      |Info    |    21 |A super-threading server has been shut down normally.                                                                                                                                                        |
+|             |        |       |A super-threaded optimization is complete and a CPU server was successfully shut down.                                                                                                                       |
+| ST-120      |Info    |     1 |Attempting to launch a super-threading server.                                                                                                                                                               |
+|             |        |       |The tool is entering super-threading mode and is launching a CPU server process.  This is enabled by the root attribute 'super_thread_servers' or 'auto_super_thread'.                                       |
+| ST-128      |Info    |     5 |Super thread servers are launched successfully.                                                                                                                                                              |
+| SYNTH-1     |Info    |     1 |Synthesizing.                                                                                                                                                                                                |
+| SYNTH-2     |Info    |     1 |Done synthesizing.                                                                                                                                                                                           |
+| SYNTH-4     |Info    |     1 |Mapping.                                                                                                                                                                                                     |
+| TIM-1000    |Info    |     1 |Multimode clock gating check is disabled.                                                                                                                                                                    |
+| TUI-273     |Warning |     1 |Black-boxes are represented as unresolved references in the design.                                                                                                                                          |
+|             |        |       |Run check_design to get all unresolved instance. To resolve the reference, either load a technology library containing the cell by appending to the 'library' attribute, or read in the hdl file containing  |
+|             |        |       | the module before performing elaboration. As the design is incomplete, synthesis results may not correspond to the entire design.                                                                           |
+| VLOGPT-37   |Warning |     1 |Ignoring unsynthesizable construct.                                                                                                                                                                          |
+|             |        |       |For example, the following constructs will be ignored:
+    - initial block
+    - final block
+    - program block
+    - property block
+    - sequence block
+    - covergroup
+    - checker block
+    - gate   |
+|             |        |       | drive strength
+    - system task enable
+    - reg declaration with initial value
+    - specify block.                                                                                                       |
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+Global incremental optimization status
+======================================
+                                    Worst 
+                           Total  Weighted
+Operation                   Area  Neg Slk Worst Path
+ global_incr                   0      -36  u_host_tx_flit_cnt_reg[0]/CK -->
+                                             u_host_tx_bump_data_reg[13]/SI
+
+    Cost Group            Target    Slack    Diff.  Constr.
+-----------------------------------------------------------
+       default               -37      -37      +0%     1000 
+
+
++-----------+----------------+-----+----------------------+---------------------------+
+|   Host    |    Machine     | CPU | Physical Memory (MB) | Peak Physical Memory (MB) |
++-----------+----------------+-----+----------------------+---------------------------+
+| localhost | mo.ece.pdx.edu |  8  |        7632.9        |          18848.7          |
++-----------+----------------+-----+----------------------+---------------------------+
+
++----------------+----------------------+---------------------------+
+|     Server     | Physical Memory (MB) | Peak Physical Memory (MB) |
++----------------+----------------------+---------------------------+
+| localhost_1_0  |      2218.0 [1]      |        12201.4 [1]        |
+| localhost_1_27 |      433.4 [2]       |          [2] [3]          |
+| localhost_1_22 |      629.3 [2]       |          [2] [3]          |
+| localhost_1_24 |      112.8 [2]       |          [2] [3]          |
+| localhost_1_26 |      566.8 [2]       |          [2] [3]          |
+| localhost_1_28 |      112.8 [2]       |          [2] [3]          |
+| localhost_1_23 |      112.8 [2]       |          [2] [3]          |
+| localhost_1_25 |      112.8 [2]       |          [2] [3]          |
++----------------+----------------------+---------------------------+
+[1] Memory of child processes is included.
+[2] Memory is included in parent localhost_1_0.
+[3] Peak physical memory is not available for forked background servers.
+
+Warning : Preserved net is not renamed during ungroup. [TUI-75]
+        : Net: 'n_4187'.
+        : For the preserved net, ungroup prefix string is used only during name conflict.
+Warning : Preserved net is not renamed during ungroup. [TUI-75]
+        : Net: 'n_4188'.
+Warning : Preserved net is not renamed during ungroup. [TUI-75]
+        : Net: 'n_4189'.
+Warning : Preserved net is not renamed during ungroup. [TUI-75]
+        : Net: 'n_4190'.
+Warning : Preserved net is not renamed during ungroup. [TUI-75]
+        : Net: 'n_4191'.
+Warning : Preserved net is not renamed during ungroup. [TUI-75]
+        : Net: 'n_4192'.
+Warning : Preserved net is not renamed during ungroup. [TUI-75]
+        : Net: 'n_4193'.
+Warning : Preserved net is not renamed during ungroup. [TUI-75]
+        : Net: 'n_4194'.
+
+State Retention Synthesis Status
+================================
+
+Category                         Flops   Percentage
+---------------------------------------------------
+Total instances                 135205        100.0
+Excluded from State Retention   135205        100.0
+    - Will not convert          135205        100.0
+      - Preserved                    0          0.0
+      - Power intent excluded   135205        100.0
+    - Could not convert              0          0.0
+      - Scan type                    0          0.0
+      - No suitable cell             0          0.0
+State Retention instances            0          0.0
+---------------------------------------------------
+
+INFO: skipping constant propagation
+PBS_Techmap-Global Mapping - Elapsed_Time 4360, CPU_Time 4479.967858
+stamp 'PBS_Techmap-Global Mapping' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  15.2( 15.4) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  21.5( 21.2) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  62.9( 63.1) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+Warning : Command 'commit_power_intent' cannot proceed as there is no power intent loaded. [CPI-506]
+        : Command 'commit_power_intent' requires a valid power_intent to be loaded.
+Info    : Wrote formal verification information. [CFM-5]
+        : Wrote 'fv/compute_core/fv_map.fv.json' for netlist 'fv/compute_core/fv_map.v.gz'.
+Info    : Existing dofile found. Copied as fv/compute_core/rtl_to_fv_map.do~.
+Info    : Wrote dofile. [CFM-1]
+        : Dofile is 'fv/compute_core/rtl_to_fv_map.do'.
+        : Alias mapping flow is enabled.
+PBS_TechMap-Datapath Postmap Operations - Elapsed_Time 75, CPU_Time 76.0
+stamp 'PBS_TechMap-Datapath Postmap Operations' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  15.1( 15.3) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  21.3( 20.9) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  62.2( 62.4) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.1(  1.1) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+PBS_TechMap-Postmap HBO Optimizations - Elapsed_Time 6, CPU_Time 9.484389000001102
+stamp 'PBS_TechMap-Postmap HBO Optimizations' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  15.0( 15.3) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  21.3( 20.9) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  62.2( 62.3) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.1(  1.1) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+ Doing ConstProp on design:compute_core ... 
+
+IOPT-REDREM: Performing redundancy removal: Detected 0 redundant wires. CPU time 3.096 seconds.
+
+Time taken by ConstProp Step: 00:00:17
+PBS_TechMap-Postmap Clock Gating - Elapsed_Time 20, CPU_Time 19.0
+stamp 'PBS_TechMap-Postmap Clock Gating' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  15.0( 15.2) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  21.2( 20.9) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  62.0( 62.1) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.1(  1.1) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.3(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+-------------------------------------------------------------------------------
+ hi_fo_buf                     0      -36      -203         0
+            Path: u_host_tx_flit_cnt_reg[0]/CK -->
+                    u_host_tx_bump_data_reg[13]/SI
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+       hi_fo_buf       978  (      977 /      977 )  92.73
+
+ 
+Incremental optimization status
+===============================
+                                    Worst     Total DRC Total
+                           Total  Weighted     Neg       Max 
+Operation                   Area  Neg Slk     Slack      Cap 
+ init_delay                    0      -36      -203         0
+            Path: u_host_tx_flit_cnt_reg[0]/CK -->
+                    u_host_tx_bump_data_reg[13]/SI
+ incr_delay                    0      -34      -201         0
+            Path: u_host_tx_flit_cnt_reg[0]/CK -->
+                    u_host_tx_bump_data_reg[13]/SI
+ incr_delay                    0      -33      -194         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[13]/SI
+ incr_delay                    0      -32      -188         0
+            Path: u_host_tx_flit_cnt_reg[0]/CK -->
+                    u_host_tx_bump_data_reg[13]/SI
+ incr_delay                    0      -31      -178         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+ incr_delay                    0      -30      -173         0
+            Path: u_host_tx_flit_cnt_reg[2]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+ incr_delay                    0      -29      -167         0
+            Path: u_host_tx_flit_cnt_reg[2]/CK -->
+                    u_host_tx_bump_data_reg[13]/SI
+ incr_delay                    0      -29      -166         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+       crit_upsz       977  (      167 /      170 )  1.73
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+          plc_st       237  (        0 /        0 )  0.00
+    plc_st_fence       237  (        0 /        0 )  0.00
+        plc_star       237  (        0 /        0 )  0.00
+      plc_laf_st       237  (        0 /        0 )  0.00
+ plc_laf_st_fence       237  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+            fopt       458  (       32 /       33 )  2.42
+   plc_laf_lo_st       247  (        0 /        0 )  0.00
+       plc_lo_st       247  (        0 /        0 )  0.00
+        mb_split       247  (        0 /        0 )  0.00
+
+ 
+Local TNS optimization status
+=============================
+                                    Worst     Total DRC Total
+                           Total  Weighted     Neg       Max 
+Operation                   Area  Neg Slk     Slack      Cap 
+ init_tns                      0      -29      -166         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+ incr_tns                      0      -29      -138         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+ incr_tns                      0      -29      -138         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+    plc_bal_star         0  (        0 /        0 )  0.00
+     drc_buftimb         0  (        0 /        0 )  0.00
+     drc_buftims         0  (        0 /        0 )  0.00
+       crit_upsz       474  (       12 /       71 )  0.78
+   plc_laf_lo_st       462  (        0 /        0 )  0.00
+       plc_lo_st       462  (        0 /        0 )  0.00
+            fopt       462  (        0 /        0 )  0.55
+       crit_dnsz       926  (       18 /      159 )  1.94
+             dup       444  (        2 /       14 )  0.14
+        setup_dn       442  (        0 /        0 )  0.01
+        mb_split       442  (        0 /        0 )  0.00
+
+PBS_TechMap-Postmap Cleanup - Elapsed_Time 112, CPU_Time 123.3712599999999
+stamp 'PBS_TechMap-Postmap Cleanup' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  14.7( 15.0) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  20.9( 20.5) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  61.0( 61.2) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.0(  1.1) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.3(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:36(02:09:05) |  00:02:03(00:01:52) |   1.7(  1.6) |   23:50:47 (May22) |   6.06 GB | PBS_TechMap-Postmap Cleanup
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+PBS_Techmap-Post_MBCI - Elapsed_Time 1, CPU_Time 1.0
+stamp 'PBS_Techmap-Post_MBCI' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  14.7( 15.0) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  20.9( 20.5) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  60.9( 61.2) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.0(  1.1) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.3(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:36(02:09:05) |  00:02:03(00:01:52) |   1.7(  1.6) |   23:50:47 (May22) |   6.06 GB | PBS_TechMap-Postmap Cleanup
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:37(02:09:06) |  00:00:01(00:00:01) |   0.0(  0.0) |   23:50:48 (May22) |   6.06 GB | PBS_Techmap-Post_MBCI
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+##>=================== Cadence Confidential (Mapping-Logical) ===================
+##>Main Thread Summary:
+##>----------------------------------------------------------------------------------------
+##>STEP                           Elapsed       WNS       TNS     Insts      Area    Memory
+##>----------------------------------------------------------------------------------------
+##>M:Initial                            6         -         -    233423         0      6057
+##>M:Pre Cleanup                        1         -         -    233423         0      6057
+##>M:Setup                              0         -         -         -         -         -
+##>M:Launch ST                          0         -         -         -         -         -
+##>M:Design Partition                   0         -         -         -         -         -
+##>M:Create Partition Netlists          0         -         -         -         -         -
+##>M:Init Power                         0         -         -         -         -         -
+##>M:Budgeting                          0         -         -         -         -         -
+##>M:Derenv-DB                          0         -         -         -         -         -
+##>M:Debug Outputs                      0         -         -         -         -         -
+##>M:ST loading                         0         -         -         -         -         -
+##>M:Distributed                        0         -         -         -         -         -
+##>M:Timer                              0         -         -         -         -         -
+##>M:Assembly                           0         -         -         -         -         -
+##>M:DFT                                0         -         -         -         -         -
+##>M:DP Operations                     75         -         -    283038         0      6070
+##>M:Const Prop                         0       -36       203    283038         0      6070
+##>M:Cleanup                          112       -29       138    359747         0      6062
+##>M:MBCI                               1         -         -    359747         0      6062
+##>M:Const Gate Removal                 0         -         -         -         -         -
+##>M:Misc                            4390
+##>----------------------------------------------------------------------------------------
+##>Total Elapsed                     4585
+##>========================================================================================
+
++-----------+----------------+-----+----------------------+---------------------------+
+|   Host    |    Machine     | CPU | Physical Memory (MB) | Peak Physical Memory (MB) |
++-----------+----------------+-----+----------------------+---------------------------+
+| localhost | mo.ece.pdx.edu |  1  |        6062.9        |          18848.7          |
++-----------+----------------+-----+----------------------+---------------------------+
+
++---------------+----------------------+---------------------------+
+|    Server     | Physical Memory (MB) | Peak Physical Memory (MB) |
++---------------+----------------------+---------------------------+
+| localhost_1_0 |        780.0         |          12201.4          |
++---------------+----------------------+---------------------------+
+
+Info    : Done mapping. [SYNTH-5]
+        : Done mapping 'compute_core'.
+      flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   syn_map
+@file(synthesize.tcl) 36: syn_opt
+Info    : Incrementally optimizing. [SYNTH-7]
+        : Incrementally optimizing 'compute_core' using 'high' effort.
+PBS_Incr_Opt-Start - Elapsed_Time 0, CPU_Time 0.0
+stamp 'PBS_Incr_Opt-Start' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  14.7( 14.9) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  20.8( 20.5) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  60.8( 61.0) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.0(  1.0) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.3(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:36(02:09:05) |  00:02:03(00:01:52) |   1.7(  1.6) |   23:50:47 (May22) |   6.06 GB | PBS_TechMap-Postmap Cleanup
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:37(02:09:06) |  00:00:01(00:00:01) |   0.0(  0.0) |   23:50:48 (May22) |   6.06 GB | PBS_Techmap-Post_MBCI
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:59(02:09:28) |  00:00:22(00:00:22) |   0.3(  0.3) |   23:51:10 (May22) |   6.03 GB | PBS_Incr_Opt-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+Info    : The given (sub)design is already uniquified. [TUI-296]
+        : design:compute_core.
+        : Try running the 'edit_netlist uniquify' command on the parent hierarchy of this (sub)design, if there exists any.
+PBS_Incr_Opt-Uniquify_Netlist - Elapsed_Time 1, CPU_Time 2.0
+stamp 'PBS_Incr_Opt-Uniquify_Netlist' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  14.7( 14.9) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  20.8( 20.5) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  60.7( 61.0) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.0(  1.0) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.3(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:36(02:09:05) |  00:02:03(00:01:52) |   1.7(  1.6) |   23:50:47 (May22) |   6.06 GB | PBS_TechMap-Postmap Cleanup
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:37(02:09:06) |  00:00:01(00:00:01) |   0.0(  0.0) |   23:50:48 (May22) |   6.06 GB | PBS_Techmap-Post_MBCI
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:59(02:09:28) |  00:00:22(00:00:22) |   0.3(  0.3) |   23:51:10 (May22) |   6.03 GB | PBS_Incr_Opt-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:01(02:09:29) |  00:00:02(00:00:01) |   0.0(  0.0) |   23:51:11 (May22) |   6.03 GB | PBS_Incr_Opt-Uniquify_Netlist
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+ Uniquify netlist ...
+ Swap or remap avoided cells ...
+                                    Worst     Total DRC Total
+                           Total  Weighted     Neg       Max 
+Operation                   Area  Neg Slk     Slack      Cap 
+ init_iopt                     0      -29      -138         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+-------------------------------------------------------------------------------
+ hi_fo_buf                     0      -29      -138         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+       hi_fo_buf       718  (      714 /      714 )  32.24
+
+ 
+
+
+                                    Worst     Total DRC Total
+                           Total  Weighted     Neg       Max 
+Operation                   Area  Neg Slk     Slack      Cap 
+ init_delay                    0      -29      -138         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+ incr_delay                    0      -27      -132         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[14]/SI
+ incr_delay                    0      -26      -129         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[15]/SI
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+       crit_upsz       403  (       56 /       61 )  0.34
+            fopt       102  (        3 /        3 )  0.22
+
+ init_tns                      0      -26      -129         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[15]/SI
+ incr_tns                      0      -26      -122         0
+            Path: u_host_tx_flit_cnt_reg[1]/CK -->
+                    u_host_tx_bump_data_reg[15]/SI
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+       crit_upsz       275  (        6 /       40 )  0.26
+            fopt       269  (        0 /        1 )  0.36
+       crit_dnsz       534  (        4 /       65 )  0.34
+             dup       265  (        0 /        6 )  0.09
+
+INIT_CLEAN_UP - Elapsed_Time 45, CPU_Time 49.71651699999893
+stamp 'INIT_CLEAN_UP' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  14.6( 14.8) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  20.7( 20.3) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  60.3( 60.6) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.0(  1.0) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.3(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:36(02:09:05) |  00:02:03(00:01:52) |   1.7(  1.6) |   23:50:47 (May22) |   6.06 GB | PBS_TechMap-Postmap Cleanup
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:37(02:09:06) |  00:00:01(00:00:01) |   0.0(  0.0) |   23:50:48 (May22) |   6.06 GB | PBS_Techmap-Post_MBCI
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:59(02:09:28) |  00:00:22(00:00:22) |   0.3(  0.3) |   23:51:10 (May22) |   6.03 GB | PBS_Incr_Opt-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:01(02:09:29) |  00:00:02(00:00:01) |   0.0(  0.0) |   23:51:11 (May22) |   6.03 GB | PBS_Incr_Opt-Uniquify_Netlist
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:51(02:10:14) |  00:00:49(00:00:45) |   0.7(  0.6) |   23:51:56 (May22) |   6.06 GB | INIT_CLEAN_UP
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+Updating ST server settings
+     Generating lib_script file: /u/fchikani/ece510/.pbs_mo.ece.pdx.edu_11035/lib_script
+Start partitioning.  Summary: MEM {curr: 8.7G, peak: 15.2G, phys curr: 5.9G, phys peak: 18.4G}
+Start timing analysis.  Summary: MEM {curr: 8.7G, peak: 15.2G, phys curr: 5.9G, phys peak: 18.4G}
+Done timing analysis.  Summary: RT {elapsed: 9s, ST: 12s}, MEM {curr: 8.7G, peak: 15.2G, phys curr: 5.9G, phys peak: 18.4G}
+Design compute_core is partitioned using GPS apart partitioner
+Done partitioning.  Summary: RT {elapsed: 20s, ST: 23s}, MEM {curr: 8.7G, peak: 15.2G, phys curr: 5.9G, phys peak: 18.4G}
+Start creating partition netlists.  Summary: MEM {curr: 8.7G, peak: 15.2G, phys curr: 5.9G, phys peak: 18.4G}
+Done creating partition netlists.  Summary: RT {elapsed: 10s, ST: 10s}, MEM {curr: 8.7G, peak: 15.2G, phys curr: 6.0G, phys peak: 18.4G}
+Start budgeting timing for partitions.  Summary: MEM {curr: 8.7G, peak: 15.2G, phys curr: 6.0G, phys peak: 18.4G}
+Done budgeting timing for partitions.  Summary: RT {elapsed: 43s, ST: 58s}, MEM {curr: 8.8G, peak: 15.2G, phys curr: 6.1G, phys peak: 18.4G}
+Start deriving partition netlists.  Summary: MEM {curr: 8.8G, peak: 15.2G, phys curr: 6.1G, phys peak: 18.4G}
+The inst 'pbs_iopt_2' is selected as pbs candidate. The instance cnt is: '80962'.
+The inst 'pbs_iopt_0' is selected as pbs candidate. The instance cnt is: '80962'.
+The inst 'pbs_iopt_1' is selected as pbs candidate. The instance cnt is: '80956'.
+The inst 'pbs_iopt_4' is selected as pbs candidate. The instance cnt is: '44171'.
+The inst 'pbs_iopt_3' is selected as pbs candidate. The instance cnt is: '80962'.
+The inst 'pbs_iopt_5' is selected as pbs candidate. The instance cnt is: '11895'.
+Done deriving partition netlists.  Summary: RT {elapsed: 9s, ST: 9s}, MEM {curr: 8.8G, peak: 15.2G, phys curr: 6.1G, phys peak: 18.4G}
+Wait for super-thread servers to finish loading libraries.
+Start super thread servers forking.  Summary: MEM {curr: 8.8G, peak: 15.2G, phys curr: 6.1G, phys peak: 18.4G}
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_29' is forked process '17393' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_30' is forked process '17395' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_31' is forked process '17397' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_32' is forked process '17399' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_33' is forked process '17401' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_34' is forked process '17404' on this host.
+Info    : Connection established with super-threading server. [ST-110]
+        : The server 'localhost_1_35' is forked process '17406' on this host.
+Done super thread servers forking.  Summary: RT {elapsed: 1s, ST: 0s}, MEM {curr: 8.8G, peak: 15.2G, phys curr: 6.1G, phys peak: 18.4G}
+        Distributing super-thread jobs: {pbs_iopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_2.etf} {pbs_iopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_0.etf} {pbs_iopt_3 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_3.etf} {pbs_iopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_1.etf} {pbs_iopt_4 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_4.etf} {pbs_iopt_5 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_5.etf}
+          Sending 'pbs_iopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_2.etf' to server 'localhost_1_32'...
+            Sent 'pbs_iopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_2.etf' to server 'localhost_1_32'.
+          Sending 'pbs_iopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_0.etf' to server 'localhost_1_31'...
+            Sent 'pbs_iopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_0.etf' to server 'localhost_1_31'.
+          Sending 'pbs_iopt_3 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_3.etf' to server 'localhost_1_34'...
+            Sent 'pbs_iopt_3 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_3.etf' to server 'localhost_1_34'.
+          Sending 'pbs_iopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_1.etf' to server 'localhost_1_33'...
+            Sent 'pbs_iopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_1.etf' to server 'localhost_1_33'.
+          Sending 'pbs_iopt_4 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_4.etf' to server 'localhost_1_29'...
+            Sent 'pbs_iopt_4 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_4.etf' to server 'localhost_1_29'.
+          Sending 'pbs_iopt_5 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_5.etf' to server 'localhost_1_35'...
+            Sent 'pbs_iopt_5 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_5.etf' to server 'localhost_1_35'.
+          Received 'pbs_iopt_5 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_5.etf' from server 'localhost_1_35'. (84683 ms elapsed)
+       Partition:  pbs_iopt_5 - PBS_Iopt-Distributed_Read_DB - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_iopt_5 - PBS_Iopt-Distributed_Iopt - Elapsed_Time 84.00, CPU_Time 84.00
+       Start - Partition: pbs_iopt_5  Slack: -26.3 TNS: 122.9 Cell-Count: 11895 Cell-Area: 0  
+Init-Memory: 1648.23
+       Done  - Partition: pbs_iopt_5  Slack: 0.0 TNS: 0.0 Cell-Count: 10359 Cell-Area: 0  
+Peak-Memory: 1712.27 Elapsed: 84
+       Partition:  pbs_iopt_5 - PBS_Iopt-Distributed_Report - Elapsed_Time 0.00, CPU_Time 0.00
+       Partition:  pbs_iopt_5 - PBS_Iopt-Distributed_Write_DB - Elapsed_Time 1.00, CPU_Time 0.00
+       pbs_iopt_5 - PBS_Iopt-Assembly - Elapsed_Time 0, CPU_Time 1.0
+       Partition:  pbs_iopt_5 - Runtime taken by the partition - Elapsed_Time 85.00, CPU_Time 84.00
+          Received 'pbs_iopt_4 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_4.etf' from server 'localhost_1_29'. (104695 ms elapsed)
+       Partition:  pbs_iopt_4 - PBS_Iopt-Distributed_Read_DB - Elapsed_Time 2.00, CPU_Time 2.00
+       Partition:  pbs_iopt_4 - PBS_Iopt-Distributed_Iopt - Elapsed_Time 99.00, CPU_Time 99.00
+       Start - Partition: pbs_iopt_4  Slack: 23.4 TNS: 0.0 Cell-Count: 44171 Cell-Area: 0  
+Init-Memory: 1648.23
+       Done  - Partition: pbs_iopt_4  Slack: 23.4 TNS: 0.0 Cell-Count: 35933 Cell-Area: 0  
+Peak-Memory: 1712.27 Elapsed: 102
+       Partition:  pbs_iopt_4 - PBS_Iopt-Distributed_Report - Elapsed_Time 1.00, CPU_Time 1.00
+       Partition:  pbs_iopt_4 - PBS_Iopt-Distributed_Write_DB - Elapsed_Time 2.00, CPU_Time 2.00
+       pbs_iopt_4 - PBS_Iopt-Assembly - Elapsed_Time 3, CPU_Time 3.0
+       Partition:  pbs_iopt_4 - Runtime taken by the partition - Elapsed_Time 104.00, CPU_Time 104.00
+          Received 'pbs_iopt_3 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_3.etf' from server 'localhost_1_34'. (155487 ms elapsed)
+          Received 'pbs_iopt_1 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_1.etf' from server 'localhost_1_33'. (156247 ms elapsed)
+       Partition:  pbs_iopt_1 - PBS_Iopt-Distributed_Read_DB - Elapsed_Time 2.00, CPU_Time 2.00
+       Partition:  pbs_iopt_1 - PBS_Iopt-Distributed_Iopt - Elapsed_Time 147.00, CPU_Time 146.00
+       Start - Partition: pbs_iopt_1  Slack: 25.6 TNS: 0.0 Cell-Count: 80956 Cell-Area: 0  
+Init-Memory: 1650.45
+       Done  - Partition: pbs_iopt_1  Slack: 25.6 TNS: 0.0 Cell-Count: 66318 Cell-Area: 0  
+Peak-Memory: 1714.49 Elapsed: 152
+       Partition:  pbs_iopt_1 - PBS_Iopt-Distributed_Report - Elapsed_Time 3.00, CPU_Time 3.00
+       Partition:  pbs_iopt_1 - PBS_Iopt-Distributed_Write_DB - Elapsed_Time 3.00, CPU_Time 4.00
+       pbs_iopt_1 - PBS_Iopt-Assembly - Elapsed_Time 9, CPU_Time 9.0
+       Partition:  pbs_iopt_1 - Runtime taken by the partition - Elapsed_Time 155.00, CPU_Time 155.00
+       Partition:  pbs_iopt_3 - PBS_Iopt-Distributed_Read_DB - Elapsed_Time 3.00, CPU_Time 3.00
+       Partition:  pbs_iopt_3 - PBS_Iopt-Distributed_Iopt - Elapsed_Time 146.00, CPU_Time 145.00
+       Start - Partition: pbs_iopt_3  Slack: 21.2 TNS: 0.0 Cell-Count: 80962 Cell-Area: 0  
+Init-Memory: 1650.43
+       Done  - Partition: pbs_iopt_3  Slack: 0.7 TNS: 0.0 Cell-Count: 64804 Cell-Area: 0  
+Peak-Memory: 1714.47 Elapsed: 151
+       Partition:  pbs_iopt_3 - PBS_Iopt-Distributed_Report - Elapsed_Time 3.00, CPU_Time 3.00
+       Partition:  pbs_iopt_3 - PBS_Iopt-Distributed_Write_DB - Elapsed_Time 3.00, CPU_Time 3.00
+       pbs_iopt_3 - PBS_Iopt-Assembly - Elapsed_Time 8, CPU_Time 7.0
+       Partition:  pbs_iopt_3 - Runtime taken by the partition - Elapsed_Time 155.00, CPU_Time 154.00
+          Received 'pbs_iopt_0 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_0.etf' from server 'localhost_1_31'. (173012 ms elapsed)
+       Partition:  pbs_iopt_0 - PBS_Iopt-Distributed_Read_DB - Elapsed_Time 3.00, CPU_Time 3.00
+       Partition:  pbs_iopt_0 - PBS_Iopt-Distributed_Iopt - Elapsed_Time 156.00, CPU_Time 155.00
+       Start - Partition: pbs_iopt_0  Slack: 23.3 TNS: 0.0 Cell-Count: 80962 Cell-Area: 0  
+Init-Memory: 1650.37
+       Done  - Partition: pbs_iopt_0  Slack: 23.3 TNS: 0.0 Cell-Count: 66621 Cell-Area: 0  
+Peak-Memory: 1714.41 Elapsed: 161
+       Partition:  pbs_iopt_0 - PBS_Iopt-Distributed_Report - Elapsed_Time 2.00, CPU_Time 3.00
+       Partition:  pbs_iopt_0 - PBS_Iopt-Distributed_Write_DB - Elapsed_Time 4.00, CPU_Time 3.00
+       pbs_iopt_0 - PBS_Iopt-Assembly - Elapsed_Time 7, CPU_Time 7.0
+       Partition:  pbs_iopt_0 - Runtime taken by the partition - Elapsed_Time 165.00, CPU_Time 164.00
+          Received 'pbs_iopt_2 ./.pbs_mo.ece.pdx.edu_11035/pbs_iopt_2.etf' from server 'localhost_1_32'. (179533 ms elapsed)
+       Partition:  pbs_iopt_2 - PBS_Iopt-Distributed_Read_DB - Elapsed_Time 3.00, CPU_Time 3.00
+       Partition:  pbs_iopt_2 - PBS_Iopt-Distributed_Iopt - Elapsed_Time 165.00, CPU_Time 164.00
+       Start - Partition: pbs_iopt_2  Slack: 17.5 TNS: 0.0 Cell-Count: 80962 Cell-Area: 0  
+Init-Memory: 1650.38
+       Done  - Partition: pbs_iopt_2  Slack: 1.3 TNS: 0.0 Cell-Count: 66062 Cell-Area: 0  
+Peak-Memory: 1714.41 Elapsed: 170
+       Partition:  pbs_iopt_2 - PBS_Iopt-Distributed_Report - Elapsed_Time 2.00, CPU_Time 3.00
+       Partition:  pbs_iopt_2 - PBS_Iopt-Distributed_Write_DB - Elapsed_Time 3.00, CPU_Time 3.00
+       pbs_iopt_2 - PBS_Iopt-Assembly - Elapsed_Time 5, CPU_Time 6.0
+       Partition:  pbs_iopt_2 - Runtime taken by the partition - Elapsed_Time 173.00, CPU_Time 173.00
+Assembled design in-time
+
++-----------+----------------+-----+----------------------+---------------------------+
+|   Host    |    Machine     | CPU | Physical Memory (MB) | Peak Physical Memory (MB) |
++-----------+----------------+-----+----------------------+---------------------------+
+| localhost | mo.ece.pdx.edu |  8  |        7558.4        |          18848.7          |
++-----------+----------------+-----+----------------------+---------------------------+
+
++----------------+----------------------+---------------------------+
+|     Server     | Physical Memory (MB) | Peak Physical Memory (MB) |
++----------------+----------------------+---------------------------+
+| localhost_1_0  |      2314.7 [1]      |        12201.4 [1]        |
+| localhost_1_30 |      154.4 [2]       |          [2] [3]          |
+| localhost_1_31 |      366.4 [2]       |          [2] [3]          |
+| localhost_1_32 |      367.0 [2]       |          [2] [3]          |
+| localhost_1_35 |      194.5 [2]       |          [2] [3]          |
+| localhost_1_29 |      272.5 [2]       |          [2] [3]          |
+| localhost_1_34 |      370.9 [2]       |          [2] [3]          |
+| localhost_1_33 |      368.3 [2]       |          [2] [3]          |
++----------------+----------------------+---------------------------+
+[1] Memory of child processes is included.
+[2] Memory is included in parent localhost_1_0.
+[3] Peak physical memory is not available for forked background servers.
+
+1ST_ST - Elapsed_Time 289, CPU_Time 320.0625940000009
+stamp '1ST_ST' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  14.0( 14.3) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  19.8( 19.5) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  57.8( 58.2) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.0(  1.0) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.2(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:36(02:09:05) |  00:02:03(00:01:52) |   1.6(  1.5) |   23:50:47 (May22) |   6.06 GB | PBS_TechMap-Postmap Cleanup
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:37(02:09:06) |  00:00:01(00:00:01) |   0.0(  0.0) |   23:50:48 (May22) |   6.06 GB | PBS_Techmap-Post_MBCI
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:59(02:09:28) |  00:00:22(00:00:22) |   0.3(  0.3) |   23:51:10 (May22) |   6.03 GB | PBS_Incr_Opt-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:01(02:09:29) |  00:00:02(00:00:01) |   0.0(  0.0) |   23:51:11 (May22) |   6.03 GB | PBS_Incr_Opt-Uniquify_Netlist
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:51(02:10:14) |  00:00:49(00:00:45) |   0.6(  0.6) |   23:51:56 (May22) |   6.06 GB | INIT_CLEAN_UP
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:19:11(02:15:03) |  00:05:20(00:04:49) |   4.1(  3.9) |   23:56:45 (May22) |   6.07 GB | 1ST_ST
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+-------------------------------------------------------------------------------
+ hi_fo_buf                     0        0         0         0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+       hi_fo_buf       816  (      815 /      815 )  54.83
+
+ 
+
+
+                                    Worst     Total DRC Total
+                           Total  Weighted     Neg       Max 
+Operation                   Area  Neg Slk     Slack      Cap 
+ init_delay                    0        0         0         0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+
+ init_tns                      0        0         0         0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+
+INTRMD_CLEAN_UP - Elapsed_Time 69, CPU_Time 79.16616000000067
+stamp 'INTRMD_CLEAN_UP' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  13.8( 14.1) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  19.6( 19.4) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  57.3( 57.7) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.0(  1.0) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.2(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:36(02:09:05) |  00:02:03(00:01:52) |   1.6(  1.5) |   23:50:47 (May22) |   6.06 GB | PBS_TechMap-Postmap Cleanup
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:37(02:09:06) |  00:00:01(00:00:01) |   0.0(  0.0) |   23:50:48 (May22) |   6.06 GB | PBS_Techmap-Post_MBCI
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:59(02:09:28) |  00:00:22(00:00:22) |   0.3(  0.3) |   23:51:10 (May22) |   6.03 GB | PBS_Incr_Opt-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:01(02:09:29) |  00:00:02(00:00:01) |   0.0(  0.0) |   23:51:11 (May22) |   6.03 GB | PBS_Incr_Opt-Uniquify_Netlist
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:51(02:10:14) |  00:00:49(00:00:45) |   0.6(  0.6) |   23:51:56 (May22) |   6.06 GB | INIT_CLEAN_UP
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:19:11(02:15:03) |  00:05:20(00:04:49) |   4.1(  3.8) |   23:56:45 (May22) |   6.07 GB | 1ST_ST
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:20:30(02:16:12) |  00:01:19(00:01:09) |   1.0(  0.9) |   23:57:54 (May22) |   6.09 GB | INTRMD_CLEAN_UP
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+CRB_ST - Elapsed_Time 0, CPU_Time 0.0
+stamp 'CRB_ST' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  13.8( 14.1) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  19.6( 19.4) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  57.3( 57.7) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.0(  1.0) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.2(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:36(02:09:05) |  00:02:03(00:01:52) |   1.6(  1.5) |   23:50:47 (May22) |   6.06 GB | PBS_TechMap-Postmap Cleanup
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:37(02:09:06) |  00:00:01(00:00:01) |   0.0(  0.0) |   23:50:48 (May22) |   6.06 GB | PBS_Techmap-Post_MBCI
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:59(02:09:28) |  00:00:22(00:00:22) |   0.3(  0.3) |   23:51:10 (May22) |   6.03 GB | PBS_Incr_Opt-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:01(02:09:29) |  00:00:02(00:00:01) |   0.0(  0.0) |   23:51:11 (May22) |   6.03 GB | PBS_Incr_Opt-Uniquify_Netlist
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:51(02:10:14) |  00:00:49(00:00:45) |   0.6(  0.6) |   23:51:56 (May22) |   6.06 GB | INIT_CLEAN_UP
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:19:11(02:15:03) |  00:05:20(00:04:49) |   4.1(  3.8) |   23:56:45 (May22) |   6.07 GB | 1ST_ST
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:20:30(02:16:12) |  00:01:19(00:01:09) |   1.0(  0.9) |   23:57:54 (May22) |   6.09 GB | INTRMD_CLEAN_UP
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:20:30(02:16:12) |  00:00:00(00:00:00) |   0.0(  0.0) |   23:57:54 (May22) |   6.09 GB | CRB_ST
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+ 
+
+
+                                    Worst     Total DRC Total
+                           Total  Weighted     Neg       Max 
+Operation                   Area  Neg Slk     Slack      Cap 
+ init_delay                    0        0         0         0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+
+ init_tns                      0        0         0         0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+
+ init_delay                    0        0         0         0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+ init_drc                      0        0         0         0
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+
+
+           Trick     Calls     Accepts   Attempts    Time(secs) 
+-----------------------------------------------------------
+
+
+# Incremental Optimization Runtime Summary: 
+                       Step    Elapsed Time(s)         Runtime(s)   WNS(ps)           TNS(ps)           CELL AREA         Leakage Power     Dynamic Power  
+##***************************************************************************************************************************************************************
+##                     INIT         9 (2.2  %)        22 (6.0  %)   -29.0             138               0                 NA             NA             
+##         HIGH_FANOUT_OPTO        32 (8.0  %)        36 (9.9  %)   -29.0             138               0                 NA             NA             
+##               SCORE_INIT         0 (0.0  %)         0 (0.0  %)   -29.0             138               0                 NA             NA             
+##                 WNS_OPTO         1 (0.2  %)         0 (0.0  %)   -26.5             129               0                 NA             NA             
+##                 TNS_OPTO         1 (0.2  %)         1 (0.3  %)   -26.3             122               0                 NA             NA             
+##                 FIRST_ST       285 (71.1 %)       204 (56.0 %)   NOT_TIMED         NOT_TIMED         0                 NA             NA             
+##                     INIT        10 (2.5  %)        23 (6.3  %)   0.0               0                 0                 NA             NA             
+##         HIGH_FANOUT_OPTO        56 (14.0 %)        69 (19.0 %)   0.0               0                 0                 NA             NA             
+##               SCORE_INIT         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##                 WNS_OPTO         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##                 TNS_OPTO         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##                     INIT         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##               LATCH_OPTO         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##               SCORE_INIT         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##                 WNS_OPTO         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##                 TNS_OPTO         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##             WNS_CRR_OPTO         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##                 DRC_OPTO         0 (0.0  %)         0 (0.0  %)   0.0               0                 0                 NA             NA             
+##***************************************************************************************************************************************************************
+                                  401                  364 
+
+Done incrementally optimizing.
+==================================
+Stage : FINAL_CLEAN_UP 
+==================================
+  =================
+   Message Summary
+  =================
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+|   Id    |  Sev   |Count |                                                                                                  Message Text                                                                                                    |
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| CFM-1   |Info    |    1 |Wrote dofile.                                                                                                                                                                                                     |
+| CFM-5   |Info    |    1 |Wrote formal verification information.                                                                                                                                                                            |
+| CPI-506 |Warning |    1 |Command 'commit_power_intent' cannot proceed as there is no power intent loaded.                                                                                                                                  |
+| GLO-51  |Info    |    2 |Hierarchical instance automatically ungrouped.                                                                                                                                                                    |
+|         |        |      |Hierarchical instances can be automatically ungrouped to allow for better area or timing optimization. To prevent this ungroup, set the root-level attribute 'auto_ungroup' to 'none'. You can also prevent       |
+|         |        |      | individual ungroup with setting the attribute 'ungroup_ok' of instances or modules to 'false'.                                                                                                                   |
+| PA-7    |Info    |    4 |Resetting power analysis results.                                                                                                                                                                                 |
+|         |        |      |All computed switching activities are removed.                                                                                                                                                                    |
+| ST-110  |Info    |    7 |Connection established with super-threading server.                                                                                                                                                               |
+|         |        |      |The tool is entering super-threading mode and has established a connection with a CPU server process.  This is enabled by the root attributes 'super_thread_servers' or 'auto_super_thread'.                      |
+| ST-112  |Info    |   14 |A super-threading server has been shut down normally.                                                                                                                                                             |
+|         |        |      |A super-threaded optimization is complete and a CPU server was successfully shut down.                                                                                                                            |
+| ST-128  |Info    |    1 |Super thread servers are launched successfully.                                                                                                                                                                   |
+| SYNTH-5 |Info    |    1 |Done mapping.                                                                                                                                                                                                     |
+| SYNTH-7 |Info    |    1 |Incrementally optimizing.                                                                                                                                                                                         |
+| TUI-75  |Warning |    8 |Preserved net is not renamed during ungroup.                                                                                                                                                                      |
+|         |        |      |For the preserved net, ungroup prefix string is used only during name conflict.                                                                                                                                   |
+| TUI-296 |Info    |    1 |The given (sub)design is already uniquified.                                                                                                                                                                      |
+|         |        |      |Try running the 'edit_netlist uniquify' command on the parent hierarchy of this (sub)design, if there exists any.                                                                                                 |
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+FINAL_CLEAN_UP - Elapsed_Time 5, CPU_Time 6.0
+stamp 'FINAL_CLEAN_UP' being created for table 'pbs_debug'
+
+  Total Time (Wall) |  Stage Time (Wall)  |   % (Wall)   |    Date - Time     |  Memory   | Stage
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:10:07(00:10:17) |  00:00:00(00:00:00) |   0.0(  0.0) |   21:51:59 (May22) |  11.30 GB | PBS_Generic-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:28:10(00:28:04) |  00:18:03(00:17:47) |  13.8( 14.1) |   22:09:46 (May22) |   7.48 GB | PBS_Generic-Post_Genopt
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:44(00:52:27) |  00:25:33(00:24:23) |  19.6( 19.4) |   22:34:09 (May22) |   6.46 GB | PBS_Generic_Opt-Post
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:53:50(00:52:32) |  00:00:06(00:00:05) |   0.1(  0.1) |   22:34:14 (May22) |   6.07 GB | PBS_Generic-Postgen HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:03(00:52:45) |  00:00:13(00:00:13) |   0.2(  0.2) |   22:34:28 (May22) |   6.06 GB | PBS_TechMap-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 00:54:09(00:52:52) |  00:00:06(00:00:07) |   0.1(  0.1) |   22:34:34 (May22) |   6.06 GB | PBS_TechMap-Premap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:08:48(02:05:32) |  01:14:39(01:12:40) |  57.2( 57.7) |   23:47:14 (May22) |   6.21 GB | PBS_Techmap-Global Mapping
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:04(02:06:47) |  00:01:16(00:01:15) |   1.0(  1.0) |   23:48:29 (May22) |   6.07 GB | PBS_TechMap-Datapath Postmap Operations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:14(02:06:53) |  00:00:09(00:00:06) |   0.1(  0.1) |   23:48:35 (May22) |   6.08 GB | PBS_TechMap-Postmap HBO Optimizations
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:10:33(02:07:13) |  00:00:19(00:00:20) |   0.2(  0.3) |   23:48:55 (May22) |   6.05 GB | PBS_TechMap-Postmap Clock Gating
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:36(02:09:05) |  00:02:03(00:01:52) |   1.6(  1.5) |   23:50:47 (May22) |   6.06 GB | PBS_TechMap-Postmap Cleanup
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:37(02:09:06) |  00:00:01(00:00:01) |   0.0(  0.0) |   23:50:48 (May22) |   6.06 GB | PBS_Techmap-Post_MBCI
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:12:59(02:09:28) |  00:00:22(00:00:22) |   0.3(  0.3) |   23:51:10 (May22) |   6.03 GB | PBS_Incr_Opt-Start
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:01(02:09:29) |  00:00:02(00:00:01) |   0.0(  0.0) |   23:51:11 (May22) |   6.03 GB | PBS_Incr_Opt-Uniquify_Netlist
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:13:51(02:10:14) |  00:00:49(00:00:45) |   0.6(  0.6) |   23:51:56 (May22) |   6.06 GB | INIT_CLEAN_UP
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:19:11(02:15:03) |  00:05:20(00:04:49) |   4.1(  3.8) |   23:56:45 (May22) |   6.07 GB | 1ST_ST
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:20:30(02:16:12) |  00:01:19(00:01:09) |   1.0(  0.9) |   23:57:54 (May22) |   6.09 GB | INTRMD_CLEAN_UP
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:20:30(02:16:12) |  00:00:00(00:00:00) |   0.0(  0.0) |   23:57:54 (May22) |   6.09 GB | CRB_ST
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+ 02:20:36(02:16:17) |  00:00:06(00:00:05) |   0.1(  0.1) |   23:57:59 (May22) |   6.09 GB | FINAL_CLEAN_UP
+--------------------+---------------------+--------------+--------------------+-----------+----------------------
+Number of threads: 8 * 1   (id: pbs_debug, time_info v1.57)
+Info: (*N*) indicates data that was populated from previously saved time_info database
+Info: CPU time includes time of parent + longest thread
+Info    : Done incrementally optimizing. [SYNTH-8]
+        : Done incrementally optimizing 'compute_core'.
+      flow.cputime  flow.realtime  timing.setup.tns  timing.setup.wns  snapshot
+UM:*                                                                   syn_opt
+@file(synthesize.tcl) 40: write_netlist > gate_level_netlist.v
+@file(synthesize.tcl) 46: redirect area_report.txt   { report_area }
+@file(synthesize.tcl) 48: redirect gates_report.txt  { report_gates }
+@file(synthesize.tcl) 50: redirect timing_report.txt { report_timing }
+@file(synthesize.tcl) 53: set_switching_activity -default -static_probability 0.5 -toggle_rate 0.2
+#@ End verbose source ./synthesize.tcl
+invalid command name "set_switching_activity"
+Encountered problems processing file: synthesize.tcl
+
+Lic Summary:
+[23:58:45.103235] Cdslmd servers: gashapon
+[23:58:45.103249] Feature usage summary:
+[23:58:45.103250] Genus_Synthesis
+
+
++-----------+----------------+-----+----------------------+---------------------------+
+|   Host    |    Machine     | CPU | Physical Memory (MB) | Peak Physical Memory (MB) |
++-----------+----------------+-----+----------------------+---------------------------+
+| localhost | mo.ece.pdx.edu |  1  |        6016.5        |          18848.7          |
++-----------+----------------+-----+----------------------+---------------------------+
+
++---------------+----------------------+---------------------------+
+|    Server     | Physical Memory (MB) | Peak Physical Memory (MB) |
++---------------+----------------------+---------------------------+
+| localhost_1_0 |        780.1         |          12201.4          |
++---------------+----------------------+---------------------------+
+
+Info    : A super-threading server has been shut down normally. [ST-112]
+        : The server 'localhost_1_0' was process '14467' on this host.
+        : A super-threaded optimization is complete and a CPU server was successfully shut down.
+=======================
+PBS_overall Index: 0.00
+=======================
+Normal exit.
