@@ -1,0 +1,93 @@
+category,metric,value,unit,source_file,source_location,derived_from
+accelerator,PERF_CYCLE counter reading,16207,clk_axi cycles,sim_run.log,line: HW perf cycles : 16207,measured
+accelerator,clk_axi frequency,250,MHz,sim_run.log,line: AXI4-Lite 32b @250MHz,measured
+accelerator,clk_axi period,4,ns,sim_run.log,250 MHz → 4 ns,derived
+accelerator,pipeline latency,64828,ns,sim_run.log,16207 × 4 ns,derived
+accelerator,pipeline latency,64.828,µs,sim_run.log,16207 × 4 ns,derived
+accelerator,TILE_DIM (simulation),32,tokens,sim_run.log,line: vopt -G TILE_DIM=32,measured
+accelerator,D_HEAD (simulation),32,–,sim_run.log,line: vopt -G D_HEAD=32,measured
+accelerator,D_MODEL (simulation),512,–,sim_run.log,line: vopt -G D_MODEL=512,measured
+accelerator,NUM_HEADS (simulation),8,–,sim_run.log,line: vopt -G NUM_HEADS=8,measured
+accelerator,SEQ_LEN (simulation),1024,tokens,sim_run.log,line: T=1024 Batch=2 (1 tile tested),measured
+accelerator,Batch configuration,2,–,sim_run.log,line: T=1024 Batch=2 (1 tile tested),measured
+accelerator,tiles exercised,1,tile,sim_run.log,line: 1 tile tested,measured
+accelerator,elements checked,1024,BF16 values,sim_run.log,line: Elements checked: 1024,measured
+accelerator,mismatches (2 ULP tolerance),0,–,sim_run.log,line: Mismatches (>2 ULP): 0,measured
+accelerator,simulation result,PASS,–,sim_run.log,line: PASS,measured
+accelerator,tokens per tile (B=1 RTL-confirmed),32,tokens,chiplet_0_qkv_outproj.sv + chiplet_head.sv,arrays are [TILE][TILE] — no batch axis,derived from RTL
+accelerator,per-token latency,2026,ns/token,sim_run.log,64828 ns ÷ 32 tokens,derived
+accelerator,per-token latency,2.026,µs/token,sim_run.log,64828 ns ÷ 32 tokens,derived
+accelerator,token throughput,493614,tokens/sec,sim_run.log,32 ÷ 64.828 µs,derived
+accelerator,FLOPs per tile (B=1 Stage 1 QKV),50331648,FLOPs,RTL parameters,3×2×1×32×512×512,derived from RTL
+accelerator,FLOPs per tile (B=1 Stage 2 QKt),524288,FLOPs,RTL parameters,2×8×32×32×32,derived from RTL
+accelerator,FLOPs per tile (B=1 Stage 3 Softmax),16384,FLOPs,RTL parameters,2×8×32×32,derived from RTL
+accelerator,FLOPs per tile (B=1 Stage 4 ScoreV),524288,FLOPs,RTL parameters,2×8×32×32×32,derived from RTL
+accelerator,FLOPs per tile (B=1 Stage 5 OutProj),16777216,FLOPs,RTL parameters,2×1×32×512×512,derived from RTL
+accelerator,FLOPs per tile total (B=1),68173824,FLOPs,RTL parameters,sum of stages,derived from RTL
+accelerator,FLOPs per tile total (B=1),68.2,MFLOPs,RTL parameters,sum of stages,derived from RTL
+accelerator,compute throughput,1052,GFLOPs/s,sim_run.log + RTL,68.2 MFLOPs ÷ 64.828 µs,derived
+accelerator,inference latency (T=1024),32,tiles,sim_run.log,1024 ÷ TILE_DIM=32,derived
+accelerator,inference latency (T=1024),2.074,ms,sim_run.log,32 × 64.828 µs,derived
+accelerator,inferences/sec,482,inf/sec,sim_run.log,1 ÷ 2.074 ms,derived
+accelerator,clk_core target,1,GHz,synthesise.tcl,line 85-86: create_clock -period 1.0,measured
+accelerator,clk_link,2,GHz,sim_run.log,line: UCIe 512b @2GHz,measured
+cpu_baseline,SelfAttention block 1 time,2.362,ms,project_profile.txt,"Section 5, SelfAttention block 1",measured
+cpu_baseline,SelfAttention block 2 time,2.249,ms,project_profile.txt,"Section 5, SelfAttention block 2",measured
+cpu_baseline,SelfAttention block 3 time,2.284,ms,project_profile.txt,"Section 5, SelfAttention block 3",measured
+cpu_baseline,SelfAttention block 4 time,2.138,ms,project_profile.txt,"Section 5, SelfAttention block 4",measured
+cpu_baseline,SelfAttention total (4 blocks),9.033,ms,project_profile.txt,"Section 5, sum of 4 blocks",derived
+cpu_baseline,wall-clock mean (full model),26.95,ms,project_profile.txt,"Section 7, mean over 10 runs",measured
+cpu_baseline,wall-clock std dev,3.58,ms,project_profile.txt,"Section 7, σ over 10 runs",measured
+cpu_baseline,number of runs,10,–,project_profile.txt,Section 7,measured
+cpu_baseline,T post-subsampling,249,tokens,project_profile.txt,"Section 3, tensor shapes",measured
+cpu_baseline,batch size,2,–,project_profile.txt,"Section 3, tensor shapes",measured
+cpu_baseline,tokens per inference (B×T),498,tokens,project_profile.txt,2 × 249,derived
+cpu_baseline,per-token latency,18.14,µs/token,project_profile.txt,9033 µs ÷ 498 tokens,derived
+cpu_baseline,token throughput,55131,tokens/sec,project_profile.txt,498 ÷ 9.033 ms,derived
+cpu_baseline,FLOPs (corrected T=249 B=2 d=64),50047008,FLOPs,ai_calculation.md (corrected),corrected formula — original had ×1000 error in Stages 2 and 4,derived
+cpu_baseline,FLOPs (corrected),50.05,MFLOPs,ai_calculation.md (corrected),corrected formula,derived
+cpu_baseline,compute throughput,5.54,GFLOPs/s,project_profile.txt + RTL,50.05 MFLOPs ÷ 9.033 ms,derived
+cpu_baseline,arithmetic intensity (T=249),2.87,FLOPs/byte,ai_calculation.md (corrected),FLOPs ÷ memory footprint,derived
+cpu_baseline,inferences/sec (full model),37.1,inf/sec,project_profile.txt,1 ÷ 26.95 ms,derived
+cpu_baseline,CPU model,Intel Core Ultra 7 256V,–,project_profile.txt,profiler header,measured
+cpu_baseline,CPU peak compute,544,GFLOPs/s,roofline_project.pdf,4P×4.8GHz×16 + 4E×3.7GHz×16,derived
+cpu_baseline,memory bandwidth,137,GB/s,roofline_project.pdf,LPDDR5X spec,published spec
+cpu_baseline,CPU ridge point,3.97,FLOPs/byte,roofline_project.pdf,544 ÷ 137,derived
+speedup,per-token latency speedup,9,×,sim_run.log + project_profile.txt,18.14 ÷ 2.026,derived
+speedup,token throughput speedup,9,×,sim_run.log + project_profile.txt,493614 ÷ 55131,derived
+speedup,GFLOPs/s speedup,190,×,sim_run.log + project_profile.txt,1052 ÷ 5.54,derived (different d_model)
+speedup,inferences/sec speedup,13,×,sim_run.log + project_profile.txt,482 ÷ 37.1 (different scope),derived
+energy,synthesis total power (1 GHz constraint),13.396,W,power_report.rpt,Total Power Summary,measured
+energy,synthesis total power (1 GHz constraint),13396,mW,power_report.rpt,Total Power Summary,measured
+energy,logic power,7.924,W,power_report.rpt,Logic row,measured
+energy,register power,5.472,W,power_report.rpt,Register row,measured
+energy,leakage power,0.856,mW,power_report.rpt,Leakage row,measured
+energy,synthesis TILE_DIM,8,–,area_report.rpt,Module: top_NUM_HEADS8_TILE_DIM8_...,measured
+energy,achieved fmax,580,MHz,timing_report.rpt,WNS=-701ps → 1/(1659+43 ps),derived
+energy,power at 580 MHz (f² scaling),4.506,W,power_report.rpt,13.396 × (580/1000)²,derived — caveat: TILE=8 not TILE=32
+energy,energy per tile (580 MHz),292,µJ,sim_run.log + power_report.rpt,4.506 W × 64.828 µs,derived
+energy,energy per inference (32 tiles),9.35,mJ,sim_run.log + power_report.rpt,32 × 292 µJ,derived
+energy,CPU TDP (base),17,W,Intel Core Ultra 7 256V datasheet,published specification,published
+energy,CPU energy per SA kernel,154,mJ,project_profile.txt + datasheet,17 W × 9.033 ms,derived
+energy,CPU energy per full inference,458,mJ,project_profile.txt + datasheet,17 W × 26.95 ms,derived
+energy,energy reduction vs SA kernel,16,×,power_report.rpt + project_profile.txt,154 ÷ 9.35,derived
+area,total area (physical library),15.74,mm²,area_report_physical.rpt,Total Area = 15737880 µm²,measured
+area,total cell area,12.26,mm²,area_report_physical.rpt,Cell Area = 12258611 µm²,measured
+area,total net area,3.48,mm²,area_report_physical.rpt,Net Area = 3479269 µm²,measured
+area,total cell count,3432394,cells,area_report.rpt,Total Cells row,measured
+area,8 head chiplets total area,9282499,µm²,area_report_physical.rpt,head_gen[0..7] sum,measured
+area,u_axi_if area,2799387,µm²,area_report_physical.rpt,u_axi_if row,measured
+area,axis_output_fifo area,2789260,µm²,area_report_physical.rpt,axis_output_fifo row (inside u_axi_if),measured
+area,chiplet_0 area,2014242,µm²,area_report_physical.rpt,u_c0 row,measured
+area,chiplet_9 softmax area,1305565,µm²,area_report_physical.rpt,u_taylor row,measured
+area,synthesis TILE_DIM,8,–,area_report.rpt,Module: top_NUM_HEADS8_TILE_DIM8_...,measured
+timing,WNS (worst negative slack),−701,ps,timing_report.rpt,Path 1 slack,measured
+timing,data path delay,1659,ps,timing_report.rpt,Path 1 data arrival time,measured
+timing,setup time,43,ps,timing_report.rpt,Path 1 required time,measured
+timing,achieved fmax,588,MHz,timing_report.rpt,"1 ÷ (1659+43) ps, rounded to 580 MHz",derived
+timing,initial WNS (before iterations),−2171,ps,synthesise.tcl comments,Iteration 0 baseline,measured
+timing,WNS after iteration 1,−1247,ps,synthesise.tcl comments,after fp32_add pipelining,measured
+timing,WNS after iteration 2,−701,ps,timing_report.rpt,after stagger reg + fp32_add split,measured
+timing,fmax iteration 0,315,MHz,synthesise.tcl comments,1/(2171+1000-2171) — approximate,derived
+timing,fmax iteration 1,445,MHz,synthesise.tcl comments,after iteration 1,derived
+timing,fmax iteration 2,580,MHz,timing_report.rpt,after iteration 2,derived
